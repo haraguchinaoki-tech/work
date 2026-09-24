@@ -3,450 +3,356 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>宮城へGO！みんなのわくわく家族旅行しおり 2027</title>
+  <title>宮城旅行 しおり</title>
   <style>
     :root {
-      --primary-color: #FF6B6B;
-      --secondary-color: #4ECDC4;
-      --accent-yellow: #FFE66D;
-      --bg-color: #FFF9F2;
-      --card-bg: #FFFFFF;
-      --text-color: #4A4A4A;
-      --radius: 20px;
+      --primary-color: #3498db;
+      --accent-color: #e74c3c;
+      --bg-color: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-color: #2c3e50;
+      --border-color: #e9ecef;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
     body {
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
-      padding-bottom: 50px;
+      padding-bottom: 40px;
     }
 
-    /* ヘッダー */
     header {
-      background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 99%, #FECFEF 100%);
+      background-color: var(--primary-color);
+      color: white;
       text-align: center;
-      padding: 30px 15px 20px;
-      border-radius: 0 0 var(--radius) var(--radius);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-      position: relative;
-    }
-
-    .badge-trip {
-      display: inline-block;
-      background-color: #FFF;
-      color: var(--primary-color);
-      font-weight: bold;
-      font-size: 0.85rem;
-      padding: 4px 14px;
-      border-radius: 50px;
-      margin-bottom: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 24px 16px;
     }
 
     h1 {
-      font-size: 1.6rem;
-      color: #333;
-      margin-bottom: 6px;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
     }
 
     .trip-date {
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: #D63031;
-      background: rgba(255, 255, 255, 0.7);
-      display: inline-block;
-      padding: 2px 12px;
-      border-radius: 12px;
+      font-size: 0.95rem;
+      opacity: 0.9;
     }
 
-    /* メインコンテナ */
     .container {
       max-width: 600px;
-      margin: 20px auto;
-      padding: 0 15px;
+      margin: 0 auto;
+      padding: 16px;
     }
 
-    /* セクション共通 */
-    .section-card {
+    .card {
       background: var(--card-bg);
-      border-radius: var(--radius);
+      border-radius: 8px;
       padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.04);
-      border: 3px solid #FFF;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color);
     }
 
-    .section-title {
-      font-size: 1.25rem;
+    .card-title {
+      font-size: 1.15rem;
       font-weight: bold;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-color);
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 15px;
-      padding-bottom: 8px;
-      border-bottom: 3px dashed #FFEAA7;
     }
 
-    /* 現在地テストシミュレーター */
-    .sim-bar {
-      background-color: #E3FAF5;
-      border: 2px solid var(--secondary-color);
-      border-radius: 15px;
-      padding: 12px;
-      margin-bottom: 20px;
+    /* シミュレーター */
+    .sim-box {
+      background: #e8f4f8;
+      border: 1px solid #bce8f1;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
       font-size: 0.85rem;
     }
+
     .sim-buttons {
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
-      margin-top: 8px;
+      margin-top: 6px;
     }
+
     .sim-btn {
-      background: #FFF;
-      border: 1px solid var(--secondary-color);
-      color: #00B894;
-      padding: 4px 10px;
-      border-radius: 20px;
+      background: white;
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 3px 8px;
+      border-radius: 4px;
       font-size: 0.75rem;
       cursor: pointer;
+    }
+
+    /* スケジュール */
+    .day-title {
+      font-weight: bold;
+      background: #f1f3f5;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin: 12px 0 8px;
+      font-size: 0.9rem;
+    }
+
+    .timeline-item {
+      padding: 10px;
+      border-left: 3px solid #dee2e6;
+      margin-left: 8px;
+      margin-bottom: 8px;
+      position: relative;
+      background: #fafafa;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .timeline-item.active {
+      border-left-color: var(--accent-color);
+      background: #fff5f5;
+    }
+
+    .time {
+      font-size: 0.8rem;
+      color: #6c757d;
       font-weight: bold;
     }
-    .sim-btn:active {
-      background-color: var(--secondary-color);
-      color: #FFF;
+
+    .spot-title {
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    .now-badge {
+      display: none;
+      background: var(--accent-color);
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+    }
+
+    .timeline-item.active .now-badge {
+      display: inline-block;
     }
 
     /* メンバー */
     .member-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .member-card {
-      background-color: #FFF5F5;
-      border-radius: 15px;
-      padding: 12px;
-      border: 2px solid #FFD8D8;
-    }
-    .member-name {
-      font-weight: bold;
-      font-size: 1rem;
-      color: #D63031;
-      margin-bottom: 4px;
-    }
-    .member-detail {
-      font-size: 0.85rem;
-      color: #666;
+      gap: 10px;
     }
 
-    /* スケジュール */
-    .day-header {
-      background-color: var(--accent-yellow);
-      color: #2D3436;
-      font-weight: bold;
-      padding: 6px 14px;
-      border-radius: 20px;
-      display: inline-block;
-      margin: 15px 0 10px;
-    }
-    .timeline {
-      position: relative;
-      padding-left: 20px;
-      border-left: 3px solid #FFEAA7;
-      margin-left: 10px;
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 20px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: #FAFAFA;
-      transition: all 0.3s;
-    }
-    .timeline-item.active {
-      background-color: #FFF0F0;
-      border: 2px solid var(--primary-color);
-      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -28px;
-      top: 15px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: #FDCB6E;
-    }
-    .timeline-item.active::before {
-      background-color: var(--primary-color);
-      transform: scale(1.3);
-    }
-    .now-badge {
-      display: none;
-      background-color: var(--primary-color);
-      color: #FFF;
-      font-size: 0.7rem;
-      font-weight: bold;
-      padding: 2px 8px;
-      border-radius: 10px;
-      margin-left: 6px;
-      animation: pulse 1.5s infinite;
-    }
-    .timeline-item.active .now-badge {
-      display: inline-block;
-    }
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-    .time-text {
-      font-weight: bold;
-      font-size: 0.85rem;
-      color: #0984E3;
-    }
-    .spot-title {
-      font-weight: bold;
-      font-size: 1rem;
+    .member-box {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
     }
 
-    /* 持ち物リスト */
-    .checklist-info {
-      font-size: 0.75rem;
-      color: #666;
-      background-color: #F0F3F8;
-      padding: 8px 12px;
-      border-radius: 10px;
+    .family-name {
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .family-desc {
+      font-size: 0.8rem;
+      color: #6c757d;
+    }
+
+    /* 持ち物 */
+    .note-text {
+      font-size: 0.8rem;
+      color: #6c757d;
+      margin-bottom: 12px;
+      background: #f8f9fa;
+      padding: 8px;
+      border-radius: 4px;
+      border-left: 3px solid var(--primary-color);
+    }
+
+    .add-box {
+      display: flex;
+      gap: 8px;
       margin-bottom: 12px;
     }
-    .add-item-box {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 15px;
-    }
-    .add-item-box input {
+
+    .add-box input {
       flex: 1;
-      padding: 8px 12px;
-      border: 2px solid #DDD;
-      border-radius: 10px;
+      padding: 6px 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
       font-size: 0.9rem;
-      outline: none;
     }
-    .add-item-box input:focus {
-      border-color: var(--secondary-color);
-    }
-    .add-item-box button {
-      background-color: var(--secondary-color);
-      color: #FFF;
+
+    .add-box button {
+      background: var(--primary-color);
+      color: white;
       border: none;
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 4px;
       cursor: pointer;
     }
 
     .check-list {
       list-style: none;
     }
+
     .check-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 10px;
-      background: #FAFAFA;
-      border-radius: 10px;
-      margin-bottom: 6px;
+      padding: 6px 0;
+      border-bottom: 1px solid #f1f3f5;
     }
-    .check-item.user-added {
-      background: #E8F8F5;
-      border: 1px dashed var(--secondary-color);
-    }
+
     .check-label {
       display: flex;
       align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      flex: 1;
-      font-size: 0.95rem;
-    }
-    .check-label input {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--secondary-color);
-    }
-    .checked-text {
-      text-decoration: line-through;
-      color: #A0A0A0;
-    }
-    .delete-btn {
-      background: none;
-      border: none;
-      color: #FF7675;
-      cursor: pointer;
+      gap: 8px;
       font-size: 0.9rem;
-      padding: 2px 6px;
+      cursor: pointer;
     }
 
-    footer {
-      text-align: center;
+    .checked-text {
+      text-decoration: line-through;
+      color: #adb5bd;
+    }
+
+    .del-btn {
+      background: none;
+      border: none;
+      color: #dc3545;
+      cursor: pointer;
       font-size: 0.8rem;
-      color: #888;
-      margin-top: 30px;
     }
   </style>
 </head>
 <body>
 
-  <!-- ヘッダー -->
   <header>
-    <span class="badge-trip">保育園お友達グループ旅行 🎈</span>
-    <h1>宮城へGO！わくわくしおり</h1>
-    <div class="trip-date">🗓 2027年 3月21日(土) 〜 22日(日)</div>
+    <h1>宮城旅行 しおり</h1>
+    <div class="trip-date">日程：2027年3月21日(土) 〜 3月22日(日)</div>
   </header>
 
   <div class="container">
 
-    <!-- シミュレーター（動作確認用） -->
-    <div class="sim-bar">
-      <strong>⏱ 今ここ自動判定（テスト用ボタン）</strong>
+    <!-- シミュレーター -->
+    <div class="sim-box">
+      <strong>現在地判定テスト用</strong>
       <div class="sim-buttons">
-        <button class="sim-btn" onclick="setSimulatedTime('2027-03-21T10:00')">1日目 午前（移動）</button>
-        <button class="sim-btn" onclick="setSimulatedTime('2027-03-21T12:30')">1日目 昼食</button>
-        <button class="sim-btn" onclick="setSimulatedTime('2027-03-21T19:00')">1日目 夜（温泉）</button>
-        <button class="sim-btn" onclick="setSimulatedTime('2027-03-22T11:00')">2日目 水族館</button>
-        <button class="sim-btn" onclick="resetSimulatedTime()">現在の実時間にリセット</button>
+        <button class="sim-btn" onclick="setSimTime('2027-03-21T10:00')">1日目 午前</button>
+        <button class="sim-btn" onclick="setSimTime('2027-03-21T12:30')">1日目 昼食</button>
+        <button class="sim-btn" onclick="setSimTime('2027-03-21T18:00')">1日目 宿</button>
+        <button class="sim-btn" onclick="setSimTime('2027-03-22T11:00')">2日目 水族館</button>
+        <button class="sim-btn" onclick="resetSimTime()">リセット</button>
       </div>
     </div>
 
     <!-- 参加メンバー -->
-    <div class="section-card">
-      <div class="section-title">👨‍👩‍👧‍👦 参加メンバー（4家族）</div>
+    <div class="card">
+      <div class="card-title">参加メンバー（4家族）</div>
       <div class="member-grid">
-        <div class="member-card">
-          <div class="member-name">かすみファミリー</div>
-          <div class="member-detail">パパ、ママ<br>👧 5歳♀、👧 3歳♀</div>
+        <div class="member-box">
+          <div class="family-name">Aファミリー</div>
+          <div class="family-desc">大人2名、子供1名</div>
         </div>
-        <div class="member-card">
-          <div class="member-name">みはるファミリー</div>
-          <div class="member-detail">パパ、ママ<br>👧 5歳♀</div>
+        <div class="member-box">
+          <div class="family-name">Bファミリー</div>
+          <div class="family-desc">大人2名、子供2名</div>
         </div>
-        <div class="member-card">
-          <div class="member-name">なつきファミリー</div>
-          <div class="member-detail">パパ、ママ<br>👧 5歳♀、👶 0歳♂</div>
+        <div class="member-box">
+          <div class="family-name">Cファミリー</div>
+          <div class="family-desc">大人2名、子供1名</div>
         </div>
-        <div class="member-card">
-          <div class="member-name">あかりファミリー</div>
-          <div class="member-detail">パパ、ママ<br>👧 7歳♀、👧 5歳♀</div>
+        <div class="member-box">
+          <div class="family-name">Dファミリー</div>
+          <div class="family-desc">大人2名、子供2名</div>
         </div>
       </div>
     </div>
 
     <!-- スケジュール -->
-    <div class="section-card">
-      <div class="section-title">⏰ スケジュール</div>
-      
-      <div class="day-header">📅 1日目：3月21日(土)</div>
-      <div class="timeline">
-        <div class="timeline-item" data-start="2027-03-21T08:00" data-end="2027-03-21T11:30">
-          <span class="time-text">08:00 〜 11:30</span><span class="now-badge">今ここ！</span>
-          <div class="spot-title">🚗 車で移動＆途中で休憩</div>
-          <div style="font-size: 0.85rem; color: #666;">SAでおやつタイム＆トイレ休憩</div>
-        </div>
-        <div class="timeline-item" data-start="2027-03-21T11:30" data-end="2027-03-21T13:30">
-          <span class="time-text">11:30 〜 13:30</span><span class="now-badge">今ここ！</span>
-          <div class="spot-title">🍣 松島でランチ＆お散歩</div>
-          <div style="font-size: 0.85rem; color: #666;">海鮮丼＆子どもたちの食べやすいメニューを探そう</div>
-        </div>
-        <div class="timeline-item" data-start="2027-03-21T14:00" data-end="2027-03-21T16:30">
-          <span class="time-text">14:00 〜 16:30</span><span class="now-badge">今ここ！</span>
-          <div class="spot-title">🛝 宮城の公園でみんなで遊ぼう</div>
-          <div style="font-size: 0.85rem; color: #666;">子どもたちが思いっきり身体を動かせるスポット</div>
-        </div>
-        <div class="timeline-item" data-start="2027-03-21T17:00" data-end="2027-03-21T23:59">
-          <span class="time-text">17:00 〜 </span><span class="now-badge">今ここ！</span>
-          <div class="spot-title">♨️ 宿チェックイン・温泉＆みんなで夕食</div>
-          <div style="font-size: 0.85rem; color: #666;">夜は部屋で子どもたちのお楽しみ会も！</div>
-        </div>
+    <div class="card">
+      <div class="card-title">スケジュール</div>
+
+      <div class="day-title">1日目：3月21日(土)</div>
+      <div class="timeline-item" data-start="2027-03-21T08:00" data-end="2027-03-21T11:30">
+        <div class="time">08:00 〜 11:30 <span class="now-badge">今ここ！</span></div>
+        <div class="spot-title">集合・出発〜車移動</div>
+      </div>
+      <div class="timeline-item" data-start="2027-03-21T11:30" data-end="2027-03-21T13:30">
+        <div class="time">11:30 〜 13:30 <span class="now-badge">今ここ！</span></div>
+        <div class="spot-title">松島到着・昼食・観光</div>
+      </div>
+      <div class="timeline-item" data-start="2027-03-21T14:00" data-end="2027-03-21T16:30">
+        <div class="time">14:00 〜 16:30 <span class="now-badge">今ここ！</span></div>
+        <div class="spot-title">公園あそび・散策</div>
+      </div>
+      <div class="timeline-item" data-start="2027-03-21T17:00" data-end="2027-03-21T23:59">
+        <div class="time">17:00 〜 <span class="now-badge">今ここ！</span></div>
+        <div class="spot-title">宿チェックイン・温泉・夕食</div>
       </div>
 
-      <div class="day-header">📅 2日目：3月22日(日)</div>
-      <div class="timeline">
-        <div class="timeline-item" data-start="2027-03-22T08:00" data-end="2027-03-22T10:00">
-          <span class="time-text">08:00 〜 10:00</span><span class="now-badge">今ここ！</span>
-          <div class="spot-title">🍳 朝食＆チェックアウト</div>
-        </div>
-        <div class="timeline-item" data-start="2027-03-22T10:30" data-end="2027-03-22T14:00">
-          <span class="time-text">10:30 〜 14:00</span><span class="now-badge">今ここ！</span>
-          <div class="spot-title">🐬 仙台うみののหมอ（水族館）</div>
-          <div style="font-size: 0.85rem; color: #666;">イルカショーと巨大水槽を見学！</div>
-        </div>
-        <div class="timeline-item" data-start="2027-03-22T14:30" data-end="2027-03-22T17:00">
-          <span class="time-text">14:30 〜 17:00</span><span class="now-badge">今ここ！</span>
-          <div class="spot-title">🛍️ お土産お買い物・現地解散＆安全運転で帰宅</div>
-        </div>
+      <div class="day-title">2日目：3月22日(日)</div>
+      <div class="timeline-item" data-start="2027-03-22T08:00" data-end="2027-03-22T10:00">
+        <div class="time">08:00 〜 10:00 <span class="now-badge">今ここ！</span></div>
+        <div class="spot-title">朝食・チェックアウト</div>
+      </div>
+      <div class="timeline-item" data-start="2027-03-22T10:30" data-end="2027-03-22T14:00">
+        <div class="time">10:30 〜 14:00 <span class="now-badge">今ここ！</span></div>
+        <div class="spot-title">仙台うみのの杜水族館</div>
+      </div>
+      <div class="timeline-item" data-start="2027-03-22T14:30" data-end="2027-03-22T17:00">
+        <div class="time">14:30 〜 17:00 <span class="now-badge">今ここ！</span></div>
+        <div class="spot-title">買い物・現地解散</div>
       </div>
     </div>
 
-    <!-- 持ち物チェックリスト -->
-    <div class="section-card">
-      <div class="section-title">🧳 持ち物チェックリスト</div>
-      
-      <div class="checklist-info">
-        🔒 💡 <strong>ご安心ください：</strong><br>
-        チェックした項目や追加したアイテムは、<strong>お使いのスマホ（ブラウザ）にのみ保存</strong>されます。他の家族には共有・表示されません。
+    <!-- 持ち物リスト -->
+    <div class="card">
+      <div class="card-title">持ち物チェックリスト</div>
+      <div class="note-text">
+        ※ チェックした項目や追加した持ち物は、お使いのスマホ（ブラウザ）に自動保存されます。他の家族には表示されません。
       </div>
 
-      <!-- アイテム追加フォーム -->
-      <div class="add-item-box">
-        <input type="text" id="custom-item-input" placeholder="+ 自分用の持ち物を追加...">
-        <button onclick="addCustomItem()">追加</button>
+      <div class="add-box">
+        <input type="text" id="item-input" placeholder="持ち物を追加...">
+        <button onclick="addItem()">追加</button>
       </div>
 
-      <!-- 自分で追加したアイテム枠（最優先配置） -->
-      <div id="user-items-container" style="margin-bottom: 10px;">
-        <ul class="check-list" id="user-item-list"></ul>
-      </div>
-
-      <!-- デフォルトの持ち物 -->
-      <ul class="check-list" id="default-item-list">
-        <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>着替え（予備多めに！）</span></label></li>
-        <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>保険証・受給券</span></label></li>
-        <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>常備薬・体温計</span></label></li>
-        <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>ウェットティッシュ・おしりふき</span></label></li>
-        <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>おむつ・ミルク（赤ちゃん組）</span></label></li>
-        <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>移動中のおやつ・飲み物</span></label></li>
-        <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>スマホ充電器・モバイルバッテリー</span></label></li>
+      <ul class="check-list" id="custom-list"></ul>
+      <ul class="check-list" id="default-list">
+        <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>着替え</span></label></li>
+        <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>保険証</span></label></li>
+        <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>常備薬</span></label></li>
+        <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>ウェットティッシュ</span></label></li>
+        <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>スマホ充電器</span></label></li>
       </ul>
     </div>
 
   </div>
 
-  <footer>
-    宮城家族旅行 2027 🌸
-  </footer>
-
   <script>
-    let overrideTime = null;
+    let simTime = null;
 
-    // --- 現在地「今ここ！」判定機能 ---
-    function updateTimelineHighlight() {
-      const now = overrideTime ? new Date(overrideTime) : new Date();
-      const items = document.querySelectorAll('.timeline-item');
-
-      items.forEach(item => {
+    function updateHighlight() {
+      const now = simTime ? new Date(simTime) : new Date();
+      document.querySelectorAll('.timeline-item').forEach(item => {
         const start = new Date(item.getAttribute('data-start'));
         const end = new Date(item.getAttribute('data-end'));
-
         if (now >= start && now <= end) {
           item.classList.add('active');
         } else {
@@ -455,17 +361,16 @@
       });
     }
 
-    // シミュレーション（テスト時間切り替え）
-    function setSimulatedTime(timeStr) {
-      overrideTime = timeStr;
-      updateTimelineHighlight();
-    }
-    function resetSimulatedTime() {
-      overrideTime = null;
-      updateTimelineHighlight();
+    function setSimTime(timeStr) {
+      simTime = timeStr;
+      updateHighlight();
     }
 
-    // --- 持ち物チェックリスト機能 ---
+    function resetSimTime() {
+      simTime = null;
+      updateHighlight();
+    }
+
     function toggleCheck(checkbox) {
       const span = checkbox.nextElementSibling;
       if (checkbox.checked) {
@@ -473,59 +378,54 @@
       } else {
         span.classList.remove('checked-text');
       }
-      saveChecklistState();
+      saveState();
     }
 
-    // カスタムアイテム追加（一番上へ）
-    function addCustomItem(text = null) {
-      const input = document.getElementById('custom-item-input');
-      const itemText = text || input.value.trim();
-      if (!itemText) return;
+    function addItem(text = null) {
+      const input = document.getElementById('item-input');
+      const val = text || input.value.trim();
+      if (!val) return;
 
-      const ul = document.getElementById('user-item-list');
+      const ul = document.getElementById('custom-list');
       const li = document.createElement('li');
-      li.className = 'check-item user-added';
+      li.className = 'check-item';
       li.innerHTML = `
         <label class="check-label">
           <input type="checkbox" onchange="toggleCheck(this)">
-          <span>${itemText}</span>
+          <span>${val}</span>
         </label>
-        <button class="delete-btn" onclick="deleteItem(this)">✕</button>
+        <button class="del-btn" onclick="deleteItem(this)">削除</button>
       `;
-
-      // リストの一番上（先頭）に追加
       ul.insertBefore(li, ul.firstChild);
 
       if (!text) {
         input.value = '';
-        saveChecklistState();
+        saveState();
       }
     }
 
     function deleteItem(btn) {
       btn.parentElement.remove();
-      saveChecklistState();
+      saveState();
     }
 
-    // ブラウザ（LocalStorage）への保存＆復元
-    function saveChecklistState() {
-      const userItems = [];
-      document.querySelectorAll('#user-item-list .check-item').forEach(li => {
-        userItems.push({
+    function saveState() {
+      const customItems = [];
+      document.querySelectorAll('#custom-list .check-item').forEach(li => {
+        customItems.push({
           text: li.querySelector('span').innerText,
           checked: li.querySelector('input').checked
         });
       });
-      // 逆順（追加順）にして保存
-      localStorage.setItem('miyagi_user_items', JSON.stringify(userItems.reverse()));
+      localStorage.setItem('simple_trip_items', JSON.stringify(customItems.reverse()));
     }
 
-    function loadChecklistState() {
-      const savedUserItems = JSON.parse(localStorage.getItem('miyagi_user_items') || '[]');
-      savedUserItems.forEach(item => {
-        addCustomItem(item.text);
+    function loadState() {
+      const items = JSON.parse(localStorage.getItem('simple_trip_items') || '[]');
+      items.forEach(item => {
+        addItem(item.text);
         if (item.checked) {
-          const firstLi = document.querySelector('#user-item-list .check-item');
+          const firstLi = document.querySelector('#custom-list .check-item');
           const cb = firstLi.querySelector('input');
           cb.checked = true;
           firstLi.querySelector('span').classList.add('checked-text');
@@ -533,11 +433,10 @@
       });
     }
 
-    // 初期化処理
     window.onload = function() {
-      loadChecklistState();
-      updateTimelineHighlight();
-      setInterval(updateTimelineHighlight, 60000); // 1分ごとに自動更新
+      loadState();
+      updateHighlight();
+      setInterval(updateHighlight, 60000);
     };
   </script>
 </body>
