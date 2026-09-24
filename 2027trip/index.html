@@ -1,536 +1,689 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>宮城旅行 しおり</title>
-  <style>
-    /* 全体の基本設定 */
-    :root {
-      --primary-color: #00b894;
-      --bg-color: #f5f6fa;
-      --text-color: #2d3436;
-      --card-bg: #ffffff;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宮城わくわく家族旅行のしおり 2027</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts (Zen Maru Gothic) -->
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
     
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-    }
-
-    /* ヘッダー */
-    header {
-      background-color: var(--primary-color);
-      color: white;
-      text-align: center;
-      padding: 20px 15px;
-    }
-
-    h1 {
-      font-size: 1.4rem;
-      margin-bottom: 5px;
-    }
-
-    .date {
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-
-    /* タブナビゲーション */
-    .tab-nav {
-      display: flex;
-      background-color: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .tab-btn {
-      flex: 1;
-      background: none;
-      border: none;
-      padding: 12px 5px;
-      font-size: 0.85rem;
-      font-weight: bold;
-      color: #b2bec3;
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      transition: all 0.3s;
-    }
-
-    .tab-btn.active {
-      color: var(--primary-color);
-      border-bottom: 3px solid var(--primary-color);
-    }
-
-    /* コンテンツエリア */
-    .content-area {
-      padding: 20px 15px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* カードデザイン共通 */
-    .card {
-      background: var(--card-bg);
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-
-    .card h3 {
-      font-size: 1.1rem;
-      border-bottom: 2px solid #ecf0f1;
-      padding-bottom: 8px;
-      margin-bottom: 12px;
-      color: var(--primary-color);
-    }
-
-    /* スケジュール */
-    .timeline-item {
-      position: relative;
-      padding: 10px 10px 10px 20px;
-      border-left: 3px solid #dfe6e9;
-      margin-bottom: 15px;
-      margin-left: 5px;
-    }
-
-    .timeline-item.active {
-      border-left-color: #fd79a8;
-      background-color: #fff0f5;
-      border-radius: 0 5px 5px 0;
-    }
-
-    .time {
-      font-size: 0.85rem;
-      color: #636e72;
-      font-weight: bold;
-      margin-bottom: 3px;
-    }
-
-    .now-badge {
-      display: none;
-      background-color: #fd79a8;
-      color: white;
-      font-size: 0.7rem;
-      padding: 2px 6px;
-      border-radius: 10px;
-      margin-left: 8px;
-    }
-
-    .timeline-item.active .now-badge {
-      display: inline-block;
-    }
-
-    .title {
-      font-weight: bold;
-      font-size: 1rem;
-    }
-
-    /* シミュレーター（テスト用） */
-    details.sim-box {
-      background: #e8f4f8;
-      padding: 10px;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      font-size: 0.85rem;
-    }
-    details.sim-box summary {
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .sim-buttons {
-      display: flex;
-      gap: 5px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-    .sim-btn {
-      padding: 5px 10px;
-      border: 1px solid var(--primary-color);
-      background: white;
-      color: var(--primary-color);
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.75rem;
-    }
-
-    /* メンバー */
-    .member-item {
-      margin-bottom: 10px;
-      padding-bottom: 10px;
-      border-bottom: 1px dashed #ecf0f1;
-    }
-    .member-item:last-child {
-      border-bottom: none;
-    }
-    .family-name {
-      font-weight: bold;
-      color: #2d3436;
-    }
-    .family-members {
-      font-size: 0.9rem;
-      color: #636e72;
-      margin-top: 3px;
-    }
-
-    /* 場所の説明 */
-    .place-img-placeholder {
-      width: 100%;
-      height: 120px;
-      background: #dfe6e9;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #a4b0be;
-      margin-bottom: 10px;
-      font-size: 0.9rem;
-    }
-    .place-desc {
-      font-size: 0.9rem;
-    }
-
-    /* 持ち物 */
-    .notice {
-      background-color: #fff3cd;
-      color: #856404;
-      padding: 10px;
-      border-radius: 5px;
-      font-size: 0.8rem;
-      margin-bottom: 15px;
-      border-left: 4px solid #ffeeba;
-    }
-
-    .add-item {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-    .add-item input {
-      flex: 1;
-      padding: 8px;
-      border: 1px solid #dfe6e9;
-      border-radius: 4px;
-      font-size: 0.9rem;
-    }
-    .add-item button {
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .check-list {
-      list-style: none;
-    }
-    .check-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid #f1f2f6;
-    }
-    .check-label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.95rem;
-      cursor: pointer;
-      flex: 1;
-    }
-    .checked-text {
-      text-decoration: line-through;
-      color: #b2bec3;
-    }
-    .del-btn {
-      color: #ff7675;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 0.8rem;
-      padding: 5px;
-    }
-  </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#52B788',
+                            mint: '#D8F3DC',
+                            yellow: '#FFD166',
+                            orange: '#F4A261',
+                            pink: '#FF9EAA',
+                            blue: '#48CAE4',
+                            pokemon: '#3A86FF',
+                            bg: '#F8FAF9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Zen Maru Gothic"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background-color: #F8FAF9;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .tab-active {
+            color: #15803D;
+            border-bottom: 3px solid #22C55E;
+            font-weight: 700;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 15px -1px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+        }
+        @keyframes pulse-border {
+            0%, 100% { border-color: #10B981; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { border-color: #059669; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+        }
+        .now-active-card {
+            border: 2px solid #10B981 !important;
+            animation: pulse-border 2s infinite;
+            background-color: #F0FDF4 !important;
+        }
+        /* Checkbox styling */
+        .custom-checkbox:checked + label {
+            text-decoration: line-through;
+            color: #9CA3AF;
+        }
+    </style>
 </head>
-<body>
+<body class="text-gray-700 pb-28 md:pb-20">
 
-  <header>
-    <h1>宮城旅行 しおり</h1>
-    <div class="date">2027年3月21日(土) 〜 22日(日)</div>
-  </header>
-
-  <!-- タブボタン -->
-  <nav class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('schedule', this)">🗓 スケジュール</button>
-    <button class="tab-btn" onclick="switchTab('members', this)">👨‍👩‍👧‍👦 メンバー</button>
-    <button class="tab-btn" onclick="switchTab('places', this)">📍 場所</button>
-    <button class="tab-btn" onclick="switchTab('checklist', this)">🧳 持ち物</button>
-  </nav>
-
-  <div class="content-area">
-
-    <!-- 【1】スケジュールタブ -->
-    <div id="schedule" class="tab-content active">
-      <details class="sim-box">
-        <summary>🔧 「今ここ！」テスト動作ツール（タップで開く）</summary>
-        <div class="sim-buttons">
-          <button class="sim-btn" onclick="setSimTime('2027-03-21T10:00')">1日目 移動中</button>
-          <button class="sim-btn" onclick="setSimTime('2027-03-21T12:30')">1日目 ランチ</button>
-          <button class="sim-btn" onclick="setSimTime('2027-03-22T11:00')">2日目 水族館</button>
-          <button class="sim-btn" onclick="resetSimTime()">現在時刻に戻す</button>
-        </div>
-      </details>
-
-      <div class="card">
-        <h3>1日目（3月21日）</h3>
-        <div class="timeline-item" data-start="2027-03-21T08:00" data-end="2027-03-21T11:30">
-          <div class="time">08:00 〜 11:30 <span class="now-badge">今ここ！</span></div>
-          <div class="title">🚗 出発 〜 車移動（途中休憩）</div>
-        </div>
-        <div class="timeline-item" data-start="2027-03-21T11:30" data-end="2027-03-21T13:30">
-          <div class="time">11:30 〜 13:30 <span class="now-badge">今ここ！</span></div>
-          <div class="title">🍣 松島到着・ランチ</div>
-        </div>
-        <div class="timeline-item" data-start="2027-03-21T14:00" data-end="2027-03-21T16:30">
-          <div class="time">14:00 〜 16:30 <span class="now-badge">今ここ！</span></div>
-          <div class="title">🛝 公園あそび・散策</div>
-        </div>
-        <div class="timeline-item" data-start="2027-03-21T17:00" data-end="2027-03-21T23:59">
-          <div class="time">17:00 〜 <span class="now-badge">今ここ！</span></div>
-          <div class="title">♨️ 宿チェックイン・温泉・夕食</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>2日目（3月22日）</h3>
-        <div class="timeline-item" data-start="2027-03-22T07:00" data-end="2027-03-22T10:00">
-          <div class="time">08:00 〜 10:00 <span class="now-badge">今ここ！</span></div>
-          <div class="title">🍳 朝食・チェックアウト</div>
-        </div>
-        <div class="timeline-item" data-start="2027-03-22T10:30" data-end="2027-03-22T14:00">
-          <div class="time">10:30 〜 14:00 <span class="now-badge">今ここ！</span></div>
-          <div class="title">🐬 仙台うみの杜水族館</div>
-        </div>
-        <div class="timeline-item" data-start="2027-03-22T14:30" data-end="2027-03-22T17:00">
-          <div class="time">14:30 〜 17:00 <span class="now-badge">今ここ！</span></div>
-          <div class="title">🛍️ お土産・現地解散 〜 帰路へ</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 【2】メンバータブ -->
-    <div id="members" class="tab-content">
-      <div class="card">
-        <h3>参加ファミリー（4家族）</h3>
-        <div class="member-item">
-          <div class="family-name">🏠 Aファミリー</div>
-          <div class="family-members">パパ、ママ、子供</div>
-        </div>
-        <div class="member-item">
-          <div class="family-name">🏠 Bファミリー</div>
-          <div class="family-members">パパ、ママ、子供</div>
-        </div>
-        <div class="member-item">
-          <div class="family-name">🏠 Cファミリー</div>
-          <div class="family-members">パパ、ママ、子供</div>
-        </div>
-        <div class="member-item">
-          <div class="family-name">🏠 Dファミリー</div>
-          <div class="family-members">パパ、ママ、子供</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 【3】場所の説明タブ -->
-    <div id="places" class="tab-content">
-      <div class="card">
-        <h3>🍣 松島周辺</h3>
-        <div class="place-img-placeholder">景色やランチの写真</div>
-        <p class="place-desc">日本三景のひとつ。美味しい海鮮丼や、子供が歩きやすい観光スポットがたくさんあります。</p>
-      </div>
-      <div class="card">
-        <h3>♨️ 温泉宿</h3>
-        <p class="place-desc">みんなで泊まるお宿。夜は子供たちのお楽しみ会も！ゆっくりお湯に浸かって長旅の疲れを癒やしましょう。</p>
-      </div>
-      <div class="card">
-        <h3>🐬 仙台うみの杜水族館</h3>
-        <div class="place-img-placeholder">水族館の写真</div>
-        <p class="place-desc">大迫力のイルカショーや、三陸の海を再現した巨大水槽が見どころ。屋内で快適に楽しめます。</p>
-      </div>
-    </div>
-
-    <!-- 【4】持ち物タブ -->
-    <div id="checklist" class="tab-content">
-      <div class="notice">
-        💡 <strong>安心のプライバシー設計！</strong><br>
-        チェックした項目や、自分で追加した持ち物は、<strong>お使いのスマホ（ブラウザ）に自動で保存</strong>されます。他の家族からは一切見えませんので、個人的なメモとしてご自由にお使いください。
-      </div>
-
-      <div class="card">
-        <h3>持ち物チェックリスト</h3>
+    <header class="bg-gradient-to-r from-teal-400 via-emerald-400 to-sky-400 text-white shadow-md relative overflow-hidden">
+        <div class="absolute -top-10 -left-10 w-32 h-32 bg-white/20 rounded-full blur-xl"></div>
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-yellow-300/30 rounded-full blur-xl"></div>
         
-        <div class="add-item">
-          <input type="text" id="new-item-input" placeholder="自分用の持ち物を追加...">
-          <button onclick="addCustomItem()">追加</button>
+        <div class="max-w-3xl mx-auto px-4 pt-7 pb-6 text-center relative z-10">
+            <span class="inline-block bg-white/30 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full font-bold tracking-wider mb-2 shadow-sm">
+                <i class="fa-solid fa-car-side mr-1"></i> 春のおともだち家族旅行 🌸
+            </span>
+            <h1 class="text-2xl md:text-4xl font-extrabold tracking-wide drop-shadow-sm mb-1">
+                宮城わくわく家族旅行 2027 <i class="fa-solid fa-compass text-yellow-300"></i>
+            </h1>
+            <p class="text-xs md:text-sm font-medium opacity-95 mt-1">
+                <i class="fa-regular fa-calendar-check mr-1"></i> 2027年 3月21日(土) 〜 3月22日(日) 1泊2日
+            </p>
+            
+            <div class="flex justify-center gap-2 mt-3 text-xs font-bold flex-wrap">
+                <span class="bg-white/90 text-teal-800 px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
+                    <i class="fa-solid fa-users text-amber-500"></i> 4家族（大人8名・子供7名）
+                </span>
+                <span class="bg-white/90 text-teal-800 px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
+                    <i class="fa-solid fa-water text-blue-500"></i> ラプラス公園＆秋保温泉
+                </span>
+            </div>
         </div>
+    </header>
 
-        <ul class="check-list" id="custom-items-list"></ul>
-        <ul class="check-list" id="default-items-list">
-          <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>着替え・パジャマ</span></label></li>
-          <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>健康保険証・医療証</span></label></li>
-          <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>常備薬・ばんそうこう</span></label></li>
-          <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>ウェットティッシュ・おむつ</span></label></li>
-          <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>移動中の飲み物・おやつ</span></label></li>
-          <li class="check-item"><label class="check-label"><input type="checkbox" onchange="toggleCheck(this)"> <span>スマホ充電器</span></label></li>
-        </ul>
-      </div>
-    </div>
+    <nav class="sticky top-0 bg-white/90 backdrop-blur-md border-b border-gray-100 z-50 shadow-sm">
+        <div class="max-w-3xl mx-auto flex justify-around text-center text-xs md:text-sm text-gray-500 font-medium">
+            <button onclick="switchTab('schedule')" id="tab-schedule" class="tab-btn flex-1 py-3 transition-colors tab-active">
+                <i class="fa-solid fa-clock mr-1"></i><span class="inline">日程</span>
+            </button>
+            <button onclick="switchTab('members')" id="tab-members" class="tab-btn flex-1 py-3 transition-colors">
+                <i class="fa-solid fa-people-group mr-1"></i><span class="inline">メンバー</span>
+            </button>
+            <button onclick="switchTab('spots')" id="tab-spots" class="tab-btn flex-1 py-3 transition-colors">
+                <i class="fa-solid fa-map-location-dot mr-1"></i><span class="inline">スポット</span>
+            </button>
+            <button onclick="switchTab('checklist')" id="tab-checklist" class="tab-btn flex-1 py-3 transition-colors">
+                <i class="fa-solid fa-list-check mr-1"></i><span class="inline">持ち物</span>
+            </button>
+        </div>
+    </nav>
 
-  </div>
+    <main class="max-w-3xl mx-auto px-4 py-6">
 
-  <script>
-    // ========== タブ切り替え処理 ==========
-    function switchTab(tabId, btnElement) {
-      // 全てのタブコンテンツを非表示
-      document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-      });
-      // 全てのボタンからactiveクラスを削除
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
+        <!-- TAB 1: SCHEDULE -->
+        <section id="sec-schedule" class="tab-content space-y-5">
+            <!-- Day Switcher Buttons -->
+            <div class="flex bg-gray-200/80 p-1 rounded-xl font-bold text-xs md:text-sm">
+                <button id="day1-btn" onclick="switchDay(1)" class="flex-1 py-2.5 rounded-lg bg-white shadow-sm text-emerald-700 transition duration-200">
+                    <i class="fa-solid fa-calendar-day mr-1"></i> 1日目 (3/21 土)
+                </button>
+                <button id="day2-btn" onclick="switchDay(2)" class="flex-1 py-2.5 rounded-lg text-gray-500 transition duration-200">
+                    <i class="fa-solid fa-calendar-day mr-1"></i> 2日目 (3/22 日)
+                </button>
+            </div>
 
-      // 選択されたタブとボタンをアクティブに
-      document.getElementById(tabId).classList.add('active');
-      btnElement.classList.add('active');
-    }
+            <!-- DAY 1 TIMELINE -->
+            <div id="day1-content" class="space-y-4">
+                <div class="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-800">
+                    <i class="fa-solid fa-location-dot mr-1"></i> <strong>集合場所：</strong> 仙台駅東口 または 「菅生PA（下り）」 9:30集合！
+                </div>
 
-    // ========== 「今ここ」現在時刻判定処理 ==========
-    let simTime = null;
+                <div class="flex gap-3 relative">
+                    <div class="w-14 text-right flex-shrink-0 pt-1">
+                        <span class="font-bold text-gray-800 text-xs md:text-sm">09:30</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-7 h-7 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xs shadow-sm z-10">
+                            <i class="fa-solid fa-car"></i>
+                        </div>
+                        <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
+                        <h3 class="font-bold text-gray-800 text-sm">集合＆みんなでスタート！</h3>
+                        <p class="text-xs text-gray-500 mt-1">4家族が無事に合流！子供たちの体調を確認したら、さっそく「うみのの杜水族館」へ出発！</p>
+                    </div>
+                </div>
 
-    function updateTimeline() {
-      const now = simTime ? new Date(simTime) : new Date();
-      document.querySelectorAll('.timeline-item').forEach(item => {
-        const start = new Date(item.getAttribute('data-start'));
-        const end = new Date(item.getAttribute('data-end'));
-        
-        if (now >= start && now <= end) {
-          item.classList.add('active');
-        } else {
-          item.classList.remove('active');
+                <div class="flex gap-3 relative">
+                    <div class="w-14 text-right flex-shrink-0 pt-1">
+                        <span class="font-bold text-gray-800 text-xs md:text-sm">10:30</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-7 h-7 bg-teal-500 text-white rounded-full flex items-center justify-center text-xs shadow-sm z-10">
+                            <i class="fa-solid fa-fish"></i>
+                        </div>
+                        <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-gray-800 text-sm">仙台うみのの杜水族館</h3>
+                            <span class="bg-teal-100 text-teal-700 text-[10px] font-bold px-2 py-0.5 rounded-full">大人気</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">大迫力のイルカ・アシカパフォーマンス観賞！フードコートでみんなで仲良くランチを食べます。</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 relative">
+                    <div class="w-14 text-right flex-shrink-0 pt-1">
+                        <span class="font-bold text-gray-800 text-xs md:text-sm">14:00</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-7 h-7 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs shadow-sm z-10">
+                            <i class="fa-solid fa-ship"></i>
+                        </div>
+                        <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-gray-800 text-sm">日本三景・松島 散策＆遊覧船</h3>
+                            <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded-full">景勝地</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">松島海岸を散策♪ 焼きたて笹かまぼこ体験や美味しいソフトクリームを食べて遊覧船に挑戦！</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 relative">
+                    <div class="w-14 text-right flex-shrink-0 pt-1">
+                        <span class="font-bold text-gray-800 text-xs md:text-sm">16:30</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-7 h-7 bg-indigo-500 text-white rounded-full flex items-center justify-center text-xs shadow-sm z-10">
+                            <i class="fa-solid fa-hotel"></i>
+                        </div>
+                        <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
+                        <h3 class="font-bold text-gray-800 text-sm">秋保温泉 宿にチェックイン</h3>
+                        <p class="text-xs text-gray-500 mt-1">お部屋に入ってひと休み。露天風呂に入って子供たちと一緒にのんびり温まりましょう。</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 relative">
+                    <div class="w-14 text-right flex-shrink-0 pt-1">
+                        <span class="font-bold text-gray-800 text-xs md:text-sm">18:30</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-7 h-7 bg-amber-500 text-white rounded-full flex items-center justify-center text-xs shadow-sm z-10">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
+                        <h3 class="font-bold text-gray-800 text-sm">4家族合同の大夕食会 ＆ 夜のお楽しみ会</h3>
+                        <p class="text-xs text-gray-500 mt-1">賑やかな夕食バイキング！夜は大部屋に集まってカードゲーム＆ビンゴ大会開催🎉</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 2 TIMELINE -->
+            <div id="day2-content" class="space-y-4 hidden">
+                <div class="flex gap-3 relative">
+                    <div class="w-14 text-right flex-shrink-0 pt-1">
+                        <span class="font-bold text-gray-800 text-xs md:text-sm">08:00</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-7 h-7 bg-amber-400 text-white rounded-full flex items-center justify-center text-xs shadow-sm z-10">
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </div>
+                        <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
+                        <h3 class="font-bold text-gray-800 text-sm">朝食 ＆ チェックアウト</h3>
+                        <p class="text-xs text-gray-500 mt-1">みんなで朝ごはんを食べて準備。9:30には宿を出発します！</p>
+                    </div>
+                </div>
+
+                <!-- ADDED SPOT: LAPRAS PARK IN SCHEDULE -->
+                <div class="flex gap-3 relative">
+                    <div class="w-14 text-right flex-shrink-0 pt-1">
+                        <span class="font-bold text-gray-800 text-xs md:text-sm">10:15</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-7 h-7 bg-sky-500 text-white rounded-full flex items-center justify-center text-xs shadow-sm z-10">
+                            <i class="fa-solid fa-water"></i>
+                        </div>
+                        <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
+                    </div>
+                    <div class="bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200 p-4 rounded-xl card-shadow flex-grow mb-2">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-sky-900 text-sm"><i class="fa-solid fa-star text-amber-400 mr-1"></i>ラプラス公園（道の駅かくだ）</h3>
+                            <span class="bg-sky-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">注目目玉</span>
+                        </div>
+                        <p class="text-xs text-sky-800 mt-1">宮城×ラプラスの巨大遊具で子供たち大興奮！大きなラプラススライダーやブランコでいっぱい遊ぼう！</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 relative">
+                    <div class="w-14 text-right flex-shrink-0 pt-1">
+                        <span class="font-bold text-gray-800 text-xs md:text-sm">12:45</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-7 h-7 bg-red-400 text-white rounded-full flex items-center justify-center text-xs shadow-sm z-10">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
+                        <h3 class="font-bold text-gray-800 text-sm">名物！仙台牛タンランチ</h3>
+                        <p class="text-xs text-gray-500 mt-1">仙台市内へ移動して本格牛タンを堪能！お子様メニューも充実の店舗を予約済み。</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 relative">
+                    <div class="w-14 text-right flex-shrink-0 pt-1">
+                        <span class="font-bold text-gray-800 text-xs md:text-sm">14:30</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-7 h-7 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xs shadow-sm z-10">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
+                        <h3 class="font-bold text-gray-800 text-sm">お土産タイム ＆ 仙台駅で解散</h3>
+                        <p class="text-xs text-gray-500 mt-1">ずんだシェイクを飲んだり銘菓（萩の月など）を購入！思い出いっぱいで解散します。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: MEMBERS (4 Families) -->
+        <section id="sec-members" class="tab-content hidden space-y-4">
+            <div class="bg-emerald-50 text-emerald-800 p-3 rounded-xl text-xs font-medium flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-emerald-600 text-base"></i>
+                <span>仲良し5歳ちゃん（同い年）が大集合の4家族旅行！大人8名・子供7名です。</span>
+            </div>
+
+            <!-- Family 1 -->
+            <div class="bg-white p-4 rounded-2xl card-shadow border-t-4 border-emerald-400">
+                <div class="flex justify-between items-center mb-2">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-0.5 rounded-lg">1号車</span>
+                        <h3 class="font-bold text-gray-800">かすみファミリー</h3>
+                    </div>
+                    <span class="text-[11px] text-gray-400"><i class="fa-solid fa-car"></i> ミニバン</span>
+                </div>
+                <div class="space-y-1 text-xs text-gray-600">
+                    <p><i class="fa-solid fa-user text-emerald-500 w-4"></i> <strong>大人：</strong> パパ、かすみママ</p>
+                    <p><i class="fa-solid fa-child-reaching text-amber-500 w-4"></i> <strong>子供：</strong> 
+                        <span class="inline-block bg-pink-100 text-pink-800 px-2 py-0.5 rounded-full text-[11px] font-bold">さくら（5歳♀）</span>
+                        <span class="inline-block bg-pink-100 text-pink-800 px-2 py-0.5 rounded-full text-[11px] font-bold">あおい（3歳♀）</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Family 2 -->
+            <div class="bg-white p-4 rounded-2xl card-shadow border-t-4 border-blue-400">
+                <div class="flex justify-between items-center mb-2">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-0.5 rounded-lg">2号車</span>
+                        <h3 class="font-bold text-gray-800">みはるファミリー</h3>
+                    </div>
+                    <span class="text-[11px] text-gray-400"><i class="fa-solid fa-car"></i> SUV</span>
+                </div>
+                <div class="space-y-1 text-xs text-gray-600">
+                    <p><i class="fa-solid fa-user text-blue-500 w-4"></i> <strong>大人：</strong> パパ、みはるママ</p>
+                    <p><i class="fa-solid fa-child-reaching text-amber-500 w-4"></i> <strong>子供：</strong> 
+                        <span class="inline-block bg-pink-100 text-pink-800 px-2 py-0.5 rounded-full text-[11px] font-bold">りん（5歳♀）</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Family 3 -->
+            <div class="bg-white p-4 rounded-2xl card-shadow border-t-4 border-amber-400">
+                <div class="flex justify-between items-center mb-2">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-extrabold px-2.5 py-0.5 rounded-lg">3号車</span>
+                        <h3 class="font-bold text-gray-800">なつきファミリー</h3>
+                    </div>
+                    <span class="text-[11px] text-gray-400"><i class="fa-solid fa-car"></i> コンパクトカー</span>
+                </div>
+                <div class="space-y-1 text-xs text-gray-600">
+                    <p><i class="fa-solid fa-user text-amber-500 w-4"></i> <strong>大人：</strong> パパ、なつきママ</p>
+                    <p><i class="fa-solid fa-child-reaching text-amber-500 w-4"></i> <strong>子供：</strong> 
+                        <span class="inline-block bg-pink-100 text-pink-800 px-2 py-0.5 rounded-full text-[11px] font-bold">みお（5歳♀）</span>
+                        <span class="inline-block bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-[11px] font-bold">れん（1歳♂）</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Family 4 -->
+            <div class="bg-white p-4 rounded-2xl card-shadow border-t-4 border-purple-400">
+                <div class="flex justify-between items-center mb-2">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-extrabold px-2.5 py-0.5 rounded-lg">4号車</span>
+                        <h3 class="font-bold text-gray-800">ゆかファミリー</h3>
+                    </div>
+                    <span class="text-[11px] text-gray-400"><i class="fa-solid fa-car"></i> ミニバン</span>
+                </div>
+                <div class="space-y-1 text-xs text-gray-600">
+                    <p><i class="fa-solid fa-user text-purple-500 w-4"></i> <strong>大人：</strong> パパ、ゆかママ</p>
+                    <p><i class="fa-solid fa-child-reaching text-amber-500 w-4"></i> <strong>子供：</strong> 
+                        <span class="inline-block bg-pink-100 text-pink-800 px-2 py-0.5 rounded-full text-[11px] font-bold">えま（5歳♀）</span>
+                        <span class="inline-block bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-[11px] font-bold">こうた（小2♂）</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: SPOTS -->
+        <section id="sec-spots" class="tab-content hidden space-y-4">
+            
+            <!-- LAPRAS PARK SPOT CARD (HIGHLIGHTED) -->
+            <div class="bg-white rounded-2xl overflow-hidden card-shadow border-2 border-sky-300 relative">
+                <div class="bg-gradient-to-r from-sky-400 to-blue-500 p-3 text-white flex justify-between items-center">
+                    <span class="text-xs font-black bg-yellow-300 text-sky-900 px-2.5 py-0.5 rounded-full">
+                        <i class="fa-solid fa-star"></i> イチオシスポット
+                    </span>
+                    <span class="text-xs opacity-90"><i class="fa-solid fa-map-pin"></i> 宮城県角田市</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-black text-gray-800 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-water text-sky-500"></i> ラプラス公園（道の駅かくだ）
+                    </h3>
+                    <p class="text-xs text-gray-600 mt-2 leading-relaxed">
+                        みやぎ応援ポケモン「ラプラス」をモチーフにした遊具がたくさん設置された夢のような公園！全高約6メートルのラプラスの大型複合遊具や、ラプラスの背中に乗れるブランコなど子供たちが笑顔になれる仕掛けが満載です。
+                    </p>
+                    <div class="mt-3 bg-sky-50 p-2.5 rounded-xl text-[11px] text-sky-800 flex items-center justify-between">
+                        <span><i class="fa-solid fa-circle-check text-sky-500 mr-1"></i> 無料駐車場あり・トイレ完備</span>
+                        <span class="font-bold bg-white px-2 py-0.5 rounded border border-sky-200">道の駅併設</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPOT 2: 水族館 -->
+            <div class="bg-white rounded-2xl p-4 card-shadow border-l-4 border-teal-400">
+                <h3 class="font-bold text-gray-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-fish text-teal-500"></i> 仙台うみのの杜水族館
+                </h3>
+                <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                    豊かな三陸の海を再現した大水槽や、大人気のイルカ・アシカのパフォーマンスを楽しめます。ペンギンとの距離も近く、小さな子でも安心して楽しめます。
+                </p>
+            </div>
+
+            <!-- SPOT 3: 松島 -->
+            <div class="bg-white rounded-2xl p-4 card-shadow border-l-4 border-blue-400">
+                <h3 class="font-bold text-gray-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-ship text-blue-500"></i> 松島海岸 ＆ 島巡り遊覧船
+                </h3>
+                <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                    日本三景のひとつ。綺麗な海と島々を眺めながらの遊覧船クルーズ。海岸通りには焼き立て笹かまぼこ体験や美味しいスイーツのお店が並んでいます。
+                </p>
+            </div>
+
+            <!-- SPOT 4: 秋保温泉 -->
+            <div class="bg-white rounded-2xl p-4 card-shadow border-l-4 border-indigo-400">
+                <h3 class="font-bold text-gray-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-hot-tub-person text-indigo-500"></i> 秋保温泉（あきうおんせん）
+                </h3>
+                <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                    仙台の奥座敷と呼ばれる名湯。肌に優しい泉質で子供たちとの温泉体験にもピッタリ。広々とした露天風呂で1日の疲れをリフレッシュ！
+                </p>
+            </div>
+        </section>
+
+        <!-- TAB 4: CHECKLIST -->
+        <section id="sec-checklist" class="tab-content hidden space-y-4">
+            
+            <!-- Notice Banner -->
+            <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-3 rounded-xl text-xs flex items-start gap-2">
+                <i class="fa-solid fa-shield-halved text-emerald-600 text-base mt-0.5"></i>
+                <div>
+                    <strong class="block font-bold">【持ち物チェックリストの使い方】</strong>
+                    <span>※ チェックした項目や自分で追加したアイテムは自動でスマホ（ブラウザ）に保存されます（他の家族には共有されません）。</span>
+                </div>
+            </div>
+
+            <!-- Custom Add Item Form -->
+            <div class="bg-white p-4 rounded-2xl card-shadow">
+                <h3 class="font-bold text-gray-800 text-xs mb-2 flex items-center gap-1.5">
+                    <i class="fa-solid fa-plus-circle text-emerald-500"></i> 自分専用の持ち物を追加する
+                </h3>
+                <form id="add-item-form" class="flex gap-2" onsubmit="addCustomItem(event)">
+                    <input type="text" id="custom-item-input" placeholder="例：お気に入りのおもちゃ、離乳食など" 
+                           class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 transition" required>
+                    <button type="submit" class="bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded-xl hover:bg-emerald-600 active:scale-95 transition shadow-sm flex items-center gap-1">
+                        <i class="fa-solid fa-plus"></i> 追加
+                    </button>
+                </form>
+            </div>
+
+            <!-- Checklist Containers -->
+            <div class="space-y-4">
+                
+                <!-- My Added Items Category (Dynamically Populated) -->
+                <div id="my-items-wrapper" class="bg-white p-4 rounded-2xl card-shadow border-2 border-emerald-200 hidden">
+                    <h3 class="font-bold text-emerald-800 text-xs mb-3 flex items-center justify-between">
+                        <span><i class="fa-solid fa-user-tag text-emerald-500 mr-1"></i> 追加した持ち物（自分用）</span>
+                        <span class="text-[10px] text-gray-400">一番上に表示</span>
+                    </h3>
+                    <ul id="my-items-list" class="space-y-2.5">
+                        <!-- Custom items will appear here -->
+                    </ul>
+                </div>
+
+                <!-- Shared Standard Category 1 -->
+                <div class="bg-white p-4 rounded-2xl card-shadow">
+                    <h3 class="font-bold text-gray-800 text-xs mb-3 flex items-center gap-1.5">
+                        <i class="fa-solid fa-briefcase text-amber-500"></i> 基本・全員の持ち物
+                    </h3>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" id="chk-1" class="custom-checkbox w-4 h-4 accent-emerald-500 rounded" onchange="toggleCheck('chk-1')">
+                            <label for="chk-1" class="text-xs text-gray-700 font-medium">着替え（1〜2セット多めに）</label>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" id="chk-2" class="custom-checkbox w-4 h-4 accent-emerald-500 rounded" onchange="toggleCheck('chk-2')">
+                            <label for="chk-2" class="text-xs text-gray-700 font-medium">健康保険証・受給者証・母子手帳</label>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" id="chk-3" class="custom-checkbox w-4 h-4 accent-emerald-500 rounded" onchange="toggleCheck('chk-3')">
+                            <label for="chk-3" class="text-xs text-gray-700 font-medium">パジャマ・パジャマ用下着</label>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" id="chk-4" class="custom-checkbox w-4 h-4 accent-emerald-500 rounded" onchange="toggleCheck('chk-4')">
+                            <label for="chk-4" class="text-xs text-gray-700 font-medium">常備薬・体温計・絆創膏</label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Shared Standard Category 2 -->
+                <div class="bg-white p-4 rounded-2xl card-shadow">
+                    <h3 class="font-bold text-gray-800 text-xs mb-3 flex items-center gap-1.5">
+                        <i class="fa-solid fa-baby text-pink-500"></i> キッズ＆車内グッズ
+                    </h3>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" id="chk-5" class="custom-checkbox w-4 h-4 accent-emerald-500 rounded" onchange="toggleCheck('chk-5')">
+                            <label for="chk-5" class="text-xs text-gray-700 font-medium">ウエットティッシュ・除菌シート</label>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" id="chk-6" class="custom-checkbox w-4 h-4 accent-emerald-500 rounded" onchange="toggleCheck('chk-6')">
+                            <label for="chk-6" class="text-xs text-gray-700 font-medium">おむつ・おしりふき・ビニール袋</label>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" id="chk-7" class="custom-checkbox w-4 h-4 accent-emerald-500 rounded" onchange="toggleCheck('chk-7')">
+                            <label for="chk-7" class="text-xs text-gray-700 font-medium">車内用のおやつ＆飲み物（マグなど）</label>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" id="chk-8" class="custom-checkbox w-4 h-4 accent-emerald-500 rounded" onchange="toggleCheck('chk-8')">
+                            <label for="chk-8" class="text-xs text-gray-700 font-medium">退屈しのぎのおもちゃ・絵本</label>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <input type="checkbox" id="chk-9" class="custom-checkbox w-4 h-4 accent-emerald-500 rounded" onchange="toggleCheck('chk-9')">
+                            <label for="chk-9" class="text-xs text-gray-700 font-medium">羽織るもの（寒さ調整用アウター）</label>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- 1. Tab Switcher Logic ---
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            // Reset tab button active styles
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('tab-active'));
+
+            // Show selected section
+            document.getElementById(`sec-${tabName}`).classList.remove('hidden');
+            // Highlight selected tab button
+            document.getElementById(`tab-${tabName}`).classList.add('tab-active');
+
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-      });
-    }
 
-    function setSimTime(timeStr) {
-      simTime = timeStr;
-      updateTimeline();
-    }
+        // --- 2. Day Switcher Logic ---
+        function switchDay(dayNum) {
+            const day1Btn = document.getElementById('day1-btn');
+            const day2Btn = document.getElementById('day2-btn');
+            const day1Content = document.getElementById('day1-content');
+            const day2Content = document.getElementById('day2-content');
 
-    function resetSimTime() {
-      simTime = null;
-      updateTimeline();
-    }
+            if (dayNum === 1) {
+                day1Content.classList.remove('hidden');
+                day2Content.classList.add('hidden');
+                day1Btn.className = "flex-1 py-2.5 rounded-lg bg-white shadow-sm text-emerald-700 transition duration-200 font-bold";
+                day2Btn.className = "flex-1 py-2.5 rounded-lg text-gray-500 transition duration-200";
+            } else {
+                day1Content.classList.add('hidden');
+                day2Content.classList.remove('hidden');
+                day2Btn.className = "flex-1 py-2.5 rounded-lg bg-white shadow-sm text-emerald-700 transition duration-200 font-bold";
+                day1Btn.className = "flex-1 py-2.5 rounded-lg text-gray-500 transition duration-200";
+            }
+        }
 
-    // ========== 持ち物チェックリスト処理 ==========
-    function toggleCheck(checkbox) {
-      const span = checkbox.nextElementSibling;
-      if (checkbox.checked) {
-        span.classList.add('checked-text');
-      } else {
-        span.classList.remove('checked-text');
-      }
-      saveChecklist();
-    }
+        // --- 3. LocalStorage for Checklist State & Custom Items ---
+        const STORAGE_KEY_CHECKS = 'miyagi_trip_checks';
+        const STORAGE_KEY_CUSTOM = 'miyagi_trip_custom_items';
 
-    function addCustomItem(text = null) {
-      const input = document.getElementById('new-item-input');
-      const val = text || input.value.trim();
-      if (!val) return;
-
-      const ul = document.getElementById('custom-items-list');
-      const li = document.createElement('li');
-      li.className = 'check-item';
-      li.innerHTML = `
-        <label class="check-label">
-          <input type="checkbox" onchange="toggleCheck(this)">
-          <span>${val}</span>
-        </label>
-        <button class="del-btn" onclick="deleteItem(this)">削除</button>
-      `;
-      // カスタムアイテムは一番上に追加
-      ul.insertBefore(li, ul.firstChild);
-
-      if (!text) {
-        input.value = '';
-        saveChecklist();
-      }
-    }
-
-    function deleteItem(btn) {
-      btn.parentElement.remove();
-      saveChecklist();
-    }
-
-    function saveChecklist() {
-      const customItems = [];
-      document.querySelectorAll('#custom-items-list .check-item').forEach(li => {
-        customItems.push({
-          text: li.querySelector('span').innerText,
-          checked: li.querySelector('input').checked
+        // Load states on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadChecks();
+            loadCustomItems();
         });
-      });
-      // 追加順を維持するためreverse
-      localStorage.setItem('miyagi_trip_tab_items', JSON.stringify(customItems.reverse()));
-    }
 
-    function loadChecklist() {
-      const items = JSON.parse(localStorage.getItem('miyagi_trip_tab_items') || '[]');
-      items.forEach(item => {
-        addCustomItem(item.text);
-        if (item.checked) {
-          const firstLi = document.querySelector('#custom-items-list .check-item');
-          const cb = firstLi.querySelector('input');
-          cb.checked = true;
-          firstLi.querySelector('span').classList.add('checked-text');
+        // Toggle checkbox state
+        function toggleCheck(id) {
+            const checks = JSON.parse(localStorage.getItem(STORAGE_KEY_CHECKS) || '{}');
+            const checkbox = document.getElementById(id);
+            if (checkbox) {
+                checks[id] = checkbox.checked;
+                localStorage.setItem(STORAGE_KEY_CHECKS, JSON.stringify(checks));
+            }
         }
-      });
-    }
 
-    // 画面読み込み時の初期化
-    window.onload = function() {
-      loadChecklist();
-      updateTimeline();
-      // 1分ごとに今ここ判定を更新
-      setInterval(updateTimeline, 60000); 
-    };
-  </script>
+        // Load saved checkbox states
+        function loadChecks() {
+            const checks = JSON.parse(localStorage.getItem(STORAGE_KEY_CHECKS) || '{}');
+            Object.keys(checks).forEach(id => {
+                const checkbox = document.getElementById(id);
+                if (checkbox) {
+                    checkbox.checked = checks[id];
+                }
+            });
+        }
+
+        // Add custom user item
+        function addCustomItem(event) {
+            event.preventDefault();
+            const input = document.getElementById('custom-item-input');
+            const text = input.value.trim();
+
+            if (!text) return;
+
+            const customItems = JSON.parse(localStorage.getItem(STORAGE_KEY_CUSTOM) || '[]');
+            const newItem = {
+                id: 'custom-' + Date.now(),
+                text: text,
+                checked: false
+            };
+
+            // Insert at top of array
+            customItems.unshift(newItem);
+            localStorage.setItem(STORAGE_KEY_CUSTOM, JSON.stringify(customItems));
+
+            input.value = '';
+            renderCustomItems();
+        }
+
+        // Render custom user items in "My Items" section
+        function loadCustomItems() {
+            renderCustomItems();
+        }
+
+        function renderCustomItems() {
+            const customItems = JSON.parse(localStorage.getItem(STORAGE_KEY_CUSTOM) || '[]');
+            const wrapper = document.getElementById('my-items-wrapper');
+            const list = document.getElementById('my-items-list');
+
+            if (customItems.length === 0) {
+                wrapper.classList.add('hidden');
+                list.innerHTML = '';
+                return;
+            }
+
+            wrapper.classList.remove('hidden');
+            list.innerHTML = '';
+
+            customItems.forEach(item => {
+                const li = document.createElement('li');
+                li.className = "flex items-center justify-between gap-2 border-b border-gray-100 pb-2 last:border-none last:pb-0";
+                
+                const checks = JSON.parse(localStorage.getItem(STORAGE_KEY_CHECKS) || '{}');
+                const isChecked = checks[item.id] || false;
+
+                li.innerHTML = `
+                    <div class="flex items-center gap-2 flex-1">
+                        <input type="checkbox" id="${item.id}" class="custom-checkbox w-4 h-4 accent-emerald-500 rounded" ${isChecked ? 'checked' : ''} onchange="toggleCheck('${item.id}')">
+                        <label for="${item.id}" class="text-xs text-gray-800 font-bold">${escapeHtml(item.text)}</label>
+                    </div>
+                    <button onclick="removeCustomItem('${item.id}')" class="text-gray-400 hover:text-red-500 text-xs px-2 py-1 transition" title="削除">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                list.appendChild(li);
+            });
+        }
+
+        // Remove custom item
+        function removeCustomItem(id) {
+            let customItems = JSON.parse(localStorage.getItem(STORAGE_KEY_CUSTOM) || '[]');
+            customItems = customItems.filter(item => item.id !== id);
+            localStorage.setItem(STORAGE_KEY_CUSTOM, JSON.stringify(customItems));
+
+            // Also clean check state
+            const checks = JSON.parse(localStorage.getItem(STORAGE_KEY_CHECKS) || '{}');
+            delete checks[id];
+            localStorage.setItem(STORAGE_KEY_CHECKS, JSON.stringify(checks));
+
+            renderCustomItems();
+        }
+
+        // Helper to prevent HTML injection
+        function escapeHtml(str) {
+            return str.replace(/[&<>"']/g, function(m) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                }[m];
+            });
+        }
+    </script>
 </body>
 </html>
