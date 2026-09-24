@@ -57,11 +57,11 @@
             box-shadow: 0 4px 15px -1px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
         }
         @keyframes pulse-border {
-            0%, 100% { border-color: #10B981; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-            50% { border-color: #059669; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            0%, 100% { border-color: #10B981; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+            50% { border-color: #059669; box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
         }
         .now-active-card {
-            border: 2px solid #10B981 !important;
+            border: 2.5px solid #10B981 !important;
             animation: pulse-border 2s infinite;
             background-color: #F0FDF4 !important;
         }
@@ -100,6 +100,27 @@
         </div>
     </header>
 
+    <!-- Realtime Status Banner & Simulation Toggle -->
+    <div class="bg-slate-800 text-white py-2 px-4 shadow-inner">
+        <div class="max-w-3xl mx-auto flex flex-wrap justify-between items-center text-xs gap-2">
+            <div id="live-status-indicator" class="flex items-center gap-2 font-bold text-amber-300">
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span id="live-status-text">現在地を更新中...</span>
+            </div>
+            
+            <!-- Debug/Simulation Controls -->
+            <div class="flex items-center gap-1.5 text-[11px] bg-slate-700/80 px-2 py-1 rounded-lg">
+                <span class="text-slate-300"><i class="fa-solid fa-vial"></i> 試す:</span>
+                <button onclick="setSimulatedTime(null)" class="bg-slate-600 hover:bg-slate-500 text-white px-1.5 py-0.5 rounded">リアル</button>
+                <button onclick="setSimulatedTime('2027-03-21T10:45:00')" class="bg-teal-600 hover:bg-teal-500 text-white px-1.5 py-0.5 rounded">1日目水族館</button>
+                <button onclick="setSimulatedTime('2027-03-22T10:30:00')" class="bg-sky-600 hover:bg-sky-500 text-white px-1.5 py-0.5 rounded">2日目ラプラス公園</button>
+            </div>
+        </div>
+    </div>
+
     <nav class="sticky top-0 bg-white/90 backdrop-blur-md border-b border-gray-100 z-50 shadow-sm">
         <div class="max-w-3xl mx-auto flex justify-around text-center text-xs md:text-sm text-gray-500 font-medium">
             <button onclick="switchTab('schedule')" id="tab-schedule" class="tab-btn flex-1 py-3 transition-colors tab-active">
@@ -133,11 +154,17 @@
 
             <!-- DAY 1 TIMELINE -->
             <div id="day1-content" class="space-y-4">
-                <div class="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-800">
-                    <i class="fa-solid fa-location-dot mr-1"></i> <strong>集合場所：</strong> 仙台駅東口 または 「菅生PA（下り）」 9:30集合！
+                <div class="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-800 flex justify-between items-center flex-wrap gap-2">
+                    <div>
+                        <i class="fa-solid fa-location-dot mr-1"></i> <strong>集合場所：</strong> 菅生PA（下り） 9:30集合！
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=菅生PA+下り" target="_blank" rel="noopener" class="bg-amber-500 text-white px-2.5 py-1 rounded-lg text-[11px] font-bold shadow-sm hover:bg-amber-600 transition flex items-center gap-1">
+                        <i class="fa-solid fa-map-location-dot"></i> MAP
+                    </a>
                 </div>
 
-                <div class="flex gap-3 relative">
+                <!-- Event 1-1 -->
+                <div class="flex gap-3 relative timeline-item" data-start="2027-03-21T09:30:00" data-end="2027-03-21T10:30:00" data-day="1">
                     <div class="w-14 text-right flex-shrink-0 pt-1">
                         <span class="font-bold text-gray-800 text-xs md:text-sm">09:30</span>
                     </div>
@@ -147,13 +174,17 @@
                         </div>
                         <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
                     </div>
-                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
-                        <h3 class="font-bold text-gray-800 text-sm">集合＆みんなでスタート！</h3>
+                    <div class="schedule-card bg-white p-4 rounded-xl card-shadow flex-grow mb-2 transition-all">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-gray-800 text-sm">集合＆みんなでスタート！</h3>
+                            <span class="now-badge hidden bg-emerald-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-bounce">📍 いまココ！</span>
+                        </div>
                         <p class="text-xs text-gray-500 mt-1">4家族が無事に合流！子供たちの体調を確認したら、さっそく「うみのの杜水族館」へ出発！</p>
                     </div>
                 </div>
 
-                <div class="flex gap-3 relative">
+                <!-- Event 1-2 -->
+                <div class="flex gap-3 relative timeline-item" data-start="2027-03-21T10:30:00" data-end="2027-03-21T14:00:00" data-day="1">
                     <div class="w-14 text-right flex-shrink-0 pt-1">
                         <span class="font-bold text-gray-800 text-xs md:text-sm">10:30</span>
                     </div>
@@ -163,16 +194,25 @@
                         </div>
                         <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
                     </div>
-                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-gray-800 text-sm">仙台うみのの杜水族館</h3>
-                            <span class="bg-teal-100 text-teal-700 text-[10px] font-bold px-2 py-0.5 rounded-full">大人気</span>
+                    <div class="schedule-card bg-white p-4 rounded-xl card-shadow flex-grow mb-2 transition-all">
+                        <div class="flex justify-between items-start gap-2">
+                            <div>
+                                <span class="bg-teal-100 text-teal-700 text-[10px] font-bold px-2 py-0.5 rounded-full mr-1">大人気</span>
+                                <h3 class="font-bold text-gray-800 text-sm inline">仙台うみのの杜水族館</h3>
+                            </div>
+                            <span class="now-badge hidden bg-emerald-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-bounce">📍 いまココ！</span>
                         </div>
                         <p class="text-xs text-gray-500 mt-1">大迫力のイルカ・アシカパフォーマンス観賞！フードコートでみんなで仲良くランチを食べます。</p>
+                        <div class="mt-2 text-right">
+                            <a href="https://www.google.com/maps/search/?api=1&query=仙台うみの杜水族館&query_place_id=ChIJ40f74ZeIiV8RZGCwJF1jzVI" target="_blank" rel="noopener" class="inline-flex items-center gap-1 bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-lg text-[11px] font-bold hover:bg-sky-100 transition">
+                                <i class="fa-solid fa-map-location-dot text-sky-500"></i> Google Map
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="flex gap-3 relative">
+                <!-- Event 1-3 -->
+                <div class="flex gap-3 relative timeline-item" data-start="2027-03-21T14:00:00" data-end="2027-03-21T16:30:00" data-day="1">
                     <div class="w-14 text-right flex-shrink-0 pt-1">
                         <span class="font-bold text-gray-800 text-xs md:text-sm">14:00</span>
                     </div>
@@ -182,16 +222,25 @@
                         </div>
                         <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
                     </div>
-                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-gray-800 text-sm">日本三景・松島 散策＆遊覧船</h3>
-                            <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded-full">景勝地</span>
+                    <div class="schedule-card bg-white p-4 rounded-xl card-shadow flex-grow mb-2 transition-all">
+                        <div class="flex justify-between items-start gap-2">
+                            <div>
+                                <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded-full mr-1">景勝地</span>
+                                <h3 class="font-bold text-gray-800 text-sm inline">日本三景・松島 散策＆遊覧船</h3>
+                            </div>
+                            <span class="now-badge hidden bg-emerald-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-bounce">📍 いまココ！</span>
                         </div>
                         <p class="text-xs text-gray-500 mt-1">松島海岸を散策♪ 焼きたて笹かまぼこ体験や美味しいソフトクリームを食べて遊覧船に挑戦！</p>
+                        <div class="mt-2 text-right">
+                            <a href="https://www.google.com/maps/search/?api=1&query=松島海岸&query_place_id=ChIJtakssIEpil8RddOLFGus-sY" target="_blank" rel="noopener" class="inline-flex items-center gap-1 bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-lg text-[11px] font-bold hover:bg-sky-100 transition">
+                                <i class="fa-solid fa-map-location-dot text-sky-500"></i> Google Map
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="flex gap-3 relative">
+                <!-- Event 1-4 -->
+                <div class="flex gap-3 relative timeline-item" data-start="2027-03-21T16:30:00" data-end="2027-03-21T18:30:00" data-day="1">
                     <div class="w-14 text-right flex-shrink-0 pt-1">
                         <span class="font-bold text-gray-800 text-xs md:text-sm">16:30</span>
                     </div>
@@ -201,13 +250,22 @@
                         </div>
                         <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
                     </div>
-                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
-                        <h3 class="font-bold text-gray-800 text-sm">秋保温泉 宿にチェックイン</h3>
+                    <div class="schedule-card bg-white p-4 rounded-xl card-shadow flex-grow mb-2 transition-all">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-gray-800 text-sm">秋保温泉 宿にチェックイン</h3>
+                            <span class="now-badge hidden bg-emerald-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-bounce">📍 いまココ！</span>
+                        </div>
                         <p class="text-xs text-gray-500 mt-1">お部屋に入ってひと休み。露天風呂に入って子供たちと一緒にのんびり温まりましょう。</p>
+                        <div class="mt-2 text-right">
+                            <a href="https://www.google.com/maps/search/?api=1&query=秋保温泉&query_place_id=ChIJK1W0L1Auil8RJJulX5AUR3Q" target="_blank" rel="noopener" class="inline-flex items-center gap-1 bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-lg text-[11px] font-bold hover:bg-sky-100 transition">
+                                <i class="fa-solid fa-map-location-dot text-sky-500"></i> Google Map
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="flex gap-3 relative">
+                <!-- Event 1-5 -->
+                <div class="flex gap-3 relative timeline-item" data-start="2027-03-21T18:30:00" data-end="2027-03-21T23:59:59" data-day="1">
                     <div class="w-14 text-right flex-shrink-0 pt-1">
                         <span class="font-bold text-gray-800 text-xs md:text-sm">18:30</span>
                     </div>
@@ -216,8 +274,11 @@
                             <i class="fa-solid fa-utensils"></i>
                         </div>
                     </div>
-                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
-                        <h3 class="font-bold text-gray-800 text-sm">4家族合同の大夕食会 ＆ 夜のお楽しみ会</h3>
+                    <div class="schedule-card bg-white p-4 rounded-xl card-shadow flex-grow mb-2 transition-all">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-gray-800 text-sm">4家族合同の大夕食会 ＆ お楽しみ会</h3>
+                            <span class="now-badge hidden bg-emerald-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-bounce">📍 いまココ！</span>
+                        </div>
                         <p class="text-xs text-gray-500 mt-1">賑やかな夕食バイキング！夜は大部屋に集まってカードゲーム＆ビンゴ大会開催🎉</p>
                     </div>
                 </div>
@@ -225,7 +286,8 @@
 
             <!-- DAY 2 TIMELINE -->
             <div id="day2-content" class="space-y-4 hidden">
-                <div class="flex gap-3 relative">
+                <!-- Event 2-1 -->
+                <div class="flex gap-3 relative timeline-item" data-start="2027-03-22T00:00:00" data-end="2027-03-22T10:15:00" data-day="2">
                     <div class="w-14 text-right flex-shrink-0 pt-1">
                         <span class="font-bold text-gray-800 text-xs md:text-sm">08:00</span>
                     </div>
@@ -235,14 +297,17 @@
                         </div>
                         <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
                     </div>
-                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
-                        <h3 class="font-bold text-gray-800 text-sm">朝食 ＆ チェックアウト</h3>
+                    <div class="schedule-card bg-white p-4 rounded-xl card-shadow flex-grow mb-2 transition-all">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-gray-800 text-sm">朝食 ＆ チェックアウト</h3>
+                            <span class="now-badge hidden bg-emerald-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-bounce">📍 いまココ！</span>
+                        </div>
                         <p class="text-xs text-gray-500 mt-1">みんなで朝ごはんを食べて準備。9:30には宿を出発します！</p>
                     </div>
                 </div>
 
-                <!-- ADDED SPOT: LAPRAS PARK IN SCHEDULE -->
-                <div class="flex gap-3 relative">
+                <!-- Event 2-2 (LAPRAS PARK) -->
+                <div class="flex gap-3 relative timeline-item" data-start="2027-03-22T10:15:00" data-end="2027-03-22T12:45:00" data-day="2">
                     <div class="w-14 text-right flex-shrink-0 pt-1">
                         <span class="font-bold text-gray-800 text-xs md:text-sm">10:15</span>
                     </div>
@@ -252,16 +317,25 @@
                         </div>
                         <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
                     </div>
-                    <div class="bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200 p-4 rounded-xl card-shadow flex-grow mb-2">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-sky-900 text-sm"><i class="fa-solid fa-star text-amber-400 mr-1"></i>ラプラス公園（道の駅かくだ）</h3>
-                            <span class="bg-sky-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">注目目玉</span>
+                    <div class="schedule-card bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200 p-4 rounded-xl card-shadow flex-grow mb-2 transition-all">
+                        <div class="flex justify-between items-start gap-1">
+                            <div>
+                                <span class="bg-sky-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full mr-1">注目目玉</span>
+                                <h3 class="font-bold text-sky-900 text-sm inline"><i class="fa-solid fa-star text-amber-400 mr-1"></i>ラプラス公園（道の駅かくだ）</h3>
+                            </div>
+                            <span class="now-badge hidden bg-emerald-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-bounce">📍 いまココ！</span>
                         </div>
                         <p class="text-xs text-sky-800 mt-1">宮城×ラプラスの巨大遊具で子供たち大興奮！大きなラプラススライダーやブランコでいっぱい遊ぼう！</p>
+                        <div class="mt-2 text-right">
+                            <a href="https://www.google.com/maps/search/?api=1&query=道の駅かくだ+ラプラス公園&query_place_id=ChIJmcyV8kxtil8RjXIa6xnVV2A" target="_blank" rel="noopener" class="inline-flex items-center gap-1 bg-sky-600 text-white px-2.5 py-1 rounded-lg text-[11px] font-bold hover:bg-sky-700 transition shadow-sm">
+                                <i class="fa-solid fa-map-location-dot"></i> Google Map
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="flex gap-3 relative">
+                <!-- Event 2-3 -->
+                <div class="flex gap-3 relative timeline-item" data-start="2027-03-22T12:45:00" data-end="2027-03-22T14:30:00" data-day="2">
                     <div class="w-14 text-right flex-shrink-0 pt-1">
                         <span class="font-bold text-gray-800 text-xs md:text-sm">12:45</span>
                     </div>
@@ -271,13 +345,22 @@
                         </div>
                         <div class="w-0.5 bg-gray-200 h-full -my-1"></div>
                     </div>
-                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
-                        <h3 class="font-bold text-gray-800 text-sm">名物！仙台牛タンランチ</h3>
+                    <div class="schedule-card bg-white p-4 rounded-xl card-shadow flex-grow mb-2 transition-all">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-gray-800 text-sm">名物！仙台牛タンランチ</h3>
+                            <span class="now-badge hidden bg-emerald-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-bounce">📍 いまココ！</span>
+                        </div>
                         <p class="text-xs text-gray-500 mt-1">仙台市内へ移動して本格牛タンを堪能！お子様メニューも充実の店舗を予約済み。</p>
+                        <div class="mt-2 text-right">
+                            <a href="https://www.google.com/maps/search/?api=1&query=仙台駅+牛タン" target="_blank" rel="noopener" class="inline-flex items-center gap-1 bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-lg text-[11px] font-bold hover:bg-sky-100 transition">
+                                <i class="fa-solid fa-map-location-dot text-sky-500"></i> Google Map
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="flex gap-3 relative">
+                <!-- Event 2-4 -->
+                <div class="flex gap-3 relative timeline-item" data-start="2027-03-22T14:30:00" data-end="2027-03-22T23:59:59" data-day="2">
                     <div class="w-14 text-right flex-shrink-0 pt-1">
                         <span class="font-bold text-gray-800 text-xs md:text-sm">14:30</span>
                     </div>
@@ -286,9 +369,17 @@
                             <i class="fa-solid fa-bag-shopping"></i>
                         </div>
                     </div>
-                    <div class="bg-white p-4 rounded-xl card-shadow flex-grow mb-2">
-                        <h3 class="font-bold text-gray-800 text-sm">お土産タイム ＆ 仙台駅で解散</h3>
+                    <div class="schedule-card bg-white p-4 rounded-xl card-shadow flex-grow mb-2 transition-all">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-gray-800 text-sm">お土産タイム ＆ 仙台駅で解散</h3>
+                            <span class="now-badge hidden bg-emerald-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-bounce">📍 いまココ！</span>
+                        </div>
                         <p class="text-xs text-gray-500 mt-1">ずんだシェイクを飲んだり銘菓（萩の月など）を購入！思い出いっぱいで解散します。</p>
+                        <div class="mt-2 text-right">
+                            <a href="https://www.google.com/maps/search/?api=1&query=仙台駅" target="_blank" rel="noopener" class="inline-flex items-center gap-1 bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-lg text-[11px] font-bold hover:bg-sky-100 transition">
+                                <i class="fa-solid fa-map-location-dot text-sky-500"></i> Google Map
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -306,12 +397,12 @@
                 <div class="flex justify-between items-center mb-2">
                     <div class="flex items-center gap-2">
                         <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-0.5 rounded-lg">1号車</span>
-                        <h3 class="font-bold text-gray-800">かすみファミリー</h3>
+                        <h3 class="font-bold text-gray-800">我が家</h3>
                     </div>
                     <span class="text-[11px] text-gray-400"><i class="fa-solid fa-car"></i> ミニバン</span>
                 </div>
                 <div class="space-y-1 text-xs text-gray-600">
-                    <p><i class="fa-solid fa-user text-emerald-500 w-4"></i> <strong>大人：</strong> パパ、かすみママ</p>
+                    <p><i class="fa-solid fa-user text-emerald-500 w-4"></i> <strong>大人：</strong> パパ、ママ</p>
                     <p><i class="fa-solid fa-child-reaching text-amber-500 w-4"></i> <strong>子供：</strong> 
                         <span class="inline-block bg-pink-100 text-pink-800 px-2 py-0.5 rounded-full text-[11px] font-bold">さくら（5歳♀）</span>
                         <span class="inline-block bg-pink-100 text-pink-800 px-2 py-0.5 rounded-full text-[11px] font-bold">あおい（3歳♀）</span>
@@ -324,12 +415,12 @@
                 <div class="flex justify-between items-center mb-2">
                     <div class="flex items-center gap-2">
                         <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-0.5 rounded-lg">2号車</span>
-                        <h3 class="font-bold text-gray-800">みはるファミリー</h3>
+                        <h3 class="font-bold text-gray-800">かすみファミリー</h3>
                     </div>
                     <span class="text-[11px] text-gray-400"><i class="fa-solid fa-car"></i> SUV</span>
                 </div>
                 <div class="space-y-1 text-xs text-gray-600">
-                    <p><i class="fa-solid fa-user text-blue-500 w-4"></i> <strong>大人：</strong> パパ、みはるママ</p>
+                    <p><i class="fa-solid fa-user text-blue-500 w-4"></i> <strong>大人：</strong> パパ、かすみママ</p>
                     <p><i class="fa-solid fa-child-reaching text-amber-500 w-4"></i> <strong>子供：</strong> 
                         <span class="inline-block bg-pink-100 text-pink-800 px-2 py-0.5 rounded-full text-[11px] font-bold">りん（5歳♀）</span>
                     </p>
@@ -341,12 +432,12 @@
                 <div class="flex justify-between items-center mb-2">
                     <div class="flex items-center gap-2">
                         <span class="bg-amber-100 text-amber-800 text-xs font-extrabold px-2.5 py-0.5 rounded-lg">3号車</span>
-                        <h3 class="font-bold text-gray-800">なつきファミリー</h3>
+                        <h3 class="font-bold text-gray-800">みはるファミリー</h3>
                     </div>
                     <span class="text-[11px] text-gray-400"><i class="fa-solid fa-car"></i> コンパクトカー</span>
                 </div>
                 <div class="space-y-1 text-xs text-gray-600">
-                    <p><i class="fa-solid fa-user text-amber-500 w-4"></i> <strong>大人：</strong> パパ、なつきママ</p>
+                    <p><i class="fa-solid fa-user text-amber-500 w-4"></i> <strong>大人：</strong> パパ、みはるママ</p>
                     <p><i class="fa-solid fa-child-reaching text-amber-500 w-4"></i> <strong>子供：</strong> 
                         <span class="inline-block bg-pink-100 text-pink-800 px-2 py-0.5 rounded-full text-[11px] font-bold">みお（5歳♀）</span>
                         <span class="inline-block bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-[11px] font-bold">れん（1歳♂）</span>
@@ -359,12 +450,12 @@
                 <div class="flex justify-between items-center mb-2">
                     <div class="flex items-center gap-2">
                         <span class="bg-purple-100 text-purple-800 text-xs font-extrabold px-2.5 py-0.5 rounded-lg">4号車</span>
-                        <h3 class="font-bold text-gray-800">ゆかファミリー</h3>
+                        <h3 class="font-bold text-gray-800">なつきファミリー</h3>
                     </div>
                     <span class="text-[11px] text-gray-400"><i class="fa-solid fa-car"></i> ミニバン</span>
                 </div>
                 <div class="space-y-1 text-xs text-gray-600">
-                    <p><i class="fa-solid fa-user text-purple-500 w-4"></i> <strong>大人：</strong> パパ、ゆかママ</p>
+                    <p><i class="fa-solid fa-user text-purple-500 w-4"></i> <strong>大人：</strong> パパ、なつきママ</p>
                     <p><i class="fa-solid fa-child-reaching text-amber-500 w-4"></i> <strong>子供：</strong> 
                         <span class="inline-block bg-pink-100 text-pink-800 px-2 py-0.5 rounded-full text-[11px] font-bold">えま（5歳♀）</span>
                         <span class="inline-block bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-[11px] font-bold">こうた（小2♂）</span>
@@ -391,40 +482,72 @@
                     <p class="text-xs text-gray-600 mt-2 leading-relaxed">
                         みやぎ応援ポケモン「ラプラス」をモチーフにした遊具がたくさん設置された夢のような公園！全高約6メートルのラプラスの大型複合遊具や、ラプラスの背中に乗れるブランコなど子供たちが笑顔になれる仕掛けが満載です。
                     </p>
-                    <div class="mt-3 bg-sky-50 p-2.5 rounded-xl text-[11px] text-sky-800 flex items-center justify-between">
+                    <div class="mt-4 flex justify-between items-center bg-sky-50 p-2.5 rounded-xl text-[11px] text-sky-800">
                         <span><i class="fa-solid fa-circle-check text-sky-500 mr-1"></i> 無料駐車場あり・トイレ完備</span>
-                        <span class="font-bold bg-white px-2 py-0.5 rounded border border-sky-200">道の駅併設</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=道の駅かくだ+ラプラス公園&query_place_id=ChIJmcyV8kxtil8RjXIa6xnVV2A" target="_blank" rel="noopener" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-3 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1">
+                            <i class="fa-solid fa-map-location-dot"></i> 地図を開く
+                        </a>
                     </div>
                 </div>
             </div>
 
             <!-- SPOT 2: 水族館 -->
             <div class="bg-white rounded-2xl p-4 card-shadow border-l-4 border-teal-400">
-                <h3 class="font-bold text-gray-800 text-base flex items-center gap-2">
-                    <i class="fa-solid fa-fish text-teal-500"></i> 仙台うみのの杜水族館
-                </h3>
-                <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                <div class="flex justify-between items-start">
+                    <h3 class="font-bold text-gray-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-fish text-teal-500"></i> 仙台うみの杜水族館
+                    </h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=仙台うみの杜水族館&query_place_id=ChIJ40f74ZeIiV8RZGCwJF1jzVI" target="_blank" rel="noopener" class="bg-teal-500 hover:bg-teal-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg transition shadow-sm flex items-center gap-1">
+                        <i class="fa-solid fa-map-location-dot"></i> 地図
+                    </a>
+                </div>
+                <p class="text-xs text-gray-600 mt-2 leading-relaxed">
                     豊かな三陸の海を再現した大水槽や、大人気のイルカ・アシカのパフォーマンスを楽しめます。ペンギンとの距離も近く、小さな子でも安心して楽しめます。
                 </p>
             </div>
 
             <!-- SPOT 3: 松島 -->
             <div class="bg-white rounded-2xl p-4 card-shadow border-l-4 border-blue-400">
-                <h3 class="font-bold text-gray-800 text-base flex items-center gap-2">
-                    <i class="fa-solid fa-ship text-blue-500"></i> 松島海岸 ＆ 島巡り遊覧船
-                </h3>
-                <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                <div class="flex justify-between items-start">
+                    <h3 class="font-bold text-gray-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-ship text-blue-500"></i> 松島海岸 ＆ 島巡り遊覧船
+                    </h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=松島海岸&query_place_id=ChIJtakssIEpil8RddOLFGus-sY" target="_blank" rel="noopener" class="bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg transition shadow-sm flex items-center gap-1">
+                        <i class="fa-solid fa-map-location-dot"></i> 地図
+                    </a>
+                </div>
+                <p class="text-xs text-gray-600 mt-2 leading-relaxed">
                     日本三景のひとつ。綺麗な海と島々を眺めながらの遊覧船クルーズ。海岸通りには焼き立て笹かまぼこ体験や美味しいスイーツのお店が並んでいます。
                 </p>
             </div>
 
             <!-- SPOT 4: 秋保温泉 -->
             <div class="bg-white rounded-2xl p-4 card-shadow border-l-4 border-indigo-400">
-                <h3 class="font-bold text-gray-800 text-base flex items-center gap-2">
-                    <i class="fa-solid fa-hot-tub-person text-indigo-500"></i> 秋保温泉（あきうおんせん）
-                </h3>
-                <p class="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                <div class="flex justify-between items-start">
+                    <h3 class="font-bold text-gray-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-hot-tub-person text-indigo-500"></i> 秋保温泉（あきうおんせん）
+                    </h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=秋保温泉&query_place_id=ChIJK1W0L1Auil8RJJulX5AUR3Q" target="_blank" rel="noopener" class="bg-indigo-500 hover:bg-indigo-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg transition shadow-sm flex items-center gap-1">
+                        <i class="fa-solid fa-map-location-dot"></i> 地図
+                    </a>
+                </div>
+                <p class="text-xs text-gray-600 mt-2 leading-relaxed">
                     仙台の奥座敷と呼ばれる名湯。肌に優しい泉質で子供たちとの温泉体験にもピッタリ。広々とした露天風呂で1日の疲れをリフレッシュ！
+                </p>
+            </div>
+
+            <!-- SPOT 5: 仙台城跡 -->
+            <div class="bg-white rounded-2xl p-4 card-shadow border-l-4 border-amber-400">
+                <div class="flex justify-between items-start">
+                    <h3 class="font-bold text-gray-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-chess-rook text-amber-500"></i> 仙台城跡（青葉城）
+                    </h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=仙台城跡" target="_blank" rel="noopener" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg transition shadow-sm flex items-center gap-1">
+                        <i class="fa-solid fa-map-location-dot"></i> 地図
+                    </a>
+                </div>
+                <p class="text-xs text-gray-600 mt-2 leading-relaxed">
+                    伊達政宗公の騎馬像が立つ高台の城跡。仙台市内を一望できる絶景スポットです！
                 </p>
             </div>
         </section>
@@ -436,8 +559,8 @@
             <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-3 rounded-xl text-xs flex items-start gap-2">
                 <i class="fa-solid fa-shield-halved text-emerald-600 text-base mt-0.5"></i>
                 <div>
-                    <strong class="block font-bold">【持ち物チェックリストの使い方】</strong>
-                    <span>※ チェックした項目や自分で追加したアイテムは自動でスマホ（ブラウザ）に保存されます（他の家族には共有されません）。</span>
+                    <strong class="block font-bold">【持ち物チェックリスト】</strong>
+                    <span>※ チェックした項目や自分で追加したアイテムは自動でスマホ（ブラウザ）に保存されます！他の家族には見えません。</span>
                 </div>
             </div>
 
@@ -529,24 +652,87 @@
     </main>
 
     <script>
-        // --- 1. Tab Switcher Logic ---
+        // --- Simulated Time Variable for Debug/Testing ---
+        let overrideTime = null;
+
+        function setSimulatedTime(isoString) {
+            overrideTime = isoString ? new Date(isoString) : null;
+            updateRealtimeNavigation();
+        }
+
+        // Current Active Time Helper
+        function getCurrentTime() {
+            return overrideTime || new Date();
+        }
+
+        // --- 1. Realtime Location Navigation Logic ---
+        function updateRealtimeNavigation() {
+            const now = getCurrentTime();
+            const tripStart = new Date('2027-03-21T09:00:00');
+            const tripEnd = new Date('2027-03-22T17:00:00');
+
+            const statusTextEl = document.getElementById('live-status-text');
+            
+            // Remove previous active classes
+            document.querySelectorAll('.schedule-card').forEach(card => card.classList.remove('now-active-card'));
+            document.querySelectorAll('.now-badge').forEach(badge => badge.classList.add('hidden'));
+
+            if (now < tripStart) {
+                const diffMs = tripStart - now;
+                const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+                statusTextEl.textContent = `旅行開始まであと ${diffDays} 日！ワクワク準備中✨`;
+                return;
+            } else if (now > tripEnd) {
+                statusTextEl.textContent = `旅行は無事に終了しました🎉 思い出たくさん！`;
+                return;
+            }
+
+            // During Trip
+            let foundActive = false;
+            const items = document.querySelectorAll('.timeline-item');
+
+            items.forEach(item => {
+                const start = new Date(item.dataset.start);
+                const end = new Date(item.dataset.end);
+                const day = parseInt(item.dataset.day);
+
+                if (now >= start && now < end) {
+                    foundActive = true;
+                    const card = item.querySelector('.schedule-card');
+                    const badge = item.querySelector('.now-badge');
+
+                    if (card) card.classList.add('now-active-card');
+                    if (badge) badge.classList.remove('hidden');
+
+                    // Automatically switch to active day view if schedule tab is open
+                    if (document.getElementById('sec-schedule').classList.contains('hidden') === false) {
+                        switchDay(day, false);
+                    }
+
+                    const timeStr = now.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
+                    statusTextEl.textContent = `【リアルタイム ${timeStr}】現在進行中のスケジュールをハイライト中📍`;
+                }
+            });
+
+            if (!foundActive) {
+                const timeStr = now.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
+                statusTextEl.textContent = `【リアルタイム ${timeStr}】宮城家族旅行を満喫中♪`;
+            }
+        }
+
+        // --- 2. Tab Switcher Logic ---
         function switchTab(tabName) {
-            // Hide all tab contents
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            // Reset tab button active styles
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('tab-active'));
 
-            // Show selected section
             document.getElementById(`sec-${tabName}`).classList.remove('hidden');
-            // Highlight selected tab button
             document.getElementById(`tab-${tabName}`).classList.add('tab-active');
 
-            // Scroll to top smoothly
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- 2. Day Switcher Logic ---
-        function switchDay(dayNum) {
+        // --- 3. Day Switcher Logic ---
+        function switchDay(dayNum, userClicked = true) {
             const day1Btn = document.getElementById('day1-btn');
             const day2Btn = document.getElementById('day2-btn');
             const day1Content = document.getElementById('day1-content');
@@ -565,17 +751,19 @@
             }
         }
 
-        // --- 3. LocalStorage for Checklist State & Custom Items ---
+        // --- 4. LocalStorage for Checklist State & Custom Items ---
         const STORAGE_KEY_CHECKS = 'miyagi_trip_checks';
         const STORAGE_KEY_CUSTOM = 'miyagi_trip_custom_items';
 
-        // Load states on page load
         document.addEventListener('DOMContentLoaded', () => {
             loadChecks();
             loadCustomItems();
+            updateRealtimeNavigation();
+
+            // Auto refresh current active item every minute
+            setInterval(updateRealtimeNavigation, 60000);
         });
 
-        // Toggle checkbox state
         function toggleCheck(id) {
             const checks = JSON.parse(localStorage.getItem(STORAGE_KEY_CHECKS) || '{}');
             const checkbox = document.getElementById(id);
@@ -585,7 +773,6 @@
             }
         }
 
-        // Load saved checkbox states
         function loadChecks() {
             const checks = JSON.parse(localStorage.getItem(STORAGE_KEY_CHECKS) || '{}');
             Object.keys(checks).forEach(id => {
@@ -596,7 +783,6 @@
             });
         }
 
-        // Add custom user item
         function addCustomItem(event) {
             event.preventDefault();
             const input = document.getElementById('custom-item-input');
@@ -611,7 +797,6 @@
                 checked: false
             };
 
-            // Insert at top of array
             customItems.unshift(newItem);
             localStorage.setItem(STORAGE_KEY_CUSTOM, JSON.stringify(customItems));
 
@@ -619,7 +804,6 @@
             renderCustomItems();
         }
 
-        // Render custom user items in "My Items" section
         function loadCustomItems() {
             renderCustomItems();
         }
@@ -658,13 +842,11 @@
             });
         }
 
-        // Remove custom item
         function removeCustomItem(id) {
             let customItems = JSON.parse(localStorage.getItem(STORAGE_KEY_CUSTOM) || '[]');
             customItems = customItems.filter(item => item.id !== id);
             localStorage.setItem(STORAGE_KEY_CUSTOM, JSON.stringify(customItems));
 
-            // Also clean check state
             const checks = JSON.parse(localStorage.getItem(STORAGE_KEY_CHECKS) || '{}');
             delete checks[id];
             localStorage.setItem(STORAGE_KEY_CHECKS, JSON.stringify(checks));
@@ -672,7 +854,6 @@
             renderCustomItems();
         }
 
-        // Helper to prevent HTML injection
         function escapeHtml(str) {
             return str.replace(/[&<>"']/g, function(m) {
                 return {
