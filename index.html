@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宮城旅行のしおり 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#80B9AD',
+                            lightgreen: '#E8F3F0',
+                            yellow: '#FFD966',
+                            lightyellow: '#FFF8E7',
+                            orange: '#FF9EAA',
+                            blue: '#7BD3EA',
+                            bg: '#F9FBF9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Zen Maru Gothic"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background-color: #F8FAF9;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .tab-active {
+            color: #2D6A4F;
+            border-bottom: 3px solid #52B788;
+            font-weight: 700;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 15px -1px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+        }
+        /* Active "Now Here" glowing effect */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .now-badge {
+            animation: pulse-ring 2s infinite;
+        }
+        .past-item {
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="text-gray-700 pb-20 md:pb-10">
+
+    <header class="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 text-white shadow-md relative overflow-hidden">
+        <div class="absolute -top-10 -left-10 w-32 h-32 bg-white/20 rounded-full blur-xl"></div>
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-yellow-300/30 rounded-full blur-xl"></div>
+        
+        <div class="max-w-3xl mx-auto px-4 pt-6 pb-6 text-center relative z-10">
+            <span class="inline-block bg-white/30 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full font-bold tracking-wider mb-2">
+                <i class="fa-solid fa-car-side mr-1"></i> わくわくファミリー旅行
+            </span>
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide drop-shadow-sm mb-1">
+                宮城旅行のしおり <i class="fa-solid fa-compass text-yellow-300"></i>
+            </h1>
+            <p class="text-sm md:text-base font-medium opacity-95 mt-1">
+                <i class="fa-regular fa-calendar-check mr-1"></i> 2026年 10月10日(土) 〜 10月11日(日) 1泊2日
+            </p>
+            
+            <div class="flex justify-center gap-2 mt-3 text-xs font-bold flex-wrap">
+                <span class="bg-white text-teal-700 px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1">
+                    <i class="fa-solid fa-users text-amber-500"></i> 4家族（大人8名・子供7名）
+                </span>
+                <span class="bg-white text-teal-700 px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1">
+                    <i class="fa-solid fa-hotel text-indigo-500"></i> 秋保温泉
+                </span>
+            </div>
+        </div>
+
+        <!-- Real-time Current Clock Banner -->
+        <div class="bg-emerald-900/30 backdrop-blur-md text-white text-xs py-2 px-4 flex flex-wrap justify-between items-center max-w-3xl mx-auto border-t border-white/20">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-red-400 animate-ping"></span>
+                <span class="font-bold">現在時刻:</span>
+                <span id="current-clock-display" class="font-mono bg-black/20 px-2 py-0.5 rounded text-amber-200">2026-10-10 09:15:00</span>
+                <span id="sim-indicator" class="hidden bg-amber-400 text-gray-900 font-extrabold px-1.5 py-0.5 rounded text-[10px]">テストモード中</span>
+            </div>
+            <button onclick="toggleSimPanel()" class="text-xs bg-white/20 hover:bg-white/30 text-white font-bold px-2 py-1 rounded transition flex items-center gap-1 mt-1 sm:mt-0">
+                <i class="fa-solid fa-sliders"></i> 「今ここ」動作テスト
+            </button>
+        </div>
+    </header>
+
+    <div id="sim-panel" class="hidden bg-amber-50 border-b border-amber-200 px-4 py-3">
+        <div class="max-w-3xl mx-auto">
+            <div class="flex justify-between items-center mb-2">
+                <h4 class="text-xs font-bold text-amber-900 flex items-center gap-1">
+                    <i class="fa-solid fa-wand-magic-sparkles text-amber-600"></i> スケジュール動作テスト（時刻シミュレーション）
+                </h4>
+                <button onclick="toggleSimPanel()" class="text-xs text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark"></i> 閉じる</button>
+            </div>
+            <p class="text-[11px] text-amber-800 mb-2">ボタンをクリックすると仮の時間をセットし、「今ここ！」の切り替えを体験できます。</p>
+            <div class="flex flex-wrap gap-1.5 text-xs">
+                <button onclick="setSimTime('2026-10-10T09:15:00')" class="bg-white border border-amber-300 hover:bg-amber-100 px-2 py-1 rounded text-amber-900 font-medium">1日目 09:15 菅生PA</button>
+                <button onclick="setSimTime('2026-10-10T11:00:00')" class="bg-white border border-amber-300 hover:bg-amber-100 px-2 py-1 rounded text-amber-900 font-medium">1日目 11:00 松島遊覧船</button>
+                <button onclick="setSimTime('2026-10-10T12:45:00')" class="bg-white border border-amber-300 hover:bg-amber-100 px-2 py-1 rounded text-amber-900 font-medium">1日目 12:45 ランチ</button>
+                <button onclick="setSimTime('2026-10-10T18:30:00')" class="bg-white border border-amber-300 hover:bg-amber-100 px-2 py-1 rounded text-amber-900 font-medium">1日目 18:30 夕食バイキング</button>
+                <button onclick="setSimTime('2026-10-11T10:30:00')" class="bg-white border border-amber-300 hover:bg-amber-100 px-2 py-1 rounded text-amber-900 font-medium">2日目 10:30 うみのの杜水族館</button>
+                <button onclick="resetSimTime()" class="bg-amber-600 text-white font-bold px-2 py-1 rounded hover:bg-amber-700">実時間にリセット</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 bg-white/90 backdrop-blur-md border-b border-gray-100 z-50 shadow-sm">
+        <div class="max-w-3xl mx-auto flex justify-around text-center text-sm text-gray-500 font-medium">
+            <button onclick="switchTab('schedule')" id="tab-schedule" class="tab-btn flex-1 py-3 transition-colors tab-active">
+                <i class="fa-solid fa-clock mr-1"></i><span class="inline">日程</span>
+            </button>
+            <button onclick="switchTab('members')" id="tab-members" class="tab-btn flex-1 py-3 transition-colors">
+                <i class="fa-solid fa-people-group mr-1"></i><span class="inline">メンバー</span>
+            </button>
+            <button onclick="switchTab('spots')" id="tab-spots" class="tab-btn flex-1 py-3 transition-colors">
+                <i class="fa-solid fa-map-location-dot mr-1"></i><span class="inline">スポット</span>
+            </button>
+            <button onclick="switchTab('checklist')" id="tab-checklist" class="tab-btn flex-1 py-3 transition-colors">
+                <i class="fa-solid fa-list-check mr-1"></i><span class="inline">持ち物</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-4 py-6">
+
+        <section id="sec-schedule" class="tab-content space-y-6">
+            
+            <!-- Live Active Status Banner -->
+            <div id="live-status-banner" class="bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-300 rounded-2xl p-4 card-shadow flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-red-500 text-white flex items-center justify-center font-black text-xs shrink-0 now-badge">
+                    今ここ！
+                </div>
+                <div class="flex-grow">
+                    <span id="current-active-time" class="text-xs font-bold text-red-500">10月10日(土) 09:00 〜 10:15</span>
+                    <h3 id="current-active-title" class="text-base font-bold text-gray-800">菅生PAで集合＆松島へ出発</h3>
+                    <p id="current-active-desc" class="text-xs text-gray-600 mt-0.5">4家族合流して挨拶！トイレ休憩と最終ルート確認をして出発。</p>
+                </div>
+            </div>
+
+            <!-- Day selector buttons -->
+            <div class="flex bg-gray-100 p-1 rounded-xl font-bold text-sm">
+                <button id="day1-btn" onclick="switchDay(1)" class="flex-1 py-2 rounded-lg bg-white shadow-sm text-emerald-700 transition relative">
+                    1日目 (10/10 Sat)
+                    <span id="day1-now-dot" class="hidden absolute top-2 right-3 w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
+                </button>
+                <button id="day2-btn" onclick="switchDay(2)" class="flex-1 py-2 rounded-lg text-gray-500 transition relative">
+                    2日目 (10/11 Sun)
+                    <span id="day2-now-dot" class="hidden absolute top-2 right-3 w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
+                </button>
+            </div>
+
+            <!-- DAY 1 TIMELINE -->
+            <div id="day1-content" class="space-y-4">
+                <div class="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-xs text-amber-800">
+                    <i class="fa-solid fa-triangle-exclamation mr-1"></i> 集合場所：東北自動車道「菅生PA（下り）」 9:00集合！
+                </div>
+                <div id="timeline-day1" class="space-y-4">
+                    <!-- Dynamic timeline Day 1 rendered here -->
+                </div>
+            </div>
+
+            <!-- DAY 2 TIMELINE -->
+            <div id="day2-content" class="space-y-4 hidden">
+                <div id="timeline-day2" class="space-y-4">
+                    <!-- Dynamic timeline Day 2 rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-members" class="tab-content hidden space-y-4">
+            <div class="bg-emerald-50 text-emerald-800 p-3 rounded-xl text-xs font-medium flex items-center gap-2 mb-2">
+                <i class="fa-solid fa-circle-info text-emerald-600 text-base"></i>
+                <span>4家族総勢15名の賑やか旅！車は各家庭1台（計4台）で移動します。</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl card-shadow border-t-4 border-emerald-400">
+                <div class="flex justify-between items-center mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-lg">A家</span>
+                        <h3 class="font-bold text-gray-800">佐藤ファミリー（幹事）</h3>
+                    </div>
+                    <span class="text-xs text-gray-400"><i class="fa-solid fa-car"></i> 白のミニバン</span>
+                </div>
+                <div class="space-y-1.5 text-xs text-gray-600">
+                    <p><i class="fa-solid fa-user text-emerald-500 w-4"></i> <strong>大人：</strong> パパ（たかし）、ママ（ゆき）</p>
+                    <p><i class="fa-solid fa-child text-amber-500 w-4"></i> <strong>子供：</strong> 
+                        <span class="inline-block bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full text-[11px] font-bold">れん（小3♂）</span>
+                        <span class="inline-block bg-pink-100 text-pink-800 px-2 py-0.5 rounded-full text-[11px] font-bold">みお（年長♀）</span>
+                    </p>
+                    <p class="text-gray-400 text-[11px] pt-1 border-t"><i class="fa-solid fa-comment-dots"></i> 一言：幹事です！みんなでいっぱい思い出作りましょう！</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl card-shadow border-t-4 border-blue-400">
+                <div class="flex justify-between items-center mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-lg">B家</span>
+                        <h3 class="font-bold text-gray-800">鈴木ファミリー</h3>
+                    </div>
+                    <span class="text-xs text-gray-400"><i class="fa-solid fa-car"></i> 黒のSUV</span>
+                </div>
+                <div class="space-y-1.5 text-xs text-gray-600">
+                    <p><i class="fa-solid fa-user text-blue-500 w-4"></i> <strong>大人：</strong> パパ（けんじ）、ママ（あき）</p>
+                    <p><i class="fa-solid fa-child text-amber-500 w-4"></i> <strong>子供：</strong> 
+                        <span class="inline-block bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full text-[11px] font-bold">こうた（小4♂）</span>
+                        <span class="inline-block bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full text-[11px] font-bold">ゆうた（小1♂）</span>
+                    </p>
+                    <p class="text-gray-400 text-[11px] pt-1 border-t"><i class="fa-solid fa-comment-dots"></i> 一言：元気すぎる兄弟ですがよろしくお願いします！</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl card-shadow border-t-4 border-orange-400">
+                <div class="flex justify-between items-center mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-orange-100 text-orange-800 text-xs font-extrabold px-2.5 py-1 rounded-lg">C家</span>
+                        <h3 class="font-bold text-gray-800">高橋ファミリー</h3>
+                    </div>
+                    <span class="text-xs text-gray-400"><i class="fa-solid fa-car"></i> 赤のコンパクト</span>
+                </div>
+                <div class="space-y-1.5 text-xs text-gray-600">
+                    <p><i class="fa-solid fa-user text-orange-500 w-4"></i> <strong>大人：</strong> パパ（ひろし）、ママ（まい）</p>
+                    <p><i class="fa-solid fa-child text-amber-500 w-4"></i> <strong>子供：</strong> 
+                        <span class="inline-block bg-pink-100 text-pink-800 px-2 py-0.5 rounded-full text-[11px] font-bold">ひかり（小3♀）</span>
+                    </p>
+                    <p class="text-gray-400 text-[11px] pt-1 border-t"><i class="fa-solid fa-comment-dots"></i> 一言：温泉と海鮮がすごーく楽しみです！</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl card-shadow border-t-4 border-purple-400">
+                <div class="flex justify-between items-center mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-extrabold px-2.5 py-1 rounded-lg">D家</span>
+                        <h3 class="font-bold text-gray-800">田中ファミリー</h3>
+                    </div>
+                    <span class="text-xs text-gray-400"><i class="fa-solid fa-car"></i> シルバーのミニバン</span>
+                </div>
+                <div class="space-y-1.5 text-xs text-gray-600">
+                    <p><i class="fa-solid fa-user text-purple-500 w-4"></i> <strong>大人：</strong> パパ（だいすけ）、ママ（りえ）</p>
+                    <p><i class="fa-solid fa-child text-amber-500 w-4"></i> <strong>子供：</strong> 
+                        <span class="inline-block bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full text-[11px] font-bold">そうた（小2♂）</span>
+                        <span class="inline-block bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full text-[11px] font-bold">あおい（3歳♀）</span>
+                    </p>
+                    <p class="text-gray-400 text-[11px] pt-1 border-t"><i class="fa-solid fa-comment-dots"></i> 一言：3歳児がいるのでマイペースに参加しますね！</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-spots" class="tab-content hidden space-y-4">
+            <div class="bg-white rounded-2xl card-shadow overflow-hidden">
+                <div class="h-40 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80');">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <span class="absolute top-3 left-3 bg-amber-400 text-gray-900 text-xs font-black px-2.5 py-1 rounded-full">Day 1</span>
+                    <h3 class="absolute bottom-3 left-3 text-white text-lg font-bold">日本三景 松島</h3>
+                </div>
+                <div class="p-4">
+                    <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                        200以上の島々が浮かぶ絶景スポット。遊覧船に乗って心地よい海風を感じながらのクルージングは子供たちも大興奮！
+                    </p>
+                    <div class="bg-yellow-50 p-2.5 rounded-xl text-xs text-amber-900 mb-3">
+                        <span class="font-bold"><i class="fa-solid fa-face-smile text-amber-500"></i> 子連れTips：</span>
+                        笹かまぼこの手焼き体験（1本約300円）が子供たちに大人気でおすすめです。
+                    </div>
+                    <a href="https://maps.google.com/?q=松島海岸" target="_blank" class="inline-flex items-center gap-1 text-xs text-blue-600 font-bold hover:underline">
+                        <i class="fa-solid fa-location-dot"></i> Google Mapで場所を見る
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl card-shadow overflow-hidden">
+                <div class="h-40 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80');">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <span class="absolute top-3 left-3 bg-amber-400 text-gray-900 text-xs font-black px-2.5 py-1 rounded-full">Day 1 宿泊</span>
+                    <h3 class="absolute bottom-3 left-3 text-white text-lg font-bold">秋保温泉（あきうおんせん）</h3>
+                </div>
+                <div class="p-4">
+                    <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                        仙台の奥座敷と呼ばれる歴史ある温泉郷。広々とした大浴場でリフレッシュ。夜はみんなでバイキングを楽しみましょう！
+                    </p>
+                    <div class="bg-yellow-50 p-2.5 rounded-xl text-xs text-amber-900 mb-3">
+                        <span class="font-bold"><i class="fa-solid fa-face-smile text-amber-500"></i> 子連れTips：</span>
+                        宿にはキッズスペースあり。温泉は少し熱めの場合があるので様子を見て入りましょう。
+                    </div>
+                    <a href="https://maps.google.com/?q=秋保温泉" target="_blank" class="inline-flex items-center gap-1 text-xs text-blue-600 font-bold hover:underline">
+                        <i class="fa-solid fa-location-dot"></i> Google Mapで場所を見る
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl card-shadow overflow-hidden">
+                <div class="h-40 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=800&q=80');">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <span class="absolute top-3 left-3 bg-emerald-500 text-white text-xs font-black px-2.5 py-1 rounded-full">Day 2</span>
+                    <h3 class="absolute bottom-3 left-3 text-white text-lg font-bold">仙台うみのの杜水族館</h3>
+                </div>
+                <div class="p-4">
+                    <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                        三陸の海を再現した大水槽や、大人気のイルカ・アシカのパフォーマンスが見どころ！ペンギンとのふれあい体験もあります。
+                    </p>
+                    <div class="bg-yellow-50 p-2.5 rounded-xl text-xs text-amber-900 mb-3">
+                        <span class="font-bold"><i class="fa-solid fa-face-smile text-amber-500"></i> 子連れTips：</span>
+                        ベビーカー貸出あり。ショースペースは屋根付きなので雨でも安心です！
+                    </div>
+                    <a href="https://maps.google.com/?q=仙台うみのの杜水族館" target="_blank" class="inline-flex items-center gap-1 text-xs text-blue-600 font-bold hover:underline">
+                        <i class="fa-solid fa-location-dot"></i> Google Mapで場所を見る
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-checklist" class="tab-content hidden space-y-4">
+            <div class="bg-sky-50 border-l-4 border-sky-400 p-3 rounded-r-lg text-xs text-sky-800 flex justify-between items-center">
+                <div>
+                    <i class="fa-solid fa-check-double mr-1"></i> チェックした項目は自動でスマホに保存されます！
+                </div>
+                <button onclick="resetChecklist()" class="text-[10px] bg-white text-sky-700 px-2 py-1 rounded shadow-sm hover:bg-sky-100">
+                    リセット
+                </button>
+            </div>
+
+            <div class="flex gap-2">
+                <input type="text" id="custom-item-input" placeholder="追加したい持ち物を入力..." class="flex-grow text-xs border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:border-emerald-500">
+                <button onclick="addCustomItem()" class="bg-emerald-500 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm hover:bg-emerald-600">
+                    追加
+                </button>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl card-shadow">
+                <h3 class="font-bold text-gray-800 text-sm mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-child text-pink-500"></i> 子供の持ち物
+                </h3>
+                <div class="space-y-2 text-xs" id="group-kids"></div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl card-shadow">
+                <h3 class="font-bold text-gray-800 text-sm mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-suitcase text-amber-500"></i> 家族共通・着替え
+                </h3>
+                <div class="space-y-2 text-xs" id="group-common"></div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl card-shadow">
+                <h3 class="font-bold text-gray-800 text-sm mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-kit-medical text-red-500"></i> 車内・車酔い・応急グッズ
+                </h3>
+                <div class="space-y-2 text-xs" id="group-car"></div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl card-shadow">
+                <h3 class="font-bold text-gray-800 text-sm mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-plus-circle text-emerald-500"></i> 自分で追加したアイテム
+                </h3>
+                <div class="space-y-2 text-xs" id="group-custom"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Data Structure for Schedule with ISO DateTime Ranges
+        const scheduleData = [
+            // DAY 1
+            {
+                id: 's1',
+                day: 1,
+                start: '2026-10-10T09:00:00',
+                end: '2026-10-10T10:15:00',
+                timeStr: '09:00 - 10:15',
+                title: '菅生PAで集合＆松島へ出発',
+                desc: '4家族合流して挨拶！トイレ休憩と最終ルート確認をして出発。',
+                icon: 'fa-car',
+                iconBg: 'bg-emerald-500',
+                tag: '集合',
+                tagBg: 'bg-emerald-100 text-emerald-700'
+            },
+            {
+                id: 's2',
+                day: 1,
+                start: '2026-10-10T10:15:00',
+                end: '2026-10-10T12:30:00',
+                timeStr: '10:15 - 12:30',
+                title: '日本三景・松島 散策＆遊覧船',
+                desc: '11:00発の遊覧船に乗船（約50分コース）。ウミネコやきれいな島々の景色を満喫！',
+                icon: 'fa-ship',
+                iconBg: 'bg-blue-500',
+                tag: '観光',
+                tagBg: 'bg-blue-100 text-blue-700',
+                tip: '駐車場は「県営松島海岸駐車場」を目指します'
+            },
+            {
+                id: 's3',
+                day: 1,
+                start: '2026-10-10T12:30:00',
+                end: '2026-10-10T15:30:00',
+                timeStr: '12:30 - 15:30',
+                title: '松島海岸通りでランチ＆散策',
+                desc: '海鮮丼、海鮮焼き、牛タンなど自由食。笹かま手焼き体験や食べ歩きもおすすめ！',
+                icon: 'fa-utensils',
+                iconBg: 'bg-red-400',
+                tag: 'グルメ',
+                tagBg: 'bg-red-100 text-red-700'
+            },
+            {
+                id: 's4',
+                day: 1,
+                start: '2026-10-10T15:30:00',
+                end: '2026-10-10T18:00:00',
+                timeStr: '15:30 - 18:00',
+                title: '秋保温泉 宿にチェックイン',
+                desc: 'お部屋でひと休み＆温泉で疲れを癒やそう。子供たちは大浴場へ！',
+                icon: 'fa-hotel',
+                iconBg: 'bg-indigo-500',
+                tag: '温泉',
+                tagBg: 'bg-indigo-100 text-indigo-700'
+            },
+            {
+                id: 's5',
+                day: 1,
+                start: '2026-10-10T18:00:00',
+                end: '2026-10-10T23:59:59',
+                timeStr: '18:00〜',
+                title: '4家族合同の大夕食会',
+                desc: '大広間でバイキング！子供向けビンゴ大会などのミニ企画も予定♪',
+                icon: 'fa-champagne-glasses',
+                iconBg: 'bg-amber-500',
+                tag: '宴会',
+                tagBg: 'bg-amber-100 text-amber-700'
+            },
+
+            // DAY 2
+            {
+                id: 's6',
+                day: 2,
+                start: '2026-10-11T00:00:00',
+                end: '2026-10-11T09:30:00',
+                timeStr: '08:00 - 09:30',
+                title: '朝食 ＆ チェックアウト準備',
+                desc: '朝風呂＆おいしい朝食バイキング。09:30には宿を出発します。',
+                icon: 'fa-mug-hot',
+                iconBg: 'bg-amber-400',
+                tag: '朝食',
+                tagBg: 'bg-amber-100 text-amber-700'
+            },
+            {
+                id: 's7',
+                day: 2,
+                start: '2026-10-11T09:30:00',
+                end: '2026-10-11T13:00:00',
+                timeStr: '10:00 - 13:00',
+                title: '仙台うみのの杜水族館',
+                desc: 'イルカ・アシカパフォーマンスやペンギンのごはんタイムを楽しもう！',
+                icon: 'fa-fish',
+                iconBg: 'bg-teal-500',
+                tag: '人気No.1',
+                tagBg: 'bg-teal-100 text-teal-700'
+            },
+            {
+                id: 's8',
+                day: 2,
+                start: '2026-10-11T13:00:00',
+                end: '2026-10-11T15:00:00',
+                timeStr: '13:00 - 15:00',
+                title: 'ランチ：仙台牛タン直営店',
+                desc: '水族館近くの牛タンレストランで贅沢ランチ。キッズメニューもあります。',
+                icon: 'fa-utensils',
+                iconBg: 'bg-red-400',
+                tag: '名物',
+                tagBg: 'bg-red-100 text-red-700'
+            },
+            {
+                id: 's9',
+                day: 2,
+                start: '2026-10-11T15:00:00',
+                end: '2026-10-11T23:59:59',
+                timeStr: '15:00〜',
+                title: 'お土産購入 ＆ 現地解散',
+                desc: 'おみやげ（ずんだ餅、笹かまなど）を買って、気をつけて帰りましょう！',
+                icon: 'fa-flag-checkered',
+                iconBg: 'bg-emerald-600',
+                tag: '解散',
+                tagBg: 'bg-emerald-100 text-emerald-700'
+            }
+        ];
+
+        // Simulation Time Override State
+        let simulatedTime = null;
+
+        // Get effective current date
+        function getCurrentDate() {
+            return simulatedTime ? new Date(simulatedTime) : new Date();
+        }
+
+        function updateLiveTracker() {
+            const now = getCurrentDate();
+
+            // Format clock display: YYYY-MM-DD HH:MM:SS
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            const hh = String(now.getHours()).padStart(2, '0');
+            const min = String(now.getMinutes()).padStart(2, '0');
+            const ss = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('current-clock-display').innerText = `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
+
+            // Find currently active item
+            let activeItem = null;
+            let currentDayNum = null;
+
+            for (let item of scheduleData) {
+                const startTime = new Date(item.start);
+                const endTime = new Date(item.end);
+
+                if (now >= startTime && now <= endTime) {
+                    activeItem = item;
+                    currentDayNum = item.day;
+                    break;
+                }
+            }
+
+            // Fallback: If before trip starts
+            if (!activeItem && now < new Date(scheduleData[0].start)) {
+                activeItem = {
+                    title: '旅行前（準備中！）',
+                    desc: '旅行開始までもう少し！持ち物チェックリストを確認しておきましょう。',
+                    timeStr: '10月10日 09:00 スタート',
+                    day: 1
+                };
+            }
+
+            // Fallback: If after trip ends
+            if (!activeItem && now > new Date(scheduleData[scheduleData.length - 1].end)) {
+                activeItem = {
+                    title: '旅行完了！',
+                    desc: '無事に旅行終了しました！素敵な思い出をありがとう♪',
+                    timeStr: '全日程終了',
+                    day: 2
+                };
+            }
+
+            // Update Header Banner Current Active Box
+            if (activeItem) {
+                document.getElementById('current-active-title').innerText = activeItem.title;
+                document.getElementById('current-active-desc').innerText = activeItem.desc;
+                document.getElementById('current-active-time').innerText = activeItem.timeStr;
+            }
+
+            // Day badges alert dot
+            if (currentDayNum === 1) {
+                document.getElementById('day1-now-dot').classList.remove('hidden');
+                document.getElementById('day2-now-dot').classList.add('hidden');
+            } else if (currentDayNum === 2) {
+                document.getElementById('day1-now-dot').classList.add('hidden');
+                document.getElementById('day2-now-dot').classList.remove('hidden');
+            } else {
+                document.getElementById('day1-now-dot').classList.add('hidden');
+                document.getElementById('day2-now-dot').classList.add('hidden');
+            }
+
+            // Render Schedule Cards
+            renderScheduleTimelines(now);
+        }
+
+        // Render Dynamic Schedule HTML
+        function renderScheduleTimelines(now) {
+            const day1Container = document.getElementById('timeline-day1');
+            const day2Container = document.getElementById('timeline-day2');
+
+            day1Container.innerHTML = '';
+            day2Container.innerHTML = '';
+
+            scheduleData.forEach((item, idx) => {
+                const startTime = new Date(item.start);
+                const endTime = new Date(item.end);
+
+                const isNow = (now >= startTime && now <= endTime);
+                const isPast = (now > endTime);
+
+                let cardClass = "bg-white p-4 rounded-xl card-shadow flex-grow transition-all duration-300 relative";
+                let badgeHTML = "";
+
+                if (isNow) {
+                    cardClass += " ring-2 ring-red-500 bg-red-50/40 shadow-lg";
+                    badgeHTML = `
+                        <span class="inline-flex items-center gap-1 bg-red-500 text-white text-[11px] font-black px-2.5 py-0.5 rounded-full shadow-sm now-badge">
+                            <i class="fa-solid fa-location-dot"></i> 今ここ！
+                        </span>
+                    `;
+                } else if (isPast) {
+                    cardClass += " past-item bg-gray-50/80";
+                }
+
+                const html = `
+                    <div class="flex gap-3 relative ${isPast ? 'opacity-70' : ''}">
+                        <div class="w-16 text-right flex-shrink-0 pt-1">
+                            <span class="font-bold ${isNow ? 'text-red-600 font-extrabold text-base' : 'text-gray-800 text-sm'}">${item.timeStr.split('-')[0]}</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-7 h-7 ${isNow ? 'bg-red-500 text-white scale-125' : item.iconBg + ' text-white'} rounded-full flex items-center justify-center text-xs shadow-sm z-10 transition-all">
+                                <i class="fa-solid ${item.icon}"></i>
+                            </div>
+                            ${idx < scheduleData.length - 1 ? '<div class="w-0.5 bg-gray-200 h-full -my-1"></div>' : ''}
+                        </div>
+                        <div class="${cardClass}">
+                            <div class="flex justify-between items-start flex-wrap gap-1 mb-1">
+                                <div class="flex items-center gap-2">
+                                    <h3 class="font-bold ${isNow ? 'text-red-900 text-base' : 'text-gray-800'}">${item.title}</h3>
+                                    ${badgeHTML}
+                                </div>
+                                <span class="${item.tagBg} text-[10px] font-bold px-2 py-0.5 rounded-full">${item.tag}</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-1">${item.desc}</p>
+                            ${item.tip ? `
+                                <div class="mt-2 text-xs text-emerald-700 font-bold bg-emerald-50 p-2 rounded-lg">
+                                    <i class="fa-solid fa-lightbulb text-amber-500"></i> ${item.tip}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+
+                if (item.day === 1) {
+                    day1Container.innerHTML += html;
+                } else {
+                    day2Container.innerHTML += html;
+                }
+            });
+        }
+
+        function toggleSimPanel() {
+            const panel = document.getElementById('sim-panel');
+            panel.classList.toggle('hidden');
+        }
+
+        function setSimTime(isoString) {
+            simulatedTime = isoString;
+            document.getElementById('sim-indicator').classList.remove('hidden');
+
+            // Auto switch schedule day tab based on sim date
+            if (isoString.includes('2026-10-10')) {
+                switchDay(1);
+            } else if (isoString.includes('2026-10-11')) {
+                switchDay(2);
+            }
+
+            updateLiveTracker();
+        }
+
+        function resetSimTime() {
+            simulatedTime = null;
+            document.getElementById('sim-indicator').classList.add('hidden');
+            updateLiveTracker();
+        }
+
+        // Tab Switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('tab-active'));
+
+            document.getElementById(`sec-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).classList.add('tab-active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Schedule Day Switcher
+        function switchDay(day) {
+            const day1Btn = document.getElementById('day1-btn');
+            const day2Btn = document.getElementById('day2-btn');
+            const day1Content = document.getElementById('day1-content');
+            const day2Content = document.getElementById('day2-content');
+
+            if (day === 1) {
+                day1Btn.className = "flex-1 py-2 rounded-lg bg-white shadow-sm text-emerald-700 transition font-bold relative";
+                day2Btn.className = "flex-1 py-2 rounded-lg text-gray-500 transition font-bold relative";
+                day1Content.classList.remove('hidden');
+                day2Content.classList.add('hidden');
+            } else {
+                day2Btn.className = "flex-1 py-2 rounded-lg bg-white shadow-sm text-emerald-700 transition font-bold relative";
+                day1Btn.className = "flex-1 py-2 rounded-lg text-gray-500 transition font-bold relative";
+                day2Content.classList.remove('hidden');
+                day1Content.classList.add('hidden');
+            }
+        }
+
+        // Default Checklist Data
+        const defaultChecklist = [
+            { id: 'k1', category: 'kids', label: '着替え（多めに2〜3セット）' },
+            { id: 'k2', category: 'kids', label: 'パジャマ・内着' },
+            { id: 'k3', category: 'kids', label: 'オムツ・お尻拭き（必要な子）' },
+            { id: 'k4', category: 'kids', label: 'お気に入りのおもちゃ・絵本' },
+            { id: 'k5', category: 'kids', label: '水筒・おやつ' },
+            { id: 'c1', category: 'common', label: '大人服・下着・靴下' },
+            { id: 'c2', category: 'common', label: '洗面用具・コスメ・スキンケア' },
+            { id: 'c3', category: 'common', label: 'スマホ充電器・モバイルバッテリー' },
+            { id: 'c4', category: 'common', label: '健康保険証・母子手帳' },
+            { id: 'c5', category: 'common', label: 'カメラ・三脚' },
+            { id: 'a1', category: 'car', label: '酔い止め薬（子供用・大人用）' },
+            { id: 'a2', category: 'car', label: '絆創膏・消毒液・体温計' },
+            { id: 'a3', category: 'car', label: 'エチケット袋（車酔い対策）' },
+            { id: 'a4', category: 'car', label: 'ウェットティッシュ・除菌スプレー' },
+            { id: 'a5', category: 'car', label: 'ETCカード・車の鍵' }
+        ];
+
+        let checkedState = JSON.parse(localStorage.getItem('miyagi_trip_checked')) || {};
+        let customItems = JSON.parse(localStorage.getItem('miyagi_trip_custom')) || [];
+
+        function renderChecklist() {
+            const categories = ['kids', 'common', 'car'];
+            
+            categories.forEach(cat => {
+                const container = document.getElementById(`group-${cat}`);
+                const items = defaultChecklist.filter(item => item.category === cat);
+                
+                container.innerHTML = items.map(item => {
+                    const isChecked = checkedState[item.id] ? 'checked' : '';
+                    const lineThrough = checkedState[item.id] ? 'line-through text-gray-400' : 'text-gray-700';
+                    return `
+                        <label class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 cursor-pointer select-none">
+                            <input type="checkbox" onchange="toggleCheck('${item.id}')" ${isChecked} class="w-4 h-4 text-emerald-600 rounded border-gray-300 focus:ring-emerald-500">
+                            <span class="${lineThrough}">${item.label}</span>
+                        </label>
+                    `;
+                }).join('');
+            });
+
+            const customContainer = document.getElementById('group-custom');
+            if (customItems.length === 0) {
+                customContainer.innerHTML = `<p class="text-gray-400 text-xs italic">追加されたアイテムはありません</p>`;
+            } else {
+                customContainer.innerHTML = customItems.map((item, index) => {
+                    const isChecked = checkedState[item.id] ? 'checked' : '';
+                    const lineThrough = checkedState[item.id] ? 'line-through text-gray-400' : 'text-gray-700';
+                    return `
+                        <div class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50">
+                            <label class="flex items-center gap-2.5 cursor-pointer select-none flex-grow">
+                                <input type="checkbox" onchange="toggleCheck('${item.id}')" ${isChecked} class="w-4 h-4 text-emerald-600 rounded border-gray-300 focus:ring-emerald-500">
+                                <span class="${lineThrough}">${item.label}</span>
+                            </label>
+                            <button onclick="removeCustomItem(${index})" class="text-gray-400 hover:text-red-500 text-xs px-2">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function toggleCheck(id) {
+            checkedState[id] = !checkedState[id];
+            localStorage.setItem('miyagi_trip_checked', JSON.stringify(checkedState));
+            renderChecklist();
+        }
+
+        function addCustomItem() {
+            const input = document.getElementById('custom-item-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const newItem = {
+                id: 'cust_' + Date.now(),
+                label: text
+            };
+
+            customItems.push(newItem);
+            localStorage.setItem('miyagi_trip_custom', JSON.stringify(customItems));
+            input.value = '';
+            renderChecklist();
+        }
+
+        function removeCustomItem(index) {
+            const item = customItems[index];
+            if (item && checkedState[item.id]) {
+                delete checkedState[item.id];
+                localStorage.setItem('miyagi_trip_checked', JSON.stringify(checkedState));
+            }
+            customItems.splice(index, 1);
+            localStorage.setItem('miyagi_trip_custom', JSON.stringify(customItems));
+            renderChecklist();
+        }
+
+        function resetChecklist() {
+            if (confirm('チェック状態をリセットしてもよろしいですか？')) {
+                checkedState = {};
+                localStorage.removeItem('miyagi_trip_checked');
+                renderChecklist();
+            }
+        }
+
+        window.onload = function() {
+            renderChecklist();
+            updateLiveTracker();
+            // Realtime ticker checking time every 1 second
+            setInterval(updateLiveTracker, 1000);
+        };
+    </script>
+</body>
+</html>
