@@ -274,6 +274,42 @@
         </div>
       </div>
 
+      <!-- スポット3: 仙台うみの杜水族館 -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+        <div class="bg-sky-600 p-3 text-white">
+          <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">ファミリー</span>
+          <h3 class="text-base font-bold mt-0.5">仙台うみの杜水族館</h3>
+        </div>
+        <div class="p-4 space-y-2">
+          <p class="text-xs text-slate-600 leading-relaxed">
+            三陸の海を再現した大水槽やイルカ・アシカのパフォーマンスが人気！雨が降っても安心して大はしゃぎできる水族館です。
+          </p>
+          <div class="pt-2">
+            <a href="https://maps.google.com/?q=仙台うみの杜水族館" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-xl w-full justify-center hover:bg-blue-100 transition-colors">
+              <i class="fa-solid fa-map-location-dot"></i> Google Mapsでナビを見る
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- スポット4: 八木山ベニーランド -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+        <div class="bg-amber-500 p-3 text-white">
+          <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">遊園地</span>
+          <h3 class="text-base font-bold mt-0.5">八木山ベニーランド</h3>
+        </div>
+        <div class="p-4 space-y-2">
+          <p class="text-xs text-slate-600 leading-relaxed">
+            小さなお子さんでも乗れるアトラクションが盛りだくさんのレトロで楽しい遊園地！隣接する「八木山動物公園」とセットでの散策もおすすめです。
+          </p>
+          <div class="pt-2">
+            <a href="https://maps.google.com/?q=八木山ベニーランド" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-xl w-full justify-center hover:bg-blue-100 transition-colors">
+              <i class="fa-solid fa-map-location-dot"></i> Google Mapsでナビを見る
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- 4. グルメタブ -->
@@ -312,6 +348,28 @@
             <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> ずんだ茶寮
           </a>
         </div>
+      </div>
+
+      <!-- 三角定義油揚げ -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-utensils text-orange-600"></i> 三角定義油揚げ
+          </h3>
+          <span class="text-[10px] bg-orange-100 text-orange-800 font-bold px-2 py-0.5 rounded-full">名物グルメ</span>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed">外はサクサク、中はふっくらの巨大な油揚げ！醤油と七味唐辛子をかけて出来立てをほうばるのが最高です。</p>
+      </div>
+
+      <!-- はらこ飯 -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-bowl-rice text-red-600"></i> はらこ飯
+          </h3>
+          <span class="text-[10px] bg-red-100 text-red-800 font-bold px-2 py-0.5 rounded-full">郷土料理</span>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed">鮭の出汁で炊いた旨味たっぷりのご飯の上に、ふっくら煮付けた鮭とイクラを敷き詰めた贅沢な宮城の名物ごはん。</p>
       </div>
 
       <!-- 牡蠣 -->
@@ -527,7 +585,7 @@
         if (badge) badge.classList.add('hidden');
       });
 
-      // 現在実行中の項目を判別
+      // 現在実行中の項目を判別＆自動スクロール
       scheduleTimes.forEach(item => {
         const start = new Date(item.start);
         const end = new Date(item.end);
@@ -536,6 +594,11 @@
           const badge = document.getElementById(`badge-${item.id}`);
           if (el) el.classList.add('is-now-card');
           if (badge) badge.classList.remove('hidden');
+
+          // スケジュールタブが開かれている場合、対象カードへ自動スクロール
+          if (!document.getElementById('content-schedule').classList.contains('hidden')) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
         }
       });
 
@@ -550,6 +613,8 @@
 
     function setSimTime(timeStr) {
       simTime = timeStr;
+      // テスト時は自動でスケジュールタブを開いてスクロール確認できるようにする
+      switchTab('schedule');
       checkCurrentStatus();
     }
 
