@@ -8,148 +8,313 @@
   <style>
     @media print {
       .no-print { display: none !important; }
-      body { background: white !important; -webkit-print-color-adjust: exact; }
-      .page { box-shadow: none !important; border: none !important; margin: 0 !important; width: 100% !important; }
+      body { background: white !important; -webkit-print-color-adjust: exact; padding: 0 !important; }
+      .page { box-shadow: none !important; border: none !important; margin: 0 !important; width: 100% !important; page-break-after: always; height: 100vh; }
+      .page:last-child { page-break-after: auto; }
     }
     @page {
       size: A4 portrait;
-      margin: 10mm;
+      margin: 8mm;
     }
   </style>
 </head>
-<body class="bg-slate-200 text-slate-800 font-sans p-4">
+<body class="bg-slate-200 text-slate-800 font-sans p-4 space-y-6">
 
   <!-- 印刷ボタン (画面表示時のみ) -->
-  <div class="max-w-4xl mx-auto mb-4 flex justify-between items-center no-print bg-white p-4 rounded-xl shadow-md">
+  <div class="max-w-4xl mx-auto no-print bg-white p-4 rounded-xl shadow-md flex justify-between items-center">
     <div>
-      <h1 class="font-bold text-lg text-slate-700">📄 子供向け印刷用しおり</h1>
-      <p class="text-xs text-slate-500">A4サイズ1枚に収まるデザインです。白黒印刷・カラー印刷どちらでも使えます。</p>
+      <h1 class="font-bold text-lg text-slate-700">📄 子供向け印刷用しおり（全2ページ）</h1>
+      <p class="text-xs text-slate-500">A4サイズ2枚（両面印刷おすすめ）のデザインです。手書き＆ビンゴで遊べます！</p>
     </div>
     <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2">
       <i class="fa-solid fa-print"></i> いんさつする（PDF保存）
     </button>
   </div>
 
-  <!-- A4印刷用紙エリア -->
-  <div class="page max-w-[210mm] mx-auto bg-white p-6 shadow-xl border border-slate-300 rounded-sm space-y-4">
+  <!-- ==================== 1ページ目 ==================== -->
+  <div class="page max-w-[210mm] mx-auto bg-white p-6 shadow-xl border border-slate-300 rounded-sm space-y-4 flex flex-col justify-between">
     
-    <!-- タイトル＆おなまえ -->
-    <div class="border-4 border-dashed border-emerald-500 rounded-3xl p-4 text-center relative bg-emerald-50/30">
-      <div class="text-xs font-bold text-emerald-700 tracking-widest mb-1">🌸 2027ねん 3がつ 21にち 〜 22にち 🌸</div>
-      <h1 class="text-2xl font-black text-slate-800 tracking-wide mb-3">わくわく！みやぎ りょこう の しおり</h1>
-      
-      <div class="flex justify-center items-center gap-3 bg-white border-2 border-emerald-400 rounded-full py-1.5 px-6 max-w-sm mx-auto shadow-sm">
-        <span class="font-bold text-sm text-emerald-800">なまえ：</span>
-        <div class="flex-1 border-b-2 border-dotted border-emerald-600 h-6"></div>
-      </div>
-    </div>
-
-    <!-- 2カラムレイアウト -->
-    <div class="grid grid-cols-12 gap-4">
-      
-      <!-- 左側：スケジュール -->
-      <div class="col-span-7 space-y-3">
-        <h2 class="font-bold text-sm bg-emerald-600 text-white px-3 py-1 rounded-lg flex items-center gap-1.5">
-          <i class="fa-solid fa-flag"></i> たびの スケジュール
-        </h2>
-
-        <!-- 1日目 -->
-        <div class="border-2 border-emerald-200 rounded-xl p-2.5 space-y-2 bg-emerald-50/20">
-          <div class="font-extrabold text-xs text-emerald-800 border-b border-emerald-200 pb-1 flex justify-between">
-            <span>【1にちめ】3がつ21にち（ど）</span>
-            <span>まつしま 観光</span>
-          </div>
-          <ul class="text-[11px] space-y-1.5 font-medium text-slate-700">
-            <li class="flex items-center gap-1.5">
-              <span class="bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded text-[10px]">09:30</span>
-              <span>しゅっぱつ！みんなで ぐんぐん しゅっぱつ 🚗</span>
-            </li>
-            <li class="flex items-center gap-1.5">
-              <span class="bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded text-[10px]">12:00</span>
-              <span>まつしま海岸で おいしいごはん＆さんさく 🦪</span>
-            </li>
-            <li class="flex items-center gap-1.5">
-              <span class="bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded text-[10px]">15:30</span>
-              <span>ホテルに とうちゃく！みんなでお部屋あそび 🏨</span>
-            </li>
-            <li class="flex items-center gap-1.5">
-              <span class="bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded text-[10px]">18:00</span>
-              <span>夜ごはん ＆ おふろタイム 温泉さっぱり ♨️</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- 2日目 -->
-        <div class="border-2 border-blue-200 rounded-xl p-2.5 space-y-2 bg-blue-50/20">
-          <div class="font-extrabold text-xs text-blue-800 border-b border-blue-200 pb-1 flex justify-between">
-            <span>【2にちめ】3がつ22にち（にち）</span>
-            <span>ラプラス公園！</span>
-          </div>
-          <ul class="text-[11px] space-y-1.5 font-medium text-slate-700">
-            <li class="flex items-center gap-1.5">
-              <span class="bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded text-[10px]">10:00</span>
-              <span class="font-bold text-blue-900">★ ラプラスこうえんで 全力であそぶ！ 🦕</span>
-            </li>
-            <li class="flex items-center gap-1.5">
-              <span class="bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded text-[10px]">13:00</span>
-              <span>仙台でお昼ごはん ＆ ずんだスイーツ 🍦</span>
-            </li>
-            <li class="flex items-center gap-1.5">
-              <span class="bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded text-[10px]">16:00</span>
-              <span>ばいばい！きをつけて おうちに かえろう 🏠</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- たびの お約束 -->
-        <div class="border-2 border-amber-300 bg-amber-50 rounded-xl p-2.5 space-y-1">
-          <h3 class="font-bold text-xs text-amber-900 flex items-center gap-1">
-            <i class="fa-solid fa-star text-amber-500"></i> たびの おやくそく
-          </h3>
-          <ul class="text-[10px] font-bold text-amber-800 space-y-0.5 list-disc list-inside">
-            <li>おとなの 人の手を しっかり つなごう！</li>
-            <li>車や こうえんでは 走らず 楽しく あそぼう！</li>
-            <li>「ありがとう」「ごめんなさい」を 言おう！</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 右側：持ち物＆おえかきメモ -->
-      <div class="col-span-5 space-y-3">
+    <!-- Header -->
+    <div>
+      <!-- タイトル＆おなまえ -->
+      <div class="border-4 border-dashed border-emerald-500 rounded-3xl p-3 text-center relative bg-emerald-50/30 mb-3">
+        <div class="text-xs font-bold text-emerald-700 tracking-widest mb-0.5">🌸 2027ねん 3がつ 21にち 〜 22にち 🌸</div>
+        <h1 class="text-2xl font-black text-slate-800 tracking-wide mb-2">わくわく！みやぎ りょこう の しおり</h1>
         
-        <!-- もちものチェック -->
-        <div class="border-2 border-slate-300 rounded-xl p-2.5 space-y-1.5">
-          <h2 class="font-bold text-xs text-slate-800 border-b pb-1 flex items-center gap-1">
-            <i class="fa-solid fa-square-check text-emerald-600"></i> じぶんの もちもの
+        <div class="flex justify-center items-center gap-3 bg-white border-2 border-emerald-400 rounded-full py-1 px-6 max-w-sm mx-auto shadow-sm">
+          <span class="font-bold text-xs text-emerald-800">なまえ：</span>
+          <div class="flex-1 border-b-2 border-dotted border-emerald-600 h-5"></div>
+        </div>
+      </div>
+
+      <!-- 2カラムレイアウト -->
+      <div class="grid grid-cols-12 gap-4">
+        
+        <!-- 左側：スケジュール -->
+        <div class="col-span-7 space-y-2.5">
+          <h2 class="font-bold text-xs bg-emerald-600 text-white px-3 py-1 rounded-lg flex items-center gap-1.5">
+            <i class="fa-solid fa-flag"></i> たびの スケジュール
           </h2>
-          <div class="grid grid-cols-1 gap-1 text-[11px] font-medium text-slate-700">
-            <label class="flex items-center gap-1.5"><input type="checkbox" class="w-3.5 h-3.5"> きがえ（ふく・したぎ）</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" class="w-3.5 h-3.5"> ハンカチ・ティッシュ</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" class="w-3.5 h-3.5"> すいとう・おやつ</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" class="w-3.5 h-3.5"> お気に入りのおもちゃ</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" class="w-3.5 h-3.5"> ラプラスの ぬいぐるみ</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" class="w-3.5 h-3.5"> ______________________</label>
+
+          <!-- 1日目 -->
+          <div class="border-2 border-emerald-200 rounded-xl p-2 space-y-1.5 bg-emerald-50/20">
+            <div class="font-extrabold text-[11px] text-emerald-800 border-b border-emerald-200 pb-0.5 flex justify-between">
+              <span>【1にちめ】3がつ21にち（ど）</span>
+              <span>まつしま 観光</span>
+            </div>
+            <ul class="text-[10px] space-y-1 font-medium text-slate-700">
+              <li class="flex items-center gap-1.5">
+                <span class="bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded text-[9px]">09:30</span>
+                <span>しゅっぱつ！みんなで ぐんぐん しゅっぱつ 🚗</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded text-[9px]">12:00</span>
+                <span>まつしま海岸で おいしいごはん＆さんさく 🦪</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded text-[9px]">15:30</span>
+                <span>ホテルに とうちゃく！みんなでお部屋あそび 🏨</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded text-[9px]">18:00</span>
+                <span>夜ごはん ＆ おふろタイム 温泉さっぱり 温泉</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 2日目 -->
+          <div class="border-2 border-blue-200 rounded-xl p-2 space-y-1.5 bg-blue-50/20">
+            <div class="font-extrabold text-[11px] text-blue-800 border-b border-blue-200 pb-0.5 flex justify-between">
+              <span>【2にちめ】3がつ22にち（にち）</span>
+              <span>ラプラス公園！</span>
+            </div>
+            <ul class="text-[10px] space-y-1 font-medium text-slate-700">
+              <li class="flex items-center gap-1.5">
+                <span class="bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded text-[9px]">10:00</span>
+                <span class="font-bold text-blue-900">★ ラプラスこうえんで 全力であそぶ！ 🦕</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded text-[9px]">13:00</span>
+                <span>仙台でお昼ごはん ＆ ずんだスイーツ 🍦</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded text-[9px]">16:00</span>
+                <span>ばいばい！きをつけて おうちに かえろう 🏠</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- たびの お約束 -->
+          <div class="border-2 border-amber-300 bg-amber-50 rounded-xl p-2 space-y-0.5">
+            <h3 class="font-bold text-[11px] text-amber-900 flex items-center gap-1">
+              <i class="fa-solid fa-star text-amber-500"></i> たびの おやくそく
+            </h3>
+            <ul class="text-[9px] font-bold text-amber-800 space-y-0.5 list-disc list-inside">
+              <li>おとなの 人の手を しっかり つなごう！</li>
+              <li>車や こうえんでは 走らず 楽しく あそぼう！</li>
+              <li>「ありがとう」「ごめんなさい」を 言おう！</li>
+            </ul>
           </div>
         </div>
 
-        <!-- お絵かき・ぬりえスペース -->
-        <div class="border-2 border-dashed border-slate-300 rounded-xl p-2.5 space-y-1 h-[220px] flex flex-col">
-          <h2 class="font-bold text-xs text-slate-700 flex justify-between items-center">
-            <span><i class="fa-solid fa-pen-nib text-amber-500"></i> たのしかった思い出メモ</span>
-            <span class="text-[9px] text-slate-400">（え を かいてね！）</span>
-          </h2>
-          <div class="flex-1 border border-slate-100 rounded-lg bg-slate-50/50 flex items-center justify-center text-slate-300 text-xs">
-            ✨ ここに えや メモを かこう ✨
+        <!-- 右側：手書き持ち物＆おえかきメモ -->
+        <div class="col-span-5 space-y-2.5">
+          
+          <!-- てがき もちものリスト -->
+          <div class="border-2 border-slate-300 rounded-xl p-2.5 space-y-1.5 bg-slate-50/30">
+            <h2 class="font-bold text-xs text-slate-800 border-b pb-1 flex items-center gap-1">
+              <i class="fa-solid fa-pen-to-square text-emerald-600"></i> じぶんの もちもの（かいてね）
+            </h2>
+            <p class="text-[9px] text-slate-400">もっていくものを ペンで かいてみよう！</p>
+            <div class="space-y-2 pt-1">
+              <div class="flex items-center gap-2 border-b border-slate-300 pb-1">
+                <span class="w-3.5 h-3.5 border-2 border-slate-400 rounded-md inline-block bg-white"></span>
+                <span class="text-[11px] text-slate-400 flex-1">＿＿＿＿＿＿＿＿＿＿＿＿</span>
+              </div>
+              <div class="flex items-center gap-2 border-b border-slate-300 pb-1">
+                <span class="w-3.5 h-3.5 border-2 border-slate-400 rounded-md inline-block bg-white"></span>
+                <span class="text-[11px] text-slate-400 flex-1">＿＿＿＿＿＿＿＿＿＿＿＿</span>
+              </div>
+              <div class="flex items-center gap-2 border-b border-slate-300 pb-1">
+                <span class="w-3.5 h-3.5 border-2 border-slate-400 rounded-md inline-block bg-white"></span>
+                <span class="text-[11px] text-slate-400 flex-1">＿＿＿＿＿＿＿＿＿＿＿＿</span>
+              </div>
+              <div class="flex items-center gap-2 border-b border-slate-300 pb-1">
+                <span class="w-3.5 h-3.5 border-2 border-slate-400 rounded-md inline-block bg-white"></span>
+                <span class="text-[11px] text-slate-400 flex-1">＿＿＿＿＿＿＿＿＿＿＿＿</span>
+              </div>
+              <div class="flex items-center gap-2 border-b border-slate-300 pb-1">
+                <span class="w-3.5 h-3.5 border-2 border-slate-400 rounded-md inline-block bg-white"></span>
+                <span class="text-[11px] text-slate-400 flex-1">＿＿＿＿＿＿＿＿＿＿＿＿</span>
+              </div>
+              <div class="flex items-center gap-2 border-b border-slate-300 pb-1">
+                <span class="w-3.5 h-3.5 border-2 border-slate-400 rounded-md inline-block bg-white"></span>
+                <span class="text-[11px] text-slate-400 flex-1">＿＿＿＿＿＿＿＿＿＿＿＿</span>
+              </div>
+            </div>
           </div>
-        </div>
 
+          <!-- お絵かき・ぬりえスペース -->
+          <div class="border-2 border-dashed border-slate-300 rounded-xl p-2 space-y-1 h-[140px] flex flex-col bg-white">
+            <h2 class="font-bold text-[11px] text-slate-700 flex justify-between items-center">
+              <span><i class="fa-solid fa-paint-brush text-amber-500"></i> たのしかった思い出メモ</span>
+            </h2>
+            <div class="flex-1 border border-slate-100 rounded-lg bg-slate-50/50 flex items-center justify-center text-slate-300 text-[10px]">
+              ✨ ここに えを かこう ✨
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 
-    <!-- フッター（みんなのなまえ） -->
-    <div class="border-t-2 border-slate-200 pt-2 text-center">
-      <div class="text-[10px] font-bold text-slate-500">
-        一緒に行くおともだち：あかりちゃん / りんちゃん / ひなちゃん / みおちゃん / えまちゃん
+    <!-- フッター -->
+    <div class="border-t-2 border-slate-200 pt-1.5 text-center">
+      <div class="text-[9px] font-bold text-slate-500">
+        いっしょに行くおともだち：さくらちゃん / りんちゃん / ひなちゃん / みおちゃん / えまちゃん
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ==================== 2ページ目 ==================== -->
+  <div class="page max-w-[210mm] mx-auto bg-white p-6 shadow-xl border border-slate-300 rounded-sm space-y-4 flex flex-col justify-between">
+    
+    <div class="space-y-4">
+      <!-- 2ページ目ヘッダー -->
+      <div class="bg-teal-600 text-white p-2.5 rounded-2xl text-center shadow-sm">
+        <h1 class="text-lg font-black tracking-wide">💡 みやぎの 豆知識 ＆ たびビンゴ 🎯</h1>
+      </div>
+
+      <!-- 宮城の豆知識（子供向け） -->
+      <div class="border-2 border-teal-200 rounded-2xl p-3 bg-teal-50/30 space-y-2">
+        <h2 class="font-bold text-xs text-teal-800 flex items-center gap-1.5 border-b border-teal-200 pb-1">
+          <i class="fa-solid fa-lightbulb text-amber-500"></i> しってる？ みやぎの ひみつ（豆知識）
+        </h2>
+        <div class="grid grid-cols-2 gap-2 text-[10px]">
+          <div class="bg-white p-2 rounded-xl border border-teal-100 space-y-0.5">
+            <div class="font-bold text-teal-900 flex items-center gap-1">
+              <span>🦕 ラプラスと 宮城</span>
+            </div>
+            <p class="text-slate-600 leading-tight">
+              みずタイプのポケモン「ラプラス」は、宮城を応援する特別なポケモンなんだよ！公園にもラプラスがいっぱい！
+            </p>
+          </div>
+
+          <div class="bg-white p-2 rounded-xl border border-teal-100 space-y-0.5">
+            <div class="font-bold text-teal-900 flex items-center gap-1">
+              <span>🏝️ まつしまの 島々</span>
+            </div>
+            <p class="text-slate-600 leading-tight">
+              松島（まつしま）の海には、なんと200こ以上の 小さな島が 浮いているんだ！探してみてね！
+            </p>
+          </div>
+
+          <div class="bg-white p-2 rounded-xl border border-teal-100 space-y-0.5">
+            <div class="font-bold text-teal-900 flex items-center gap-1">
+              <span>🍡 みどり色の「ずんだ」</span>
+            </div>
+            <p class="text-slate-600 leading-tight">
+              みどり色のおもち「ずんだ」は、えだまめをつぶして作った 宮城のめいぶつスイーツだよ！
+            </p>
+          </div>
+
+          <div class="bg-white p-2 rounded-xl border border-teal-100 space-y-0.5">
+            <div class="font-bold text-teal-900 flex items-center gap-1">
+              <span>🌙 三日月のぶしょう</span>
+            </div>
+            <p class="text-slate-600 leading-tight">
+              むかしのカッコいいお殿様「伊達政宗（だてまさむね）」は、かぶとに大きな三日月がついていたよ！
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 宮城旅行ビンゴ -->
+      <div class="border-2 border-emerald-400 rounded-2xl p-3 bg-emerald-50/20 space-y-2">
+        <div class="flex justify-between items-center border-b border-emerald-200 pb-1">
+          <h2 class="font-bold text-xs text-emerald-900 flex items-center gap-1.5">
+            <i class="fa-solid fa-bullseye text-red-500"></i> みやぎ たび ビンゴ！
+          </h2>
+          <span class="text-[9px] font-bold text-emerald-700">みつけたら 丸をつけたり シールをはろう！</span>
+        </div>
+
+        <!-- 3x3 ビンゴグリッド -->
+        <div class="grid grid-cols-3 gap-2 text-center">
+          
+          <!-- 1 -->
+          <div class="bg-white border-2 border-dashed border-emerald-300 rounded-xl p-2 flex flex-col items-center justify-center h-20 relative">
+            <span class="text-xl">🦕</span>
+            <span class="font-bold text-[10px] text-slate-700 mt-1">ラプラス</span>
+          </div>
+
+          <!-- 2 -->
+          <div class="bg-white border-2 border-dashed border-emerald-300 rounded-xl p-2 flex flex-col items-center justify-center h-20 relative">
+            <span class="text-xl">🍡</span>
+            <span class="font-bold text-[10px] text-slate-700 mt-1">ずんだもち</span>
+          </div>
+
+          <!-- 3 -->
+          <div class="bg-white border-2 border-dashed border-emerald-300 rounded-xl p-2 flex flex-col items-center justify-center h-20 relative">
+            <span class="text-xl">🌊</span>
+            <span class="font-bold text-[10px] text-slate-700 mt-1">まつしまのうみ</span>
+          </div>
+
+          <!-- 4 -->
+          <div class="bg-white border-2 border-dashed border-emerald-300 rounded-xl p-2 flex flex-col items-center justify-center h-20 relative">
+            <span class="text-xl">🦪</span>
+            <span class="font-bold text-[10px] text-slate-700 mt-1">かき（貝）</span>
+          </div>
+
+          <!-- 5 (FREE) -->
+          <div class="bg-amber-100 border-2 border-amber-400 rounded-xl p-2 flex flex-col items-center justify-center h-20 relative shadow-inner">
+            <span class="text-xs font-black text-amber-700">★ FREE ★</span>
+            <span class="font-bold text-[9px] text-amber-800 mt-0.5">たのしいえがお</span>
+          </div>
+
+          <!-- 6 -->
+          <div class="bg-white border-2 border-dashed border-emerald-300 rounded-xl p-2 flex flex-col items-center justify-center h-20 relative">
+            <span class="text-xl">♨️</span>
+            <span class="font-bold text-[10px] text-slate-700 mt-1">おんせんマーク</span>
+          </div>
+
+          <!-- 7 -->
+          <div class="bg-white border-2 border-dashed border-emerald-300 rounded-xl p-2 flex flex-col items-center justify-center h-20 relative">
+            <span class="text-xl">🏯</span>
+            <span class="font-bold text-[10px] text-slate-700 mt-1">伊達政宗の像</span>
+          </div>
+
+          <!-- 8 -->
+          <div class="bg-white border-2 border-dashed border-emerald-300 rounded-xl p-2 flex flex-col items-center justify-center h-20 relative">
+            <span class="text-xl">🐮</span>
+            <span class="font-bold text-[10px] text-slate-700 mt-1">ぎゅうたん</span>
+          </div>
+
+          <!-- 9 -->
+          <div class="bg-white border-2 border-dashed border-emerald-300 rounded-xl p-2 flex flex-col items-center justify-center h-20 relative">
+            <span class="text-xl">🐟</span>
+            <span class="font-bold text-[10px] text-slate-700 mt-1">ささかまぼこ</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 自由なメモ・スタンプ枠 -->
+    <div class="border-2 border-dashed border-slate-300 rounded-xl p-2 space-y-1 h-[110px] bg-slate-50/50 flex flex-col">
+      <div class="text-[10px] font-bold text-slate-500 flex items-center justify-between">
+        <span>💮 スタンプ 押すところ ＆ じゆうノート</span>
+      </div>
+      <div class="flex-1 flex items-center justify-center text-slate-300 text-[10px]">
+        旅先で見つけたスタンプを押したり自由にお絵かきしよう！
+      </div>
+    </div>
+
+    <!-- フッター -->
+    <div class="border-t border-slate-200 pt-1 text-center">
+      <div class="text-[9px] text-slate-400">
+        みやぎファミリー旅行 2027
       </div>
     </div>
 
