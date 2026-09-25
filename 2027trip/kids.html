@@ -3,279 +3,227 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>キッズページ - たのしい旅のしおり</title>
+  <title>きっずぺーじ - たびのしおり</title>
   <style>
+    /* 印刷基本設定 */
+    @page {
+      size: A4;
+      margin: 10mm;
+    }
+
     :root {
-      --primary-color: #4CAF50;
-      --bg-color: #F4F9F4;
-      --card-bg: #FFFFFF;
-      --text-color: #333333;
-      --accent-color: #FF9800;
-      --border-color: #E0E0E0;
+      --main-color: #4CAF50;
+      --text-color: #222222;
+      --border-color: #888888;
     }
 
     body {
-      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-      background-color: var(--bg-color);
+      font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
       color: var(--text-color);
+      background-color: #FFFFFF;
       margin: 0;
-      padding: 16px;
-      line-height: 1.6;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
     }
 
-    .container {
-      max-width: 600px;
+    .page-container {
+      width: 100%;
+      max-width: 800px;
       margin: 0 auto;
+      box-sizing: border-box;
     }
 
-    h1 {
+    .header-title {
       text-align: center;
-      color: var(--primary-color);
-      font-size: 1.5rem;
+      font-size: 1.8rem;
+      color: var(--main-color);
+      border-bottom: 3px dashed var(--main-color);
+      padding-bottom: 8px;
       margin-bottom: 20px;
     }
 
-    .section-card {
-      background: var(--card-bg);
+    .section-box {
+      border: 2px solid var(--border-color);
       border-radius: 12px;
-      padding: 16px;
+      padding: 15px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      background-color: #FFFFFF;
     }
 
     .section-title {
       font-size: 1.2rem;
-      color: var(--primary-color);
-      border-bottom: 2px dashed var(--primary-color);
-      padding-bottom: 6px;
+      font-weight: bold;
+      color: var(--main-color);
       margin-top: 0;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     /* 1. めあて・じこしょうかい */
-    .profile-grid {
+    .profile-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .field-line {
+      display: flex;
+      align-items: flex-end;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .field-line .line {
+      flex-grow: 1;
+      border-bottom: 2px dotted #999;
+      margin-left: 8px;
+      height: 1.5rem;
+    }
+
+    /* 2. クイズ・スタンプラリー（ミッション） */
+    .mission-grid {
       display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
 
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .input-group label {
-      font-weight: bold;
-      font-size: 0.9rem;
-    }
-
-    .input-group input {
-      padding: 8px;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-
-    /* 2. クイズ・ミッション（スタンプラリー） */
-    .mission-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .mission-item {
+    .mission-card {
+      border: 2px dashed #AAA;
+      border-radius: 10px;
+      padding: 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border-color);
     }
 
-    .mission-item:last-child {
-      border-bottom: none;
+    .mission-text {
+      font-size: 0.95rem;
+      font-weight: bold;
+      line-height: 1.4;
     }
 
-    .mission-label {
+    .stamp-circle {
+      width: 45px;
+      height: 45px;
+      border: 2px dotted var(--main-color);
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      font-size: 0.95rem;
-    }
-
-    .mission-checkbox {
-      width: 22px;
-      height: 22px;
-      accent-color: var(--primary-color);
-    }
-
-    .stamp-badge {
-      background-color: var(--accent-color);
-      color: white;
-      font-size: 0.8rem;
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-weight: bold;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #888;
+      flex-shrink: 0;
+      margin-left: 8px;
     }
 
     /* 3. おえかき・ぬりえスペース */
-    .canvas-container {
-      text-align: center;
-    }
-
-    canvas {
-      border: 2px dashed var(--primary-color);
-      border-radius: 8px;
-      background-color: #FFFFFF;
-      touch-action: none; /* スマホでのスクロール防止 */
-      max-width: 100%;
-    }
-
-    .canvas-tools {
-      margin-top: 10px;
+    .drawing-space {
+      border: 2px dashed #999;
+      border-radius: 10px;
+      height: 280px;
+      position: relative;
+      background-color: #FAFAFA;
       display: flex;
+      align-items: center;
       justify-content: center;
-      gap: 10px;
     }
 
-    .btn {
-      background-color: var(--primary-color);
+    .drawing-hint {
+      color: #BBB;
+      font-size: 1.2rem;
+      font-weight: bold;
+      pointer-events: none;
+    }
+
+    /* 画面表示用（印刷時には非表示にするボタン等） */
+    .no-print {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .print-btn {
+      background-color: var(--main-color);
       color: white;
       border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 0.9rem;
+      padding: 10px 24px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 20px;
       cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
-    .btn-clear {
-      background-color: #f44336;
+    @media print {
+      .no-print {
+        display: none;
+      }
+      .section-box {
+        break-inside: avoid;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>🎈 きっず ぺーじ 🎈</h1>
+<div class="no-print">
+  <button class="print-btn" onclick="window.print()">🛈 このページをいんさつする</button>
+</div>
+
+<div class="page-container">
+  <h1 class="header-title">🎈 たびの きっずのーと 🎈</h1>
 
   <!-- 1. めあて・じこしょうかい -->
-  <section class="section-card">
-    <h2 class="section-title">✏️ たびのめあて & じこしょうかい</h2>
-    <div class="profile-grid">
-      <div class="input-group">
-        <label for="child-name">なまえ：</label>
-        <input type="text" id="child-name" placeholder="なまえをいれてね">
+  <section class="section-box">
+    <div class="section-title">✏️ じこしょうかい & めあて</div>
+    <div class="profile-fields">
+      <div class="field-line">
+        <span>なまえ：</span>
+        <div class="line"></div>
       </div>
-      <div class="input-group">
-        <label for="child-goal">たびの めあて：</label>
-        <input type="text" id="child-goal" placeholder="例：いっぱいあそぶ！、ごはんをのこさない">
+      <div class="field-line">
+        <span>たびの めあて：</span>
+        <div class="line"></div>
       </div>
-      <div class="input-group">
-        <label for="child-favorite">いちばん たのしみなこと：</label>
-        <input type="text" id="child-favorite" placeholder="例：おんせん、いちごがり">
+      <div class="field-line">
+        <span>いちばん たのしみなこと：</span>
+        <div class="line"></div>
       </div>
     </div>
   </section>
 
   <!-- 2. クイズ・スタンプラリー -->
-  <section class="section-card">
-    <h2 class="section-title">🔍 みっしょん（ミッション）</h2>
-    <p style="font-size: 0.85rem; color: #666; margin-top: -8px; margin-bottom: 12px;">みつけたり、できたりしたら チェックしてね！</p>
-    <ul class="mission-list">
-      <li class="mission-item">
-        <label class="mission-label">
-          <input type="checkbox" class="mission-checkbox">
-          <span>🚗 あかい くるまを 3だい みつける</span>
-        </label>
-        <span class="stamp-badge">クリア！</span>
-      </li>
-      <li class="mission-item">
-        <label class="mission-label">
-          <input type="checkbox" class="mission-checkbox">
-          <span>🌸 きれいな はなを みつける</span>
-        </label>
-        <span class="stamp-badge">クリア！</span>
-      </li>
-      <li class="mission-item">
-        <label class="mission-label">
-          <input type="checkbox" class="mission-checkbox">
-          <span>🤝 みんなに 「ありがとう」を いう</span>
-        </label>
-        <span class="stamp-badge">クリア！</span>
-      </li>
-      <li class="mission-item">
-        <label class="mission-label">
-          <input type="checkbox" class="mission-checkbox">
-          <span>♨️ おんせんに はいる・おふろを たのしむ</span>
-        </label>
-        <span class="stamp-badge">クリア！</span>
-      </li>
-    </ul>
-  </section>
-
-  <!-- 3. おえかき・ぬりえスペース -->
-  <section class="section-card">
-    <h2 class="section-title">🎨 自由におえかき</h2>
-    <div class="canvas-container">
-      <canvas id="paintCanvas" width="300" height="200"></canvas>
-      <div class="canvas-tools">
-        <button class="btn btn-clear" id="clearBtn">けす</button>
+  <section class="section-box">
+    <div class="section-title">🔍 みっしょん（見つけたらスタンプを押してね！）</div>
+    <div class="mission-grid">
+      <div class="mission-card">
+        <div class="mission-text">🚗 あかい くるまを<br>3だい みつける</div>
+        <div class="stamp-circle">スタンプ</div>
+      </div>
+      <div class="mission-card">
+        <div class="mission-text">🌸 きれいな はなを<br>みつける</div>
+        <div class="stamp-circle">スタンプ</div>
+      </div>
+      <div class="mission-card">
+        <div class="mission-text">🤝 みんなに<br>「ありがとう」を いう</div>
+        <div class="stamp-circle">スタンプ</div>
+      </div>
+      <div class="mission-card">
+        <div class="mission-text">♨️ おふろ・おんせんに<br>はいる</div>
+        <div class="stamp-circle">スタンプ</div>
       </div>
     </div>
   </section>
+
+  <!-- 3. おえかき・ぬりえスペース -->
+  <section class="section-box">
+    <div class="section-title">🎨 じゆうに おえかきしよう！</div>
+    <div class="drawing-space">
+      <span class="drawing-hint">ここに えを かいてね！</span>
+    </div>
+  </section>
 </div>
-
-<script>
-  // お絵描きキャンバスの動作スクリプト
-  const canvas = document.getElementById('paintCanvas');
-  const ctx = canvas.getContext('2d');
-  const clearBtn = document.getElementById('clearBtn');
-  let isDrawing = false;
-
-  ctx.lineWidth = 3;
-  ctx.lineCap = 'round';
-  ctx.strokeStyle = '#333333';
-
-  function startDrawing(e) {
-    isDrawing = true;
-    draw(e);
-  }
-
-  function stopDrawing() {
-    isDrawing = false;
-    ctx.beginPath();
-  }
-
-  function draw(e) {
-    if (!isDrawing) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = (e.clientX || e.touches[0].clientX) - rect.left;
-    const y = (e.clientY || e.touches[0].clientY) - rect.top;
-
-    ctx.lineTo(x, y);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-  }
-
-  // マウスイベント
-  canvas.addEventListener('mousedown', startDrawing);
-  canvas.addEventListener('mouseup', stopDrawing);
-  canvas.addEventListener('mousemove', draw);
-
-  // タッチイベント（スマホ対応）
-  canvas.addEventListener('touchstart', startDrawing);
-  canvas.addEventListener('touchend', stopDrawing);
-  canvas.addEventListener('touchmove', draw);
-
-  // クリアボタン
-  clearBtn.addEventListener('click', () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  });
-</script>
 
 </body>
 </html>
