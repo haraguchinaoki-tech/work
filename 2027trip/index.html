@@ -4,660 +4,563 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ラプラスに会いに行く旅 🌸 宮城家族旅行のしおり</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+            },
+            pokemon: {
+              blue: '#3b82f6',
+              light: '#eff6ff'
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root {
-      --primary: #2e7d32;
-      --primary-light: #e8f5e9;
-      --accent: #ff8f00;
-      --bg: #f9fbe7;
-      --card-bg: #ffffff;
-      --text: #37474f;
-      --border-radius: 16px;
+    .tab-btn.active {
+      background-color: #22c55e;
+      color: white;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
     }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding-bottom: 60px;
-    }
-
-    header {
-      background: linear-gradient(135deg, #a5d6a7, #81c784);
-      color: #1b5e20;
-      text-align: center;
-      padding: 24px 16px;
-      border-bottom-left-radius: 24px;
-      border-bottom-right-radius: 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    header h1 {
-      font-size: 1.6rem;
-      margin-bottom: 6px;
-    }
-
-    header p {
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-
-    .sim-bar {
-      background: #fff;
-      margin: 12px;
-      padding: 10px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      text-align: center;
-      border: 1px solid #c8e6c9;
-    }
-
-    .sim-btn {
-      background: var(--primary-light);
-      border: 1px solid var(--primary);
-      color: var(--primary);
-      padding: 4px 8px;
-      border-radius: 6px;
-      margin: 2px;
-      cursor: pointer;
-      font-size: 0.8rem;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-around;
-      background: #fff;
-      padding: 8px;
-      margin: 12px;
-      border-radius: 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      position: sticky;
-      top: 10px;
-      z-index: 100;
-    }
-
-    .nav-btn {
-      border: none;
-      background: transparent;
-      padding: 8px 12px;
-      font-weight: bold;
-      color: #666;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.85rem;
-    }
-
-    .nav-btn.active {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 0 12px;
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--border-radius);
-      padding: 16px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      position: relative;
-    }
-
-    .card-title {
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: var(--primary);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .now-badge {
-      background: #ff3d00;
-      color: #fff;
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      border-radius: 12px;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-
-    .card.is-now {
-      border: 2px solid #ff3d00;
-      background: #fffbe6;
-    }
-
-    .flex-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .member-box {
-      background: #f1f8e9;
-      padding: 10px;
-      border-radius: 12px;
-      font-size: 0.9rem;
-    }
-
-    .map-btn, .web-btn {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 6px 12px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: bold;
-    }
-
-    .map-btn {
-      background: #e3f2fd;
-      color: #1976d2;
-    }
-
-    .web-btn {
-      background: #fff3e0;
-      color: #e65100;
-    }
-
-    /* 持ち物チェックリスト */
-    .add-todo {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .add-todo input {
-      flex: 1;
-      padding: 8px 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 0.9rem;
-    }
-
-    .add-todo button {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .todo-list {
-      list-style: none;
-    }
-
-    .todo-item {
-      display: flex;
-      align-items: center;
-      padding: 8px 0;
-      border-bottom: 1px dashed #eee;
-    }
-
-    .todo-item input[type="checkbox"] {
-      margin-right: 10px;
-      width: 18px;
-      height: 18px;
-    }
-
-    .notice {
-      font-size: 0.75rem;
-      color: #777;
-      margin-top: 8px;
-    }
-
-    .spot-img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 8px;
-    }
-
-    /* モーダル */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-box {
-      background: #fff;
-      padding: 24px;
-      border-radius: 16px;
-      width: 85%;
-      max-width: 360px;
-      text-align: center;
-    }
-
-    .modal-box h2 {
-      font-size: 1.3rem;
-      color: var(--primary);
-      margin-bottom: 12px;
-    }
-
-    .modal-box p {
-      font-size: 0.95rem;
-      margin-bottom: 20px;
-    }
-
-    .modal-close-btn {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 8px 24px;
-      border-radius: 20px;
-      font-weight: bold;
-      font-size: 0.9rem;
-      cursor: pointer;
+    .is-now-card {
+      border: 2px solid #ef4444 !important;
+      animation: pulse-ring 2s infinite;
     }
   </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 pb-16 font-sans antialiased">
 
-<header>
-  <h1>ラプラスに会いに行く旅 🌸</h1>
-  <p>2027年3月21日(土) 〜 22日(日)</p>
-</header>
-
-<!-- シミュレーションバー -->
-<div class="sim-bar">
-  <strong>⏱️ 現在地テスト:</strong>
-  <button class="sim-btn" onclick="setSimTime('2027-03-21T11:00:00')">1日目お昼</button>
-  <button class="sim-btn" onclick="setSimTime('2027-03-22T10:30:00')">2日目ラプラス公園</button>
-  <button class="sim-btn" onclick="setSimTime('2027-03-22T19:00:00')">旅行終了後</button>
-  <button class="sim-btn" onclick="resetSimTime()">リアルタイムに戻す</button>
-</div>
-
-<!-- タブナビゲーション -->
-<nav>
-  <button class="nav-btn active" onclick="switchTab('schedule')">日程</button>
-  <button class="nav-btn" onclick="switchTab('members')">メンバー</button>
-  <button class="nav-btn" onclick="switchTab('spots')">スポット</button>
-  <button class="nav-btn" onclick="switchTab('gourmet')">グルメ</button>
-  <button class="nav-btn" onclick="switchTab('belongings')">持ち物</button>
-</nav>
-
-<div class="container">
-
-  <!-- 1. スケジュールタブ -->
-  <div id="tab-schedule" class="tab-content active">
-    
-    <div class="card" style="background: #fffde7; border-left: 4px solid var(--accent);">
-      <p style="font-size: 0.85rem; font-weight: bold; color: #f57f17;">
-        ※ あくまでも予定です！当日の気分や子供たちの機嫌に合わせて柔軟に楽しく対応しましょう♪
-      </p>
+  <!-- ヘッダー -->
+  <header class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white p-6 shadow-md rounded-b-3xl text-center relative overflow-hidden">
+    <div class="absolute -right-6 -bottom-6 opacity-20 text-8xl">
+      <i class="fa-solid fa-water"></i>
     </div>
+    <div class="relative z-10">
+      <span class="bg-emerald-700/50 text-emerald-100 text-xs px-3 py-1 rounded-full font-bold tracking-wide uppercase mb-2 inline-block">宮城家族旅行のしおり</span>
+      <h1 class="text-2xl font-extrabold tracking-tight mb-1">ラプラスに会いに行く旅 🌸</h1>
+      <p class="text-emerald-100 text-sm font-medium">2027年3月21日(土) 〜 3月22日(日)</p>
+    </div>
+  </header>
 
-    <!-- DAY 1 -->
-    <h2 style="font-size: 1.2rem; margin: 16px 0 8px; color: var(--primary);">📅 DAY 1 : 3/21(土)</h2>
-
-    <div class="card" id="sched-1">
-      <div class="card-title">
-        <span>09:30 - 出発・移動</span>
-        <span class="now-badge" id="badge-sched-1" style="display:none;">📍 いまココ！</span>
+  <!-- デモ用時間コントロール -->
+  <div class="max-w-md mx-auto px-4 mt-3">
+    <div class="bg-amber-50 border border-amber-200 rounded-xl p-2.5 text-xs text-amber-800 flex flex-wrap items-center justify-between gap-1 shadow-sm">
+      <span class="font-bold flex items-center gap-1"><i class="fa-solid fa-clock-rotate-left"></i> 現在地テスト:</span>
+      <div class="flex flex-wrap gap-1">
+        <button onclick="setSimTime('2027-03-21T11:00:00')" class="bg-white border border-amber-300 hover:bg-amber-100 px-2 py-0.5 rounded text-[11px] font-medium">1日目昼</button>
+        <button onclick="setSimTime('2027-03-22T10:30:00')" class="bg-white border border-amber-300 hover:bg-amber-100 px-2 py-0.5 rounded text-[11px] font-medium">2日目公園</button>
+        <button onclick="setSimTime('2027-03-22T19:00:00')" class="bg-white border border-amber-300 hover:bg-amber-100 px-2 py-0.5 rounded text-[11px] font-medium">旅行終了後</button>
+        <button onclick="resetSimTime()" class="bg-amber-200 text-amber-900 px-2 py-0.5 rounded text-[11px] font-bold">解除</button>
       </div>
-      <p>みんなで合流して宮城へ出発！車内で楽しくおしゃべり。</p>
     </div>
-
-    <div class="card" id="sched-2">
-      <div class="card-title">
-        <span>12:00 - 松島ランチ・散策</span>
-        <span class="now-badge" id="badge-sched-2" style="display:none;">📍 いまココ！</span>
-      </div>
-      <p>美味しい海鮮や焼き牡蠣ランチ。食べ歩きも楽しもう！</p>
-      <a href="https://maps.google.com/?q=松島海岸" target="_blank" class="map-btn">🗺️ Google Maps</a>
-    </div>
-
-    <div class="card" id="sched-3">
-      <div class="card-title">
-        <span>15:30 - チェックイン・お部屋遊び</span>
-        <span class="now-badge" id="badge-sched-3" style="display:none;">📍 いまココ！</span>
-      </div>
-      <p>宿に到着！子供たちはみんなでお部屋遊びタイム。</p>
-    </div>
-
-    <div class="card" id="sched-4">
-      <div class="card-title">
-        <span>18:00 - 晩ごはん・温泉</span>
-        <span class="now-badge" id="badge-sched-4" style="display:none;">📍 いまココ！</span>
-      </div>
-      <p>みんなでワイワイごちそうタイム＆ゆっくり温泉に入ってリラックス。</p>
-    </div>
-
-    <!-- DAY 2 -->
-    <h2 style="font-size: 1.2rem; margin: 16px 0 8px; color: var(--primary);">📅 DAY 2 : 3/22(日)</h2>
-
-    <div class="card" id="sched-5">
-      <div class="card-title">
-        <span>10:00 - ラプラス公園inせんだい</span>
-        <span class="now-badge" id="badge-sched-5" style="display:none;">📍 いまココ！</span>
-      </div>
-      <p>大型ラプラス遊具で子供たち大はしゃぎ！記念写真もたっぷり撮ろう♪</p>
-      <a href="https://maps.google.com/?q=仙台市海岸公園冒険広場" target="_blank" class="map-btn">🗺️ Google Maps</a>
-    </div>
-
-    <div class="card" id="sched-6">
-      <div class="card-title">
-        <span>13:00 - 仙台ランチ＆お土産</span>
-        <span class="now-badge" id="badge-sched-6" style="display:none;">📍 いまココ！</span>
-      </div>
-      <p>仙台駅周辺で牛タンやお寿司。ずんだスイーツやお土産選びも！</p>
-    </div>
-
-    <div class="card" id="sched-7">
-      <div class="card-title">
-        <span>16:00 - 解散・帰路へ</span>
-        <span class="now-badge" id="badge-sched-7" style="display:none;">📍 いまココ！</span>
-      </div>
-      <p>楽しかった旅もここで解散。気をつけて帰りましょう！</p>
-    </div>
-
   </div>
 
-  <!-- 2. メンバータブ -->
-  <div id="tab-members" class="tab-content">
-    <div class="card">
-      <div class="card-title">👨‍👩‍👧‍👧 参加メンバー（4家族）</div>
-      <div class="flex-grid" style="margin-top: 12px;">
-        <div class="member-box">
-          <strong>あかりファミリー</strong><br>
-          ・パパ / ママ<br>
-          ・さくら (5歳♀)
+  <!-- ナビゲーションタブ -->
+  <div class="sticky top-2 z-30 max-w-md mx-auto px-4 my-3">
+    <nav class="bg-white/90 backdrop-blur-md p-1.5 rounded-2xl shadow-lg border border-slate-100 flex justify-between gap-1 text-xs font-bold">
+      <button onclick="switchTab('schedule')" id="tab-btn-schedule" class="tab-btn active flex-1 py-2 rounded-xl transition-all text-center">日程</button>
+      <button onclick="switchTab('members')" id="tab-btn-members" class="tab-btn flex-1 py-2 rounded-xl transition-all text-center text-slate-600">メンバー</button>
+      <button onclick="switchTab('spots')" id="tab-btn-spots" class="tab-btn flex-1 py-2 rounded-xl transition-all text-center text-slate-600">スポット</button>
+      <button onclick="switchTab('gourmet')" id="tab-btn-gourmet" class="tab-btn flex-1 py-2 rounded-xl transition-all text-center text-slate-600">グルメ</button>
+      <button onclick="switchTab('belongings')" id="tab-btn-belongings" class="tab-btn flex-1 py-2 rounded-xl transition-all text-center text-slate-600">持ち物</button>
+    </nav>
+  </div>
+
+  <!-- メインコンテンツ -->
+  <main class="max-w-md mx-auto px-4 space-y-4">
+
+    <!-- 1. スケジュールタブ -->
+    <div id="content-schedule" class="space-y-4">
+      
+      <!-- 注意書きメッセージ -->
+      <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 text-xs text-emerald-800 flex items-start gap-2.5 shadow-sm">
+        <i class="fa-solid fa-lightbulb text-emerald-600 text-base mt-0.5"></i>
+        <p class="leading-relaxed font-medium">
+          ※ あくまでも予定です！当日の気分や子供たちの機嫌に合わせて柔軟に楽しく対応しましょう♪
+        </p>
+      </div>
+
+      <!-- Day 1 -->
+      <div class="space-y-3">
+        <div class="flex items-center gap-2">
+          <span class="bg-emerald-600 text-white font-extrabold text-xs px-3 py-1 rounded-lg">1日目</span>
+          <h2 class="font-bold text-slate-700 text-sm">2027年3月21日(土)</h2>
         </div>
-        <div class="member-box">
-          <strong>かすみファミリー</strong><br>
-          ・パパ / ママ<br>
-          ・りん (5歳♀)<br>
-          ・ひな (3歳♀)
+
+        <div id="sched-1" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 relative transition-all">
+          <div class="flex justify-between items-start mb-1">
+            <span class="text-xs font-bold text-emerald-600"><i class="fa-regular fa-clock mr-1"></i>09:30 -</span>
+            <span id="badge-sched-1" class="hidden bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">📍 いまココ！</span>
+          </div>
+          <h3 class="font-bold text-slate-800">出発・移動 🚗</h3>
+          <p class="text-xs text-slate-500 mt-1">みんなで合流して宮城へ出発！車内でおしゃべりを楽しみながら向かいます。</p>
         </div>
-        <div class="member-box">
-          <strong>みはるファミリー</strong><br>
-          ・パパ / ママ<br>
-          ・みお (5歳♀)
+
+        <div id="sched-2" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 relative transition-all">
+          <div class="flex justify-between items-start mb-1">
+            <span class="text-xs font-bold text-emerald-600"><i class="fa-regular fa-clock mr-1"></i>12:00 -</span>
+            <span id="badge-sched-2" class="hidden bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">📍 いまココ！</span>
+          </div>
+          <h3 class="font-bold text-slate-800">松島海岸でお昼ごはん＆散策 🦪</h3>
+          <p class="text-xs text-slate-500 mt-1">日本三景の松島に到着。美味しい海鮮ランチや焼き牡蠣を堪能！散策や食べ歩きを楽しみます。</p>
+          <a href="https://maps.google.com/?q=松島海岸" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg mt-2.5 hover:bg-blue-100 transition-colors">
+            <i class="fa-solid fa-map-location-dot"></i> Google Mapsで開く
+          </a>
         </div>
-        <div class="member-box">
-          <strong>なつきファミリー</strong><br>
-          ・パパ / ママ<br>
-          ・えま (5歳♀)
+
+        <div id="sched-3" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 relative transition-all">
+          <div class="flex justify-between items-start mb-1">
+            <span class="text-xs font-bold text-emerald-600"><i class="fa-regular fa-clock mr-1"></i>15:30 -</span>
+            <span id="badge-sched-3" class="hidden bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">📍 いまココ！</span>
+          </div>
+          <h3 class="font-bold text-slate-800">宿チェックイン＆のんびりタイム ♨️</h3>
+          <p class="text-xs text-slate-500 mt-1">宿にチェックイン。お部屋で休憩したり、子供たちみんなでお部屋遊び！</p>
+        </div>
+
+        <div id="sched-4" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 relative transition-all">
+          <div class="flex justify-between items-start mb-1">
+            <span class="text-xs font-bold text-emerald-600"><i class="fa-regular fa-clock mr-1"></i>18:00 -</span>
+            <span id="badge-sched-4" class="hidden bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">📍 いまココ！</span>
+          </div>
+          <h3 class="font-bold text-slate-800">みんなで夕食＆お風呂 🍲</h3>
+          <p class="text-xs text-slate-500 mt-1">4家族一緒に賑やかな夜ご飯！美味しいご飯のあとは温泉でゆったり過ごします。</p>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- 3. スポットタブ -->
-  <div id="tab-spots" class="tab-content">
-    <div class="card">
-      <div class="card-title">🐢 ラプラス公園inせんだい</div>
-      <p style="font-size: 0.85rem; color: #666; margin-bottom: 8px;">（仙台市海岸公園冒険広場）</p>
-      <p>みやぎ応援ポケモンの「ラプラス」をモチーフにした可愛くて大きな遊具が大人気！子供たちが安全に遊べる滑り台やアスレチックがたくさんあります。</p>
-      <a href="https://maps.google.com/?q=仙台市海岸公園冒険広場" target="_blank" class="map-btn">🗺️ Google Maps</a>
+      <!-- Day 2 -->
+      <div class="space-y-3 pt-2">
+        <div class="flex items-center gap-2">
+          <span class="bg-emerald-600 text-white font-extrabold text-xs px-3 py-1 rounded-lg">2日目</span>
+          <h2 class="font-bold text-slate-700 text-sm">2027年3月22日(日)</h2>
+        </div>
+
+        <div id="sched-5" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 relative transition-all">
+          <div class="flex justify-between items-start mb-1">
+            <span class="text-xs font-bold text-emerald-600"><i class="fa-regular fa-clock mr-1"></i>10:00 -</span>
+            <span id="badge-sched-5" class="hidden bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">📍 いまココ！</span>
+          </div>
+          <h3 class="font-bold text-slate-800">ラプラス公園inせんだい 🦕</h3>
+          <p class="text-xs text-slate-500 mt-1">楽しみにしていたラプラス公園へ！巨大なラプラス遊具やふわふわドームで子供たちと一緒に全力遊び！</p>
+          <a href="https://maps.google.com/?q=仙台市海岸公園冒険広場" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg mt-2.5 hover:bg-blue-100 transition-colors">
+            <i class="fa-solid fa-map-location-dot"></i> Google Mapsで開く
+          </a>
+        </div>
+
+        <div id="sched-6" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 relative transition-all">
+          <div class="flex justify-between items-start mb-1">
+            <span class="text-xs font-bold text-emerald-600"><i class="fa-regular fa-clock mr-1"></i>13:00 -</span>
+            <span id="badge-sched-6" class="hidden bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">📍 いまココ！</span>
+          </div>
+          <h3 class="font-bold text-slate-800">仙台市内ランチ＆お土産購入 🛍️</h3>
+          <p class="text-xs text-slate-500 mt-1">牛タンやお寿司など名物ランチを堪能。ずんだスイーツを食べたり、家族へのお土産を探します。</p>
+        </div>
+
+        <div id="sched-7" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 relative transition-all">
+          <div class="flex justify-between items-start mb-1">
+            <span class="text-xs font-bold text-emerald-600"><i class="fa-regular fa-clock mr-1"></i>16:00 -</span>
+            <span id="badge-sched-7" class="hidden bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">📍 いまココ！</span>
+          </div>
+          <h3 class="font-bold text-slate-800">現地解散・気をつけて帰りましょう 帰路</h3>
+          <p class="text-xs text-slate-500 mt-1">楽しかった思い出を胸に帰路につきます。みんな無事に帰れるように気をつけて！</p>
+        </div>
+      </div>
+
     </div>
 
-    <div class="card">
-      <div class="card-title">🌊 松島海岸周辺</div>
-      <p>日本三景の一つ！美味しい焼き牡蠣や練り物の食べ歩きを楽しみながらお散歩できます。</p>
-      <a href="https://maps.google.com/?q=松島海岸" target="_blank" class="map-btn">🗺️ Google Maps</a>
-    </div>
-  </div>
+    <!-- 2. メンバータブ -->
+    <div id="content-members" class="hidden space-y-3">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+        <h2 class="font-bold text-slate-800 text-base mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-users text-emerald-600"></i> 参加ファミリー（4家族）
+        </h2>
+        
+        <div class="grid grid-cols-1 gap-3">
+          <!-- あかりファミリー -->
+          <div class="bg-emerald-50/60 border border-emerald-100 rounded-xl p-3.5">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-bold text-emerald-900 text-sm">あかりファミリー</span>
+              <span class="bg-emerald-200 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">3名</span>
+            </div>
+            <p class="text-xs text-emerald-800">パパ / ママ / さくら (5歳♀)</p>
+          </div>
 
-  <!-- 4. グルメタブ -->
-  <div id="tab-gourmet" class="tab-content">
-    
-    <div class="card">
-      <div class="card-title">🥩 仙台牛タン</div>
-      <p>厚切りでジューシーな仙台名物！定番の塩焼きやスープとのセットが絶品です。</p>
+          <!-- かすみファミリー -->
+          <div class="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-bold text-slate-800 text-sm">かすみファミリー</span>
+              <span class="bg-slate-200 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full">4名</span>
+            </div>
+            <p class="text-xs text-slate-600">パパ / ママ / りん (5歳♀) / ひな (3歳♀)</p>
+          </div>
+
+          <!-- みはるファミリー -->
+          <div class="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-bold text-slate-800 text-sm">みはるファミリー</span>
+              <span class="bg-slate-200 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full">3名</span>
+            </div>
+            <p class="text-xs text-slate-600">パパ / ママ / みお (5歳♀)</p>
+          </div>
+
+          <!-- なつきファミリー -->
+          <div class="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-bold text-slate-800 text-sm">なつきファミリー</span>
+              <span class="bg-slate-200 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full">3名</span>
+            </div>
+            <p class="text-xs text-slate-600">パパ / ママ / えま (5歳♀)</p>
+          </div>
+        </div>
+
+        <div class="mt-4 p-3 bg-amber-50 rounded-xl text-xs text-amber-800 flex items-center justify-between font-bold">
+          <span>合計人数</span>
+          <span>大人 8名 ／ 子供 5名（合計 13名）</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. スポットタブ -->
+    <div id="content-spots" class="hidden space-y-4">
+      
+      <!-- スポット1: ラプラス公園 -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+        <div class="bg-blue-500 p-3 text-white">
+          <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">メインスポット</span>
+          <h3 class="text-base font-bold mt-0.5">ラプラス公園inせんだい</h3>
+          <p class="text-xs text-blue-100">（仙台市海岸公園冒険広場）</p>
+        </div>
+        <div class="p-4 space-y-2">
+          <p class="text-xs text-slate-600 leading-relaxed">
+            みやぎ応援ポケモンの「ラプラス」をモチーフにした遊具が揃う公園！巨大なラプラスの滑り台やふわふわドームなど、子供たちが大興奮できるポイントがいっぱいです。
+          </p>
+          <div class="pt-2">
+            <a href="https://maps.google.com/?q=仙台市海岸公園冒険広場" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-xl w-full justify-center hover:bg-blue-100 transition-colors">
+              <i class="fa-solid fa-map-location-dot"></i> Google Mapsでナビを見る
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- スポット2: 松島海岸 -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+        <div class="bg-teal-600 p-3 text-white">
+          <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">観光＆グルメ</span>
+          <h3 class="text-base font-bold mt-0.5">松島海岸エリア</h3>
+        </div>
+        <div class="p-4 space-y-2">
+          <p class="text-xs text-slate-600 leading-relaxed">
+            日本三景の一つで絶景を眺めながら散策！焼き牡蠣の食べ歩きや笹かまぼこの手焼き体験など、大人も子供も満足できる食べ歩きスポットです。
+          </p>
+          <div class="pt-2">
+            <a href="https://maps.google.com/?q=松島海岸" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-xl w-full justify-center hover:bg-blue-100 transition-colors">
+              <i class="fa-solid fa-map-location-dot"></i> Google Mapsでナビを見る
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 4. グルメタブ -->
+    <div id="content-gourmet" class="hidden space-y-4">
+      
+      <!-- 牛タン -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-drumstick-bite text-amber-600"></i> 仙台牛タン
+          </h3>
+          <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full">名物</span>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed">厚切りでジューシーな炭火焼き牛タン。定番の塩焼きだけでなくテールスープや麦飯との相性も抜群です！</p>
+        <div class="flex flex-wrap gap-2 pt-1">
+          <a href="https://www.kisuke.co.jp/" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium inline-flex items-center gap-1">
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 味の牛たん 喜助
+          </a>
+          <a href="https://www.rikyu-gyutan.co.jp/" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium inline-flex items-center gap-1">
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 牛たん炭焼 利久
+          </a>
+        </div>
+      </div>
+
+      <!-- ずんだ -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-ice-cream text-emerald-600"></i> ずんだスイーツ
+          </h3>
+          <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">スイーツ</span>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed">風味豊かな枝豆ペーストのずんだ餅や、手軽に持ち運べる大人気の「ずんだシェイク」は子供たちのおやつにもぴったり！</p>
+        <div class="flex flex-wrap gap-2 pt-1">
+          <a href="https://zundasaryo.com/" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium inline-flex items-center gap-1">
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> ずんだ茶寮
+          </a>
+        </div>
+      </div>
+
+      <!-- 牡蠣 -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-water text-blue-600"></i> 松島の牡蠣
+          </h3>
+          <span class="text-[10px] bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded-full">海の幸</span>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed">松島名物のぷりぷり牡蠣！焼き牡蠣や牡蠣フライなど、出来立てをその場で味わえます。</p>
+        <div class="flex flex-wrap gap-2 pt-1">
+          <a href="https://www.matsushima-kanko.com/" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium inline-flex items-center gap-1">
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 松島観光協会
+          </a>
+        </div>
+      </div>
+
+      <!-- 笹かまぼこ -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-fish text-indigo-600"></i> 笹かまぼこ体験
+          </h3>
+          <span class="text-[10px] bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded-full">体験</span>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed">自分でじっくり焼いてあつあつを食べる「手焼き体験」は旅の楽しい思い出になります。</p>
+        <div class="flex flex-wrap gap-2 pt-1">
+          <a href="https://www.abe-kamaboko.co.jp/" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium inline-flex items-center gap-1">
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 阿部蒲鉾店
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 5. 持ち物タブ -->
+    <div id="content-belongings" class="hidden space-y-4">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
+        <h2 class="font-bold text-slate-800 text-sm flex items-center justify-between">
+          <span><i class="fa-solid fa-list-check text-emerald-600 mr-1.5"></i> 持ち物チェックリスト</span>
+        </h2>
+
+        <!-- 追加フォーム -->
+        <form onsubmit="addCustomItem(event)" class="flex gap-2">
+          <input type="text" id="customItemInput" placeholder="自分用の持ち物を追加..." class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-emerald-500">
+          <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3 py-2 rounded-xl transition-colors">追加</button>
+        </form>
+
+        <!-- チェックリスト本体 -->
+        <div id="todoList" class="space-y-2 pt-1">
+          <!-- JSで描画 -->
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-2.5 text-[11px] text-slate-500 leading-relaxed">
+          ※ チェックした項目は自動でスマホに保存されます！他の家族には見えません。
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- お疲れさま ポップアップ (シンプル版) -->
+  <div id="finishModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl border border-slate-100">
+      <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-3xl mx-auto">
+        <i class="fa-solid fa-champagne-glasses"></i>
+      </div>
       <div>
-        <a href="https://www.kisuke.co.jp/" target="_blank" class="web-btn">🌐 味の牛たん 喜助 公式</a>
-        <a href="https://www.rikyu-gyutan.co.jp/" target="_blank" class="web-btn">🌐 牛たん炭焼 利久 公式</a>
+        <h3 class="text-lg font-extrabold text-slate-800">お疲れさまでした！</h3>
+        <p class="text-xs text-slate-500 mt-1.5">またみんなで遊びに行きましょう♪</p>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">🍡 ずんだ餅・ずんだシェイク</div>
-      <p>枝豆の風味豊かな名物和スイーツ。手軽に飲める「ずんだシェイク」は子供たちにも大人気！</p>
-      <div>
-        <a href="https://zundasaryo.com/" target="_blank" class="web-btn">🌐 ずんだ茶寮 公式</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">🦪 松島の牡蠣</div>
-      <p>ぷりぷりの新鮮な牡蠣。焼き牡蠣食べ放題や、牡蠣フライなど色々楽しめます。</p>
-      <div>
-        <a href="https://www.matsushima-kanko.com/" target="_blank" class="web-btn">🌐 松島観光協会</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">🍢 手焼き笹かまぼこ</div>
-      <p>自分でアツアツに焼いて食べられる体験型グルメ！香ばしさがたまりません。</p>
-      <div>
-        <a href="https://www.abe-kamaboko.co.jp/" target="_blank" class="web-btn">🌐 阿部蒲鉾店 公式</a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- 5. 持ち物タブ -->
-  <div id="tab-belongings" class="tab-content">
-    <div class="card">
-      <div class="card-title">🎒 持ち物チェックリスト</div>
-
-      <!-- 追加フォーム -->
-      <div class="add-todo">
-        <input type="text" id="custom-item-input" placeholder="+ 自分専用の持ち物を追加...">
-        <button onclick="addCustomItem()">追加</button>
-      </div>
-
-      <ul class="todo-list" id="todo-list">
-        <!-- JSで動的生成 -->
-      </ul>
-
-      <p class="notice">※ チェックした項目や追加したアイテムは自動でスマホに保存されます（他の家族には見えません）。</p>
+      <button onclick="closeFinishModal()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm py-2.5 rounded-xl shadow-md transition-all">
+        閉じる
+      </button>
     </div>
   </div>
 
-</div>
+  <script>
+    // デフォルト持ち物
+    const defaultBelongings = [
+      "着替え（大人・子供）",
+      "パジャマ・下着",
+      "子供のおやつ・飲み物",
+      "ウェットティッシュ",
+      "常備薬・絆創膏",
+      "健康保険証・母子手帳",
+      "スマホ充電器・モバイルバッテリー",
+      "ラプラスグッズ（持ち込み用）"
+    ];
 
-<!-- ポップアップ（モーダル） -->
-<div class="modal-overlay" id="finish-modal">
-  <div class="modal-box">
-    <h2>🎉 お疲れさでした！</h2>
-    <p>またみんなで遊びに行きましょう！</p>
-    <button class="modal-close-btn" onclick="closeModal()">閉じる</button>
-  </div>
-</div>
+    let customItems = [];
+    let checkedItems = {};
+    let simTime = null;
 
-<script>
-  // 初期持ち物データ
-  const defaultTodos = [
-    "着替え（予備含め）",
-    "パジャマ・下着",
-    "子供のおやつ・飲み物",
-    "ウェットティッシュ・ティッシュ",
-    "ビニール袋（ゴミ・汚れた服入れ）",
-    "常備薬・絆創膏",
-    "健康保険証・母子手帳",
-    "スマホ充電器",
-    "ラプラスグッズ（あれば！）"
-  ];
-
-  let customItems = [];
-  let checkedState = {};
-  let simTimeOverride = null;
-
-  // 初期化
-  window.addEventListener('DOMContentLoaded', () => {
-    loadLocalStorage();
-    renderTodos();
-    checkScheduleStatus();
-    setInterval(checkScheduleStatus, 10000); // 10秒毎に現在地チェック
-  });
-
-  // タブ切り替え
-  function switchTab(tabName) {
-    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-
-    document.getElementById(`tab-${tabName}`).classList.add('active');
-    event.target.classList.add('active');
-  }
-
-  // 持ち物描画
-  function renderTodos() {
-    const listEl = document.getElementById('todo-list');
-    listEl.innerHTML = '';
-
-    // カスタムアイテム（最上部）
-    customItems.forEach((item, idx) => {
-      const id = `custom-${idx}`;
-      const isChecked = checkedState[id] || false;
-      listEl.appendChild(createTodoRow(id, item, isChecked, true));
+    // 初期化
+    window.addEventListener('DOMContentLoaded', () => {
+      loadLocalStorage();
+      renderTodoList();
+      checkCurrentStatus();
+      setInterval(checkCurrentStatus, 10000); // 10秒ごとに自動更新
     });
 
-    // デフォルトアイテム
-    defaultTodos.forEach((item, idx) => {
-      const id = `default-${idx}`;
-      const isChecked = checkedState[id] || false;
-      listEl.appendChild(createTodoRow(id, item, isChecked, false));
-    });
-  }
+    // タブ切り替え
+    function switchTab(tab) {
+      const tabs = ['schedule', 'members', 'spots', 'gourmet', 'belongings'];
+      tabs.forEach(t => {
+        document.getElementById(`content-${t}`).classList.add('hidden');
+        const btn = document.getElementById(`tab-btn-${t}`);
+        btn.classList.remove('active');
+        btn.classList.add('text-slate-600');
+      });
 
-  function createTodoRow(id, text, isChecked, isCustom) {
-    const li = document.createElement('li');
-    li.className = 'todo-item';
-    li.innerHTML = `
-      <label style="display:flex; align-items:center; width:100%; cursor:pointer;">
-        <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleCheck('${id}', this.checked)">
-        <span style="${isChecked ? 'text-decoration:line-through; color:#aaa;' : ''}">${text}</span>
-      </label>
-    `;
-    return li;
-  }
-
-  function addCustomItem() {
-    const input = document.getElementById('custom-item-input');
-    const text = input.value.trim();
-    if (!text) return;
-
-    customItems.unshift(text); // 最上部に追加
-    input.value = '';
-    saveLocalStorage();
-    renderTodos();
-  }
-
-  function toggleCheck(id, isChecked) {
-    checkedState[id] = isChecked;
-    saveLocalStorage();
-    renderTodos();
-  }
-
-  function saveLocalStorage() {
-    localStorage.setItem('shiori_custom_items', JSON.stringify(customItems));
-    localStorage.setItem('shiori_checked_state', JSON.stringify(checkedState));
-  }
-
-  function loadLocalStorage() {
-    const c = localStorage.getItem('shiori_custom_items');
-    const s = localStorage.getItem('shiori_checked_state');
-    if (c) customItems = JSON.parse(c);
-    if (s) checkedState = JSON.parse(s);
-  }
-
-  // 現在地判定＆ポップアップ処理
-  function getCurrentTime() {
-    return simTimeOverride ? new Date(simTimeOverride) : new Date();
-  }
-
-  function setSimTime(timeStr) {
-    simTimeOverride = timeStr;
-    checkScheduleStatus();
-  }
-
-  function resetSimTime() {
-    simTimeOverride = null;
-    checkScheduleStatus();
-  }
-
-  const scheduleRanges = [
-    { id: 'sched-1', start: '2027-03-21T09:30:00', end: '2027-03-21T12:00:00' },
-    { id: 'sched-2', start: '2027-03-21T12:00:00', end: '2027-03-21T15:30:00' },
-    { id: 'sched-3', start: '2027-03-21T15:30:00', end: '2027-03-21T18:00:00' },
-    { id: 'sched-4', start: '2027-03-21T18:00:00', end: '2027-03-21T23:59:59' },
-    { id: 'sched-5', start: '2027-03-22T09:00:00', end: '2027-03-22T13:00:00' },
-    { id: 'sched-6', start: '2027-03-22T13:00:00', end: '2027-03-22T16:00:00' },
-    { id: 'sched-7', start: '2027-03-22T16:00:00', end: '2027-03-22T18:00:00' }
-  ];
-
-  function checkScheduleStatus() {
-    const now = getCurrentTime();
-
-    // スケジュールのハイライトリセット
-    scheduleRanges.forEach(s => {
-      const card = document.getElementById(s.id);
-      const badge = document.getElementById(`badge-${s.id}`);
-      if (card) card.classList.remove('is-now');
-      if (badge) badge.style.display = 'none';
-    });
-
-    // 「いまココ」判定
-    scheduleRanges.forEach(s => {
-      const start = new Date(s.start);
-      const end = new Date(s.end);
-
-      if (now >= start && now < end) {
-        const card = document.getElementById(s.id);
-        const badge = document.getElementById(`badge-${s.id}`);
-        if (card) card.classList.add('is-now');
-        if (badge) badge.style.display = 'inline-block';
-      }
-    });
-
-    // 旅行終了判定（2027/03/22 18:00以降）
-    const tripEnd = new Date('2027-03-22T18:00:00');
-    if (now >= tripEnd) {
-      document.getElementById('finish-modal').style.display = 'flex';
-    } else {
-      document.getElementById('finish-modal').style.display = 'none';
+      document.getElementById(`content-${tab}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-btn-${tab}`);
+      activeBtn.classList.add('active');
+      activeBtn.classList.remove('text-slate-600');
     }
-  }
 
-  function closeModal() {
-    document.getElementById('finish-modal').style.display = 'none';
-  }
-</script>
+    // 持ち物リスト描画
+    function renderTodoList() {
+      const container = document.getElementById('todoList');
+      container.innerHTML = '';
 
+      // 自分追加分（最上部）
+      customItems.forEach((item, index) => {
+        const id = `custom-${index}`;
+        const isChecked = !!checkedItems[id];
+        container.appendChild(createTodoElement(id, item, isChecked, true, index));
+      });
+
+      // デフォルト分
+      defaultBelongings.forEach((item, index) => {
+        const id = `default-${index}`;
+        const isChecked = !!checkedItems[id];
+        container.appendChild(createTodoElement(id, item, isChecked, false));
+      });
+    }
+
+    function createTodoElement(id, text, isChecked, isCustom, customIndex = null) {
+      const div = document.createElement('div');
+      div.className = `flex items-center justify-between p-2.5 rounded-xl border ${isChecked ? 'bg-slate-50 border-slate-200 opacity-60' : 'bg-white border-slate-200'} transition-all`;
+      
+      div.innerHTML = `
+        <label class="flex items-center gap-2.5 flex-1 cursor-pointer">
+          <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleTodo('${id}', this.checked)" class="w-4 h-4 accent-emerald-600 rounded">
+          <span class="text-xs font-medium ${isChecked ? 'line-through text-slate-400' : 'text-slate-700'}">${text}</span>
+        </label>
+        ${isCustom ? `
+          <button onclick="removeCustomItem(${customIndex})" class="text-slate-400 hover:text-red-500 text-xs px-1.5 py-0.5">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        ` : ''}
+      `;
+      return div;
+    }
+
+    function toggleTodo(id, isChecked) {
+      checkedItems[id] = isChecked;
+      saveLocalStorage();
+      renderTodoList();
+    }
+
+    function addCustomItem(e) {
+      e.preventDefault();
+      const input = document.getElementById('customItemInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      customItems.unshift(text); // 最上部に追加
+      input.value = '';
+      saveLocalStorage();
+      renderTodoList();
+    }
+
+    function removeCustomItem(index) {
+      customItems.splice(index, 1);
+      saveLocalStorage();
+      renderTodoList();
+    }
+
+    function saveLocalStorage() {
+      localStorage.setItem('miyagi_trip_custom_items', JSON.stringify(customItems));
+      localStorage.setItem('miyagi_trip_checked_items', JSON.stringify(checkedItems));
+    }
+
+    function loadLocalStorage() {
+      const c = localStorage.getItem('miyagi_trip_custom_items');
+      const k = localStorage.getItem('miyagi_trip_checked_items');
+      if (c) customItems = JSON.parse(c);
+      if (k) checkedItems = JSON.parse(k);
+    }
+
+    // スケジュール＆お疲れさま判定
+    const scheduleTimes = [
+      { id: 'sched-1', start: '2027-03-21T09:30:00', end: '2027-03-21T12:00:00' },
+      { id: 'sched-2', start: '2027-03-21T12:00:00', end: '2027-03-21T15:30:00' },
+      { id: 'sched-3', start: '2027-03-21T15:30:00', end: '2027-03-21T18:00:00' },
+      { id: 'sched-4', start: '2027-03-21T18:00:00', end: '2027-03-22T09:59:59' },
+      { id: 'sched-5', start: '2027-03-22T10:00:00', end: '2027-03-22T13:00:00' },
+      { id: 'sched-6', start: '2027-03-22T13:00:00', end: '2027-03-22T16:00:00' },
+      { id: 'sched-7', start: '2027-03-22T16:00:00', end: '2027-03-22T18:00:00' },
+    ];
+
+    function checkCurrentStatus() {
+      const now = simTime ? new Date(simTime) : new Date();
+
+      // カードの「いまココ」リセット
+      scheduleTimes.forEach(item => {
+        const el = document.getElementById(item.id);
+        const badge = document.getElementById(`badge-${item.id}`);
+        if (el) el.classList.remove('is-now-card');
+        if (badge) badge.classList.add('hidden');
+      });
+
+      // 現在実行中の項目を判別
+      scheduleTimes.forEach(item => {
+        const start = new Date(item.start);
+        const end = new Date(item.end);
+        if (now >= start && now <= end) {
+          const el = document.getElementById(item.id);
+          const badge = document.getElementById(`badge-${item.id}`);
+          if (el) el.classList.add('is-now-card');
+          if (badge) badge.classList.remove('hidden');
+        }
+      });
+
+      // 旅行終了判定（2027年3月22日 18:00以降）
+      const finishTime = new Date('2027-03-22T18:00:00');
+      if (now >= finishTime) {
+        document.getElementById('finishModal').classList.remove('hidden');
+      } else {
+        document.getElementById('finishModal').classList.add('hidden');
+      }
+    }
+
+    function setSimTime(timeStr) {
+      simTime = timeStr;
+      checkCurrentStatus();
+    }
+
+    function resetSimTime() {
+      simTime = null;
+      checkCurrentStatus();
+    }
+
+    function closeFinishModal() {
+      document.getElementById('finishModal').classList.add('hidden');
+    }
+  </script>
 </body>
 </html>
