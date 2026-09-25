@@ -77,7 +77,7 @@
       <button onclick="switchTab('members')" id="tab-btn-members" class="tab-btn flex-1 py-2 rounded-xl transition-all text-center text-slate-600">メンバー</button>
       <button onclick="switchTab('spots')" id="tab-btn-spots" class="tab-btn flex-1 py-2 rounded-xl transition-all text-center text-slate-600">スポット</button>
       <button onclick="switchTab('gourmet')" id="tab-btn-gourmet" class="tab-btn flex-1 py-2 rounded-xl transition-all text-center text-slate-600">グルメ</button>
-      <button onclick="switchTab('belongings')" id="tab-btn-belongings" class="tab-btn flex-1 py-2 rounded-xl transition-all text-center text-slate-600">持ち物</button>
+      <button onclick="switchTab('other')" id="tab-btn-other" class="tab-btn flex-1 py-2 rounded-xl transition-all text-center text-slate-600">その他</button>
     </nav>
   </div>
 
@@ -86,8 +86,6 @@
 
     <!-- 1. スケジュールタブ -->
     <div id="content-schedule" class="space-y-4">
-      
-      <!-- 注意書きメッセージ -->
       <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 text-xs text-emerald-800 flex items-start gap-2.5 shadow-sm">
         <i class="fa-solid fa-lightbulb text-emerald-600 text-base mt-0.5"></i>
         <p class="leading-relaxed font-medium">
@@ -179,7 +177,6 @@
           <p class="text-xs text-slate-500 mt-1">楽しかった思い出を胸に帰路につきます。みんな無事に帰れるように気をつけて！</p>
         </div>
       </div>
-
     </div>
 
     <!-- 2. メンバータブ -->
@@ -188,9 +185,7 @@
         <h2 class="font-bold text-slate-800 text-base mb-3 flex items-center gap-2">
           <i class="fa-solid fa-users text-emerald-600"></i> 参加ファミリー（4家族）
         </h2>
-        
         <div class="grid grid-cols-1 gap-3">
-          <!-- あかりファミリー -->
           <div class="bg-emerald-50/60 border border-emerald-100 rounded-xl p-3.5">
             <div class="flex justify-between items-center mb-1">
               <span class="font-bold text-emerald-900 text-sm">あかりファミリー</span>
@@ -198,8 +193,6 @@
             </div>
             <p class="text-xs text-emerald-800">パパ / ママ / さくら (5歳♀)</p>
           </div>
-
-          <!-- かすみファミリー -->
           <div class="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
             <div class="flex justify-between items-center mb-1">
               <span class="font-bold text-slate-800 text-sm">かすみファミリー</span>
@@ -207,8 +200,6 @@
             </div>
             <p class="text-xs text-slate-600">パパ / ママ / りん (5歳♀) / ひな (3歳♀)</p>
           </div>
-
-          <!-- みはるファミリー -->
           <div class="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
             <div class="flex justify-between items-center mb-1">
               <span class="font-bold text-slate-800 text-sm">みはるファミリー</span>
@@ -216,8 +207,6 @@
             </div>
             <p class="text-xs text-slate-600">パパ / ママ / みお (5歳♀)</p>
           </div>
-
-          <!-- なつきファミリー -->
           <div class="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
             <div class="flex justify-between items-center mb-1">
               <span class="font-bold text-slate-800 text-sm">なつきファミリー</span>
@@ -226,7 +215,6 @@
             <p class="text-xs text-slate-600">パパ / ママ / えま (5歳♀)</p>
           </div>
         </div>
-
         <div class="mt-4 p-3 bg-amber-50 rounded-xl text-xs text-amber-800 flex items-center justify-between font-bold">
           <span>合計人数</span>
           <span>大人 8名 ／ 子供 5名（合計 13名）</span>
@@ -236,8 +224,6 @@
 
     <!-- 3. スポットタブ -->
     <div id="content-spots" class="hidden space-y-4">
-      
-      <!-- スポット1: ラプラス公園 -->
       <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
         <div class="bg-blue-500 p-3 text-white">
           <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">メインスポット</span>
@@ -256,7 +242,6 @@
         </div>
       </div>
 
-      <!-- スポット2: 松島海岸 -->
       <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
         <div class="bg-teal-600 p-3 text-white">
           <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">観光＆グルメ</span>
@@ -273,49 +258,10 @@
           </div>
         </div>
       </div>
-
-      <!-- スポット3: 仙台うみの杜水族館 -->
-      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
-        <div class="bg-sky-600 p-3 text-white">
-          <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">ファミリー</span>
-          <h3 class="text-base font-bold mt-0.5">仙台うみの杜水族館</h3>
-        </div>
-        <div class="p-4 space-y-2">
-          <p class="text-xs text-slate-600 leading-relaxed">
-            三陸の海を再現した大水槽やイルカ・アシカのパフォーマンスが人気！雨が降っても安心して大はしゃぎできる水族館です。
-          </p>
-          <div class="pt-2">
-            <a href="https://maps.google.com/?q=仙台うみの杜水族館" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-xl w-full justify-center hover:bg-blue-100 transition-colors">
-              <i class="fa-solid fa-map-location-dot"></i> Google Mapsでナビを見る
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- スポット4: 八木山ベニーランド -->
-      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
-        <div class="bg-amber-500 p-3 text-white">
-          <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">遊園地</span>
-          <h3 class="text-base font-bold mt-0.5">八木山ベニーランド</h3>
-        </div>
-        <div class="p-4 space-y-2">
-          <p class="text-xs text-slate-600 leading-relaxed">
-            小さなお子さんでも乗れるアトラクションが盛りだくさんのレトロで楽しい遊園地！隣接する「八木山動物公園」とセットでの散策もおすすめです。
-          </p>
-          <div class="pt-2">
-            <a href="https://maps.google.com/?q=八木山ベニーランド" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-xl w-full justify-center hover:bg-blue-100 transition-colors">
-              <i class="fa-solid fa-map-location-dot"></i> Google Mapsでナビを見る
-            </a>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <!-- 4. グルメタブ -->
     <div id="content-gourmet" class="hidden space-y-4">
-      
-      <!-- 牛タン -->
       <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
         <div class="flex items-center justify-between">
           <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
@@ -324,17 +270,8 @@
           <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full">名物</span>
         </div>
         <p class="text-xs text-slate-500 leading-relaxed">厚切りでジューシーな炭火焼き牛タン。定番の塩焼きだけでなくテールスープや麦飯との相性も抜群です！</p>
-        <div class="flex flex-wrap gap-2 pt-1">
-          <a href="https://www.kisuke.co.jp/" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium inline-flex items-center gap-1">
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 味の牛たん 喜助
-          </a>
-          <a href="https://www.rikyu-gyutan.co.jp/" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium inline-flex items-center gap-1">
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 牛たん炭焼 利久
-          </a>
-        </div>
       </div>
 
-      <!-- ずんだ -->
       <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
         <div class="flex items-center justify-between">
           <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
@@ -343,96 +280,82 @@
           <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">スイーツ</span>
         </div>
         <p class="text-xs text-slate-500 leading-relaxed">風味豊かな枝豆ペーストのずんだ餅や、手軽に持ち運べる大人気の「ずんだシェイク」は子供たちのおやつにもぴったり！</p>
-        <div class="flex flex-wrap gap-2 pt-1">
-          <a href="https://zundasaryo.com/" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium inline-flex items-center gap-1">
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> ずんだ茶寮
-          </a>
-        </div>
       </div>
-
-      <!-- 三角定義油揚げ -->
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-            <i class="fa-solid fa-utensils text-orange-600"></i> 三角定義油揚げ
-          </h3>
-          <span class="text-[10px] bg-orange-100 text-orange-800 font-bold px-2 py-0.5 rounded-full">名物グルメ</span>
-        </div>
-        <p class="text-xs text-slate-500 leading-relaxed">外はサクサク、中はふっくらの巨大な油揚げ！醤油と七味唐辛子をかけて出来立てをほうばるのが最高です。</p>
-      </div>
-
-      <!-- はらこ飯 -->
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-            <i class="fa-solid fa-bowl-rice text-red-600"></i> はらこ飯
-          </h3>
-          <span class="text-[10px] bg-red-100 text-red-800 font-bold px-2 py-0.5 rounded-full">郷土料理</span>
-        </div>
-        <p class="text-xs text-slate-500 leading-relaxed">鮭の出汁で炊いた旨味たっぷりのご飯の上に、ふっくら煮付けた鮭とイクラを敷き詰めた贅沢な宮城の名物ごはん。</p>
-      </div>
-
-      <!-- 牡蠣 -->
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-            <i class="fa-solid fa-water text-blue-600"></i> 松島の牡蠣
-          </h3>
-          <span class="text-[10px] bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded-full">海の幸</span>
-        </div>
-        <p class="text-xs text-slate-500 leading-relaxed">松島名物のぷりぷり牡蠣！焼き牡蠣や牡蠣フライなど、出来立てをその場で味わえます。</p>
-        <div class="flex flex-wrap gap-2 pt-1">
-          <a href="https://www.matsushima-kanko.com/" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium inline-flex items-center gap-1">
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 松島観光協会
-          </a>
-        </div>
-      </div>
-
-      <!-- 笹かまぼこ -->
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-            <i class="fa-solid fa-fish text-indigo-600"></i> 笹かまぼこ体験
-          </h3>
-          <span class="text-[10px] bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded-full">体験</span>
-        </div>
-        <p class="text-xs text-slate-500 leading-relaxed">自分でじっくり焼いてあつあつを食べる「手焼き体験」は旅の楽しい思い出になります。</p>
-        <div class="flex flex-wrap gap-2 pt-1">
-          <a href="https://www.abe-kamaboko.co.jp/" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium inline-flex items-center gap-1">
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 阿部蒲鉾店
-          </a>
-        </div>
-      </div>
-
     </div>
 
-    <!-- 5. 持ち物タブ -->
-    <div id="content-belongings" class="hidden space-y-4">
+    <!-- 5. その他タブ (持ち物 / お土産 / 割り勘) -->
+    <div id="content-other" class="hidden space-y-6">
+      
+      <!-- 持ち物チェックリスト -->
       <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
         <h2 class="font-bold text-slate-800 text-sm flex items-center justify-between">
           <span><i class="fa-solid fa-list-check text-emerald-600 mr-1.5"></i> 持ち物チェックリスト</span>
         </h2>
-
-        <!-- 追加フォーム -->
         <form onsubmit="addCustomItem(event)" class="flex gap-2">
           <input type="text" id="customItemInput" placeholder="自分用の持ち物を追加..." class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-emerald-500">
           <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3 py-2 rounded-xl transition-colors">追加</button>
         </form>
-
-        <!-- チェックリスト本体 -->
-        <div id="todoList" class="space-y-2 pt-1">
-          <!-- JSで描画 -->
-        </div>
-
+        <div id="todoList" class="space-y-2 pt-1"></div>
         <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-2.5 text-[11px] text-slate-500 leading-relaxed">
           ※ チェックした項目は自動でスマホに保存されます！他の家族には見えません。
         </div>
       </div>
+
+      <!-- お土産チェックリスト -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
+        <h2 class="font-bold text-slate-800 text-sm flex items-center justify-between">
+          <span><i class="fa-solid fa-gift text-amber-500 mr-1.5"></i> お土産チェックリスト</span>
+        </h2>
+        <form onsubmit="addSouvenirItem(event)" class="flex gap-2">
+          <input type="text" id="souvenirItemInput" placeholder="買いたいお土産（例: 笹かま、ずんだ餅）" class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500">
+          <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs px-3 py-2 rounded-xl transition-colors">追加</button>
+        </form>
+        <div id="souvenirList" class="space-y-2 pt-1"></div>
+      </div>
+
+      <!-- 割り勘・立替計算ツール -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-4">
+        <h2 class="font-bold text-slate-800 text-sm flex items-center justify-between">
+          <span><i class="fa-solid fa-calculator text-blue-600 mr-1.5"></i> 家族間 割り勘・立替メモ</span>
+        </h2>
+        
+        <!-- 立替入力フォーム -->
+        <form onsubmit="addPayment(event)" class="space-y-2 bg-blue-50/50 p-3 rounded-xl border border-blue-100">
+          <div class="flex gap-2">
+            <select id="payFamily" class="text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white font-bold text-slate-700">
+              <option value="あかり">あかり家</option>
+              <option value="かすみ">かすみ家</option>
+              <option value="みはる">みはる家</option>
+              <option value="なつき">なつき家</option>
+            </select>
+            <input type="text" id="payTitle" placeholder="支払内容（例: 高速代、おやつ）" class="flex-1 text-xs border border-slate-200 rounded-lg px-2.5 py-1.5 bg-white focus:outline-none">
+          </div>
+          <div class="flex gap-2">
+            <input type="number" id="payAmount" placeholder="金額 (円)" class="flex-1 text-xs border border-slate-200 rounded-lg px-2.5 py-1.5 bg-white focus:outline-none">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-1.5 rounded-lg transition-colors">記録</button>
+          </div>
+        </form>
+
+        <!-- 立替履歴 -->
+        <div class="space-y-2">
+          <h3 class="text-xs font-bold text-slate-600">立替記録一覧</h3>
+          <div id="paymentList" class="space-y-1.5 max-h-40 overflow-y-auto"></div>
+        </div>
+
+        <!-- 精算実行ボタン＆結果 -->
+        <div class="pt-2 border-t border-slate-100">
+          <button onclick="calculateSettlement()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs py-2.5 rounded-xl shadow-sm transition-colors flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-scale-balanced"></i> 精算計算を実行
+          </button>
+          <div id="settlementResult" class="mt-3 p-3 bg-slate-50 rounded-xl text-xs space-y-1.5 hidden"></div>
+        </div>
+      </div>
+
     </div>
 
   </main>
 
-  <!-- お疲れさま ポップアップ (シンプル版) -->
+  <!-- お疲れさま ポップアップ -->
   <div id="finishModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl border border-slate-100">
       <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-3xl mx-auto">
@@ -463,19 +386,24 @@
 
     let customItems = [];
     let checkedItems = {};
+    let souvenirItems = [];
+    let souvenirChecked = {};
+    let payments = [];
     let simTime = null;
 
     // 初期化
     window.addEventListener('DOMContentLoaded', () => {
       loadLocalStorage();
       renderTodoList();
+      renderSouvenirList();
+      renderPaymentList();
       checkCurrentStatus();
-      setInterval(checkCurrentStatus, 10000); // 10秒ごとに自動更新
+      setInterval(checkCurrentStatus, 10000);
     });
 
     // タブ切り替え
     function switchTab(tab) {
-      const tabs = ['schedule', 'members', 'spots', 'gourmet', 'belongings'];
+      const tabs = ['schedule', 'members', 'spots', 'gourmet', 'other'];
       tabs.forEach(t => {
         document.getElementById(`content-${t}`).classList.add('hidden');
         const btn = document.getElementById(`tab-btn-${t}`);
@@ -489,37 +417,47 @@
       activeBtn.classList.remove('text-slate-600');
     }
 
-    // 持ち物リスト描画
+    // 持ち物描画
     function renderTodoList() {
       const container = document.getElementById('todoList');
       container.innerHTML = '';
-
-      // 自分追加分（最上部）
       customItems.forEach((item, index) => {
         const id = `custom-${index}`;
-        const isChecked = !!checkedItems[id];
-        container.appendChild(createTodoElement(id, item, isChecked, true, index));
+        container.appendChild(createTodoElement(id, item, !!checkedItems[id], true, index, 'todo'));
       });
-
-      // デフォルト分
       defaultBelongings.forEach((item, index) => {
         const id = `default-${index}`;
-        const isChecked = !!checkedItems[id];
-        container.appendChild(createTodoElement(id, item, isChecked, false));
+        container.appendChild(createTodoElement(id, item, !!checkedItems[id], false, null, 'todo'));
       });
     }
 
-    function createTodoElement(id, text, isChecked, isCustom, customIndex = null) {
+    // お土産描画
+    function renderSouvenirList() {
+      const container = document.getElementById('souvenirList');
+      container.innerHTML = '';
+      if(souvenirItems.length === 0) {
+        container.innerHTML = '<p class="text-xs text-slate-400 text-center py-2">買いたいお土産を追加してください♪</p>';
+        return;
+      }
+      souvenirItems.forEach((item, index) => {
+        const id = `souvenir-${index}`;
+        container.appendChild(createTodoElement(id, item, !!souvenirChecked[id], true, index, 'souvenir'));
+      });
+    }
+
+    function createTodoElement(id, text, isChecked, isCustom, customIndex, type) {
       const div = document.createElement('div');
       div.className = `flex items-center justify-between p-2.5 rounded-xl border ${isChecked ? 'bg-slate-50 border-slate-200 opacity-60' : 'bg-white border-slate-200'} transition-all`;
+      const fn = type === 'todo' ? 'toggleTodo' : 'toggleSouvenir';
+      const rmFn = type === 'todo' ? 'removeCustomItem' : 'removeSouvenirItem';
       
       div.innerHTML = `
         <label class="flex items-center gap-2.5 flex-1 cursor-pointer">
-          <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleTodo('${id}', this.checked)" class="w-4 h-4 accent-emerald-600 rounded">
+          <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="${fn}('${id}', this.checked)" class="w-4 h-4 accent-emerald-600 rounded">
           <span class="text-xs font-medium ${isChecked ? 'line-through text-slate-400' : 'text-slate-700'}">${text}</span>
         </label>
         ${isCustom ? `
-          <button onclick="removeCustomItem(${customIndex})" class="text-slate-400 hover:text-red-500 text-xs px-1.5 py-0.5">
+          <button onclick="${rmFn}(${customIndex})" class="text-slate-400 hover:text-red-500 text-xs px-1.5 py-0.5">
             <i class="fa-solid fa-trash-can"></i>
           </button>
         ` : ''}
@@ -527,40 +465,133 @@
       return div;
     }
 
-    function toggleTodo(id, isChecked) {
-      checkedItems[id] = isChecked;
-      saveLocalStorage();
-      renderTodoList();
-    }
+    function toggleTodo(id, isChecked) { checkedItems[id] = isChecked; saveLocalStorage(); renderTodoList(); }
+    function toggleSouvenir(id, isChecked) { souvenirChecked[id] = isChecked; saveLocalStorage(); renderSouvenirList(); }
 
     function addCustomItem(e) {
       e.preventDefault();
       const input = document.getElementById('customItemInput');
-      const text = input.value.trim();
-      if (!text) return;
-
-      customItems.unshift(text); // 最上部に追加
+      if (!input.value.trim()) return;
+      customItems.unshift(input.value.trim());
       input.value = '';
+      saveLocalStorage(); renderTodoList();
+    }
+    function removeCustomItem(index) { customItems.splice(index, 1); saveLocalStorage(); renderTodoList(); }
+
+    function addSouvenirItem(e) {
+      e.preventDefault();
+      const input = document.getElementById('souvenirItemInput');
+      if (!input.value.trim()) return;
+      souvenirItems.unshift(input.value.trim());
+      input.value = '';
+      saveLocalStorage(); renderSouvenirList();
+    }
+    function removeSouvenirItem(index) { souvenirItems.splice(index, 1); saveLocalStorage(); renderSouvenirList(); }
+
+    // 立替・割り勘機能
+    function addPayment(e) {
+      e.preventDefault();
+      const family = document.getElementById('payFamily').value;
+      const title = document.getElementById('payTitle').value.trim();
+      const amount = parseInt(document.getElementById('payAmount').value);
+
+      if (!title || !amount || amount <= 0) return;
+
+      payments.push({ family, title, amount });
+      document.getElementById('payTitle').value = '';
+      document.getElementById('payAmount').value = '';
       saveLocalStorage();
-      renderTodoList();
+      renderPaymentList();
     }
 
-    function removeCustomItem(index) {
-      customItems.splice(index, 1);
+    function removePayment(index) {
+      payments.splice(index, 1);
       saveLocalStorage();
-      renderTodoList();
+      renderPaymentList();
+    }
+
+    function renderPaymentList() {
+      const container = document.getElementById('paymentList');
+      container.innerHTML = '';
+      if (payments.length === 0) {
+        container.innerHTML = '<p class="text-xs text-slate-400 text-center py-2">立替記録はありません</p>';
+        return;
+      }
+
+      payments.forEach((p, idx) => {
+        const div = document.createElement('div');
+        div.className = 'flex justify-between items-center p-2 bg-slate-50 rounded-lg text-xs';
+        div.innerHTML = `
+          <div>
+            <span class="font-bold text-slate-700">[${p.family}家]</span>
+            <span class="text-slate-600 ml-1">${p.title}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-blue-600">¥${p.amount.toLocaleString()}</span>
+            <button onclick="removePayment(${idx})" class="text-slate-400 hover:text-red-500 text-xs">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function calculateSettlement() {
+      const resultDiv = document.getElementById('settlementResult');
+      if (payments.length === 0) {
+        resultDiv.classList.remove('hidden');
+        resultDiv.innerHTML = '<p class="text-slate-500 text-center">記録されている支払いがありません。</p>';
+        return;
+      }
+
+      const families = ['あかり', 'かすみ', 'みはる', 'なつき'];
+      let totals = { 'あかり': 0, 'かすみ': 0, 'みはる': 0, 'なつき': 0 };
+      let grandTotal = 0;
+
+      payments.forEach(p => {
+        totals[p.family] += p.amount;
+        grandTotal += p.amount;
+      });
+
+      const avg = Math.round(grandTotal / 4);
+
+      let html = `<div class="font-bold text-slate-700 mb-1 border-b pb-1">総額: ¥${grandTotal.toLocaleString()} (1家あたり ¥${avg.toLocaleString()})</div>`;
+      
+      families.forEach(f => {
+        const diff = totals[f] - avg;
+        if (diff > 0) {
+          html += `<div class="text-emerald-600 font-bold">・${f}家: +¥${diff.toLocaleString()} (受取る)</div>`;
+        } else if (diff < 0) {
+          html += `<div class="text-red-500 font-bold">・${f}家: -¥${Math.abs(diff).toLocaleString()} (支払う)</div>`;
+        } else {
+          html += `<div class="text-slate-500">・${f}家: 精算なし</div>`;
+        }
+      });
+
+      resultDiv.innerHTML = html;
+      resultDiv.classList.remove('hidden');
     }
 
     function saveLocalStorage() {
       localStorage.setItem('miyagi_trip_custom_items', JSON.stringify(customItems));
       localStorage.setItem('miyagi_trip_checked_items', JSON.stringify(checkedItems));
+      localStorage.setItem('miyagi_trip_souvenir_items', JSON.stringify(souvenirItems));
+      localStorage.setItem('miyagi_trip_souvenir_checked', JSON.stringify(souvenirChecked));
+      localStorage.setItem('miyagi_trip_payments', JSON.stringify(payments));
     }
 
     function loadLocalStorage() {
       const c = localStorage.getItem('miyagi_trip_custom_items');
       const k = localStorage.getItem('miyagi_trip_checked_items');
+      const s = localStorage.getItem('miyagi_trip_souvenir_items');
+      const sc = localStorage.getItem('miyagi_trip_souvenir_checked');
+      const p = localStorage.getItem('miyagi_trip_payments');
       if (c) customItems = JSON.parse(c);
       if (k) checkedItems = JSON.parse(k);
+      if (s) souvenirItems = JSON.parse(s);
+      if (sc) souvenirChecked = JSON.parse(sc);
+      if (p) payments = JSON.parse(p);
     }
 
     // スケジュール＆お疲れさま判定
@@ -577,7 +608,6 @@
     function checkCurrentStatus() {
       const now = simTime ? new Date(simTime) : new Date();
 
-      // カードの「いまココ」リセット
       scheduleTimes.forEach(item => {
         const el = document.getElementById(item.id);
         const badge = document.getElementById(`badge-${item.id}`);
@@ -585,7 +615,6 @@
         if (badge) badge.classList.add('hidden');
       });
 
-      // 現在実行中の項目を判別＆自動スクロール
       scheduleTimes.forEach(item => {
         const start = new Date(item.start);
         const end = new Date(item.end);
@@ -595,14 +624,12 @@
           if (el) el.classList.add('is-now-card');
           if (badge) badge.classList.remove('hidden');
 
-          // スケジュールタブが開かれている場合、対象カードへ自動スクロール
           if (!document.getElementById('content-schedule').classList.contains('hidden')) {
             el.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         }
       });
 
-      // 旅行終了判定（2027年3月22日 18:00以降）
       const finishTime = new Date('2027-03-22T18:00:00');
       if (now >= finishTime) {
         document.getElementById('finishModal').classList.remove('hidden');
@@ -613,7 +640,6 @@
 
     function setSimTime(timeStr) {
       simTime = timeStr;
-      // テスト時は自動でスケジュールタブを開いてスクロール確認できるようにする
       switchTab('schedule');
       checkCurrentStatus();
     }
