@@ -6,102 +6,110 @@
   <title>ラプラスに会いに行く旅</title>
   <style>
     :root {
-      --primary-color: #3b82f6;
-      --primary-dark: #1d4ed8;
-      --accent-color: #38bdf8;
-      --bg-color: #f0f9ff;
+      --primary-color: #00a896;
+      --secondary-color: #028090;
+      --accent-color: #f4a261;
+      --bg-color: #f0f7f7;
       --card-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-sub: #64748b;
-      --border-color: #e2e8f0;
-      --highlight-color: #38bdf8;
+      --text-color: #2b2d42;
+      --active-tab: #028090;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
     }
 
     body {
       background-color: var(--bg-color);
-      color: var(--text-main);
-      line-height: 1.6;
-      padding-bottom: 80px;
+      color: var(--text-color);
+      padding-bottom: 40px;
     }
 
-    /* Header */
+    /* ヘッダー */
     header {
-      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+      background: linear-gradient(135deg, #028090, #00a896);
       color: white;
       text-align: center;
-      padding: 24px 16px 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      position: relative;
+      padding: 25px 15px 20px;
+      border-radius: 0 0 25px 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 
-    header h1 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      margin-bottom: 4px;
-      letter-spacing: 0.05em;
-    }
-
-    header p.subtitle {
+    .sub-title {
       font-size: 0.9rem;
-      opacity: 0.95;
-      font-weight: bold;
       background: rgba(255,255,255,0.2);
       display: inline-block;
-      padding: 2px 12px;
-      border-radius: 12px;
+      padding: 4px 12px;
+      border-radius: 15px;
       margin-bottom: 8px;
     }
 
-    header .dates {
-      font-size: 0.85rem;
-      opacity: 0.9;
+    header h1 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      letter-spacing: 1px;
     }
 
-    /* Navigation Tabs */
-    nav.tabs {
-      display: flex;
+    /* 日時・シミュレーター */
+    .date-badge {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      opacity: 0.95;
+    }
+
+    .sim-bar {
+      background: #e0f2f1;
+      padding: 10px;
+      text-align: center;
+      font-size: 0.8rem;
+      border-bottom: 1px solid #b2dfdb;
+    }
+
+    .sim-bar select {
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid #00897b;
+      margin-left: 5px;
       background: white;
-      border-bottom: 1px solid var(--border-color);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      overflow-x: auto;
+    }
+
+    /* ナビゲーションタブ */
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background: white;
+      margin: 15px 10px;
+      padding: 6px;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
 
     .tab-btn {
       flex: 1;
-      min-width: 70px;
-      padding: 12px 4px;
-      text-align: center;
-      background: none;
       border: none;
+      background: none;
+      padding: 10px 5px;
       font-size: 0.85rem;
       font-weight: bold;
-      color: var(--text-sub);
+      color: #666;
+      border-radius: 10px;
       cursor: pointer;
-      border-bottom: 3px solid transparent;
-      transition: all 0.2s;
-      white-space: nowrap;
+      transition: all 0.3s;
     }
 
     .tab-btn.active {
-      color: var(--primary-color);
-      border-bottom-color: var(--primary-color);
+      background: var(--active-tab);
+      color: white;
     }
 
-    /* Container & Tab Content */
+    /* コンテンツエリア */
     .container {
+      padding: 0 15px;
       max-width: 600px;
       margin: 0 auto;
-      padding: 16px;
     }
 
     .tab-content {
@@ -112,100 +120,41 @@
       display: block;
     }
 
-    /* Simulation Control */
-    .sim-bar {
-      background: #e0f2fe;
-      border: 1px solid #bae6fd;
-      border-radius: 12px;
-      padding: 10px 12px;
-      margin-bottom: 16px;
-      font-size: 0.8rem;
-    }
-    .sim-bar select {
-      padding: 4px 8px;
-      border-radius: 6px;
-      border: 1px solid #7dd3fc;
-      background: white;
-      font-size: 0.8rem;
-      margin-left: 6px;
-    }
-
-    /* Cards */
-    .card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      border: 1px solid var(--border-color);
-      position: relative;
-    }
-
-    .card.now-active {
-      border: 2px solid var(--primary-color);
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
-      background: #f0f9ff;
-    }
-
-    .now-badge {
-      display: inline-block;
-      background: #ef4444;
+    /* スケジュール */
+    .day-header {
+      background: var(--accent-color);
       color: white;
-      font-size: 0.7rem;
-      font-weight: bold;
-      padding: 2px 8px;
+      padding: 8px 15px;
       border-radius: 10px;
-      margin-left: 6px;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-
-    /* Section Headings */
-    .section-title {
-      font-size: 1.1rem;
       font-weight: bold;
-      color: var(--primary-dark);
-      margin-bottom: 12px;
+      margin: 20px 0 10px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 6px;
     }
 
-    /* Schedule Timeline */
     .timeline {
       position: relative;
       padding-left: 20px;
+      border-left: 3px solid #b2dfdb;
+      margin-left: 10px;
     }
 
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 6px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: #cbd5e1;
-    }
-
-    .timeline-item {
+    .time-card {
+      background: white;
+      padding: 12px 15px;
+      border-radius: 12px;
+      margin-bottom: 15px;
       position: relative;
-      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      transition: border 0.3s, box-shadow 0.3s;
     }
 
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .timeline-item::before {
+    .time-card::before {
       content: '';
       position: absolute;
-      left: -18px;
-      top: 6px;
+      left: -27px;
+      top: 15px;
       width: 10px;
       height: 10px;
       border-radius: 50%;
@@ -213,515 +162,671 @@
       border: 2px solid white;
     }
 
-    .time-label {
+    /* いまココ ハイライト */
+    .time-card.is-now {
+      border: 2px solid #e76f51;
+      box-shadow: 0 0 12px rgba(231, 111, 81, 0.4);
+      background: #fff8f6;
+    }
+
+    .time-card.is-now::before {
+      background: #e76f51;
+      transform: scale(1.3);
+    }
+
+    .now-badge {
+      display: none;
+      background: #e76f51;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 10px;
       font-weight: bold;
-      font-size: 0.85rem;
-      color: var(--primary-dark);
+      margin-left: 8px;
+      animation: blink 1.5s infinite;
+    }
+
+    .time-card.is-now .now-badge {
+      display: inline-block;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
     .time-title {
-      font-size: 0.95rem;
       font-weight: bold;
-      margin: 2px 0;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .time-desc {
-      font-size: 0.8rem;
-      color: var(--text-sub);
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 5px;
+      line-height: 1.4;
     }
 
-    /* Map Link Button */
     .map-btn {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-size: 0.75rem;
-      color: #0284c7;
-      background: #e0f2fe;
-      padding: 3px 8px;
-      border-radius: 6px;
+      background: #e8f5e9;
+      color: #2e7d32;
       text-decoration: none;
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      margin-top: 8px;
       font-weight: bold;
-      margin-top: 4px;
+      border: 1px solid #c8e6c9;
     }
 
-    /* Gourmet & Spot Image Cards */
-    .gourmet-card, .spot-card {
+    /* メンバーカード */
+    .member-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .member-card {
+      background: white;
+      padding: 12px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      border-top: 4px solid var(--primary-color);
+    }
+
+    .member-card h3 {
+      font-size: 0.95rem;
+      color: var(--secondary-color);
+      margin-bottom: 6px;
+    }
+
+    .member-card ul {
+      list-style: none;
+      font-size: 0.8rem;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    /* スポット＆グルメ */
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 12px;
       overflow: hidden;
-      padding: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
 
-    .card-img {
+    .info-card img {
       width: 100%;
       height: 160px;
       object-fit: cover;
     }
 
-    .card-body {
-      padding: 16px;
+    .info-card-body {
+      padding: 12px 15px;
     }
 
-    .spot-title {
-      font-size: 1.05rem;
-      font-weight: bold;
-      margin-bottom: 4px;
+    .info-card h3 {
+      font-size: 1rem;
+      color: var(--secondary-color);
+      margin-bottom: 6px;
     }
 
-    .spot-tag {
-      display: inline-block;
-      background: #e0f2fe;
-      color: #0369a1;
-      font-size: 0.7rem;
-      padding: 2px 6px;
-      border-radius: 4px;
+    .info-card p {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.4;
       margin-bottom: 8px;
     }
 
-    .web-btn {
-      display: inline-block;
-      margin-top: 10px;
-      background: var(--primary-color);
-      color: white;
-      text-decoration: none;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: bold;
-    }
-
-    /* Members Grid */
-    .family-card {
-      border-left: 4px solid var(--primary-color);
-    }
-
-    .family-name {
-      font-weight: bold;
-      color: var(--primary-dark);
-      font-size: 0.95rem;
-      margin-bottom: 4px;
-    }
-
-    .member-list {
-      font-size: 0.85rem;
-      color: var(--text-main);
-    }
-
-    /* Checklist */
-    .add-item-box {
+    .btn-group {
       display: flex;
       gap: 8px;
-      margin-bottom: 12px;
+      flex-wrap: wrap;
     }
 
-    .add-item-box input {
+    .web-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #e0f7fa;
+      color: #00838f;
+      text-decoration: none;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      border: 1px solid #b2ebf2;
+    }
+
+    /* 持ち物リスト */
+    .belongings-notice {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 8px 12px;
+      font-size: 0.75rem;
+      color: #e65100;
+      margin-bottom: 15px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .add-item-form {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .add-item-form input {
       flex: 1;
       padding: 8px 12px;
-      border: 1px solid var(--border-color);
+      border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 0.85rem;
     }
 
-    .add-item-box button {
+    .add-item-form button {
       background: var(--primary-color);
       color: white;
       border: none;
-      padding: 8px 14px;
+      padding: 8px 15px;
       border-radius: 8px;
       font-weight: bold;
       font-size: 0.85rem;
       cursor: pointer;
     }
 
-    .notice-box {
-      background: #fef3c7;
-      border: 1px solid #fde047;
-      color: #78350f;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      margin-bottom: 16px;
-    }
-
     .category-title {
       font-size: 0.9rem;
       font-weight: bold;
-      color: #334155;
-      margin: 12px 0 6px;
-      border-bottom: 1px solid #cbd5e1;
-      padding-bottom: 2px;
+      color: var(--secondary-color);
+      margin: 15px 0 8px;
+      border-bottom: 2px solid #b2dfdb;
+      padding-bottom: 3px;
     }
 
-    .check-item {
+    .checklist {
+      list-style: none;
+      background: white;
+      border-radius: 12px;
+      padding: 5px 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .checklist li {
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 0;
-      border-bottom: 1px dashed var(--border-color);
       font-size: 0.85rem;
     }
 
-    .check-item input[type="checkbox"] {
+    .checklist li:last-child {
+      border-bottom: none;
+    }
+
+    .checklist input[type="checkbox"] {
+      margin-right: 10px;
       width: 18px;
       height: 18px;
       accent-color: var(--primary-color);
     }
 
-    .check-item.checked label {
-      text-decoration: line-through;
-      color: var(--text-sub);
+    .checklist label {
+      flex: 1;
+      cursor: pointer;
     }
 
-    .user-added-tag {
-      background: #dcfce7;
-      color: #15803d;
+    .checklist input:checked + label {
+      text-decoration: line-through;
+      color: #aaa;
+    }
+
+    .user-added-badge {
+      background: #e1f5fe;
+      color: #0288d1;
       font-size: 0.65rem;
       padding: 1px 5px;
       border-radius: 4px;
-      margin-left: 4px;
+      margin-left: 6px;
+    }
+
+    .del-btn {
+      background: none;
+      border: none;
+      color: #ff5252;
+      font-size: 0.9rem;
+      cursor: pointer;
+      padding: 0 5px;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="subtitle">ラプラスに会いに行く旅</div>
-    <h1>宮城家族旅行のしおり</h1>
-    <div class="dates">🗓️ 2027年3月21日(土) 〜 22日(日)</div>
+    <div class="sub-title">ラプラスに会いに行く旅</div>
+    <div class="date-badge">📅 2027年3月21日(土) 〜 3月22日(日)</div>
   </header>
 
-  <nav class="tabs">
-    <button class="tab-btn active" onclick="switchTab('schedule')">日程</button>
-    <button class="tab-btn" onclick="switchTab('gourmet')">グルメ</button>
-    <button class="tab-btn" onclick="switchTab('spots')">スポット</button>
-    <button class="tab-btn" onclick="switchTab('members')">メンバー</button>
-    <button class="tab-btn" onclick="switchTab('checklist')">持ち物</button>
+  <!-- 現在地テスト用シミュレーター -->
+  <div class="sim-bar">
+    ⏱️ <b>現在時刻テスト:</b>
+    <select id="timeSim" onchange="updateCurrentLocation()">
+      <option value="real">実際の現在時刻</option>
+      <option value="d1_1000">1日目 10:00（移動中）</option>
+      <option value="d1_1230">1日目 12:30（松島ランチ）</option>
+      <option value="d1_1500">1日目 15:00（遊覧船）</option>
+      <option value="d2_1000">2日目 10:00（ラプラス公園）</option>
+      <option value="d2_1300">2日目 13:00（水族館）</option>
+    </select>
+  </div>
+
+  <nav>
+    <button class="tab-btn active" onclick="switchTab('schedule')">📅 スケジュール</button>
+    <button class="tab-btn" onclick="switchTab('members')">👨‍👩‍👧‍👦 メンバー</button>
+    <button class="tab-btn" onclick="switchTab('spots')">📍 スポット</button>
+    <button class="tab-btn" onclick="switchTab('gourmet')">🍣 グルメ</button>
+    <button class="tab-btn" onclick="switchTab('belongings')">🎒 持ち物</button>
   </nav>
 
   <div class="container">
 
-    <!-- 1. スケジュール TAB -->
+    <!-- 1. スケジュールタブ -->
     <div id="schedule" class="tab-content active">
-      
-      <div class="sim-bar">
-        🕒 <strong>現在地テスト表示：</strong>
-        <select id="timeSim" onchange="updateRealTimeDisplay()">
-          <option value="real">実際の現在時刻</option>
-          <option value="d1_1">1日目 11:30（松島到着・昼食）</option>
-          <option value="d1_2">1日目 15:30（うみのの杜水族館）</option>
-          <option value="d2_1">2日目 10:30（ラプラス公園）</option>
-          <option value="d2_2">2日目 13:00（名取でお土産・昼食）</option>
-        </select>
+      <div class="day-header">
+        <span>DAY 1：3月21日(土)</span>
+        <span style="font-size:0.8rem;">松島・温泉エリア</span>
       </div>
+      <div class="timeline">
+        <div class="time-card" data-start="2027-03-21T08:00" data-end="2027-03-21T11:30">
+          <div class="time-title">
+            <span>08:00〜 出発・移動</span>
+            <span class="now-badge">📍 いまココ！</span>
+          </div>
+          <div class="time-desc">みんなで車で出発！サービスエリアでおやつ休憩を挟みつつ宮城へ移動🚗</div>
+        </div>
 
-      <div class="section-title">📅 1日目：2027年3月21日(土)</div>
-      <div class="card" id="card-d1">
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="time-label">08:00</div>
-            <div class="time-title">出発・集合</div>
-            <div class="time-desc">サービスエリアで休憩しつつ宮城へ向けて出発！</div>
+        <div class="time-card" data-start="2027-03-21T11:30" data-end="2027-03-21T13:30">
+          <div class="time-title">
+            <span>11:30〜 松島到着＆ランチ</span>
+            <span class="now-badge">📍 いまココ！</span>
           </div>
-          <div class="timeline-item">
-            <div class="time-label">11:30</div>
-            <div class="time-title">松島海岸に到着・日本三景散策＆昼食</div>
-            <div class="time-desc">美味しい海鮮丼や笹かま焼き体験！子供たちと五大堂へ。</div>
-            <a href="https://maps.google.com/?q=松島海岸" target="_blank" class="map-btn">🗺️ Google Maps</a>
+          <div class="time-desc">日本三景・松島に到着！海鮮丼や名物の焼き牡蠣、牛たんを堪能します。</div>
+          <a class="map-btn" href="https://maps.google.com/?q=松島海岸駅" target="_blank">🗺️ Google Maps</a>
+        </div>
+
+        <div class="time-card" data-start="2027-03-21T13:30" data-end="2027-03-21T16:00">
+          <div class="time-title">
+            <span>13:30〜 松島観光・島巡り遊覧船</span>
+            <span class="now-badge">📍 いまココ！</span>
           </div>
-          <div class="timeline-item">
-            <div class="time-label">14:30</div>
-            <div class="time-title">仙台うみのの杜水族館</div>
-            <div class="time-desc">イルカ・アシカパフォーマンスや大水槽を堪能！</div>
-            <a href="https://maps.google.com/?q=仙台うみのの杜水族館" target="_blank" class="map-btn">🗺️ Google Maps</a>
+          <div class="time-desc">遊覧船に乗ってウミネコや島々を観察！散策しながら「ずんだもち」の食べ歩きも。</div>
+          <a class="map-btn" href="https://maps.google.com/?q=松島島巡り遊覧船" target="_blank">🗺️ Google Maps</a>
+        </div>
+
+        <div class="time-card" data-start="2027-03-21T16:30" data-end="2027-03-21T23:59">
+          <div class="time-title">
+            <span>16:30〜 宿にチェックイン・温泉＆宴会</span>
+            <span class="now-badge">📍 いまココ！</span>
           </div>
-          <div class="timeline-item">
-            <div class="time-label">17:30</div>
-            <div class="time-title">ホテルチェックイン・夕食</div>
-            <div class="time-desc">みんなで賑やかに温泉＆仙台名物の牛たん夕食会！</div>
-          </div>
+          <div class="time-desc">温泉に入ってリフレッシュ♨️ 夜は4家族みんなで賑やか夕食＆大部屋宴会！</div>
         </div>
       </div>
 
-      <div class="section-title">📅 2日目：2027年3月22日(日)</div>
-      <div class="card" id="card-d2">
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="time-label">09:00</div>
-            <div class="time-title">ホテル出発</div>
-            <div class="time-desc">準備を整えて「ラプラス公園」へGO！</div>
-          </div>
-          <div class="timeline-item">
-            <div class="time-label">10:00</div>
-            <div class="time-title">ラプラス公園inせんだい（藤塚）</div>
-            <div class="time-desc">ラプラスの遊具でたっぷりお遊び！写真撮影タイム📸</div>
-            <a href="https://maps.google.com/?q=アクアイグニス仙台" target="_blank" class="map-btn">🗺️ Google Maps</a>
-          </div>
-          <div class="timeline-item">
-            <div class="time-label">12:30</div>
-            <div class="time-title">かわまちてらす閖上（ゆりあげ）で昼食</div>
-            <div class="time-desc">川沿いのおしゃれなスポットで海鮮・ずんだスイーツ散策。</div>
-            <a href="https://maps.google.com/?q=かわまちてらす閖上" target="_blank" class="map-btn">🗺️ Google Maps</a>
-          </div>
-          <div class="timeline-item">
-            <div class="time-label">15:00</div>
-            <div class="time-title">現地解散・帰路へ</div>
-            <div class="time-desc">楽しかった旅の思い出を胸に気をつけて帰りましょう！</div>
-          </div>
-        </div>
+      <div class="day-header">
+        <span>DAY 2：3月22日(日)</span>
+        <span style="font-size:0.8rem;">仙台・ポケモン・水族館</span>
       </div>
-
-    </div>
-
-    <!-- 2. グルメ TAB -->
-    <div id="gourmet" class="tab-content">
-      <div class="section-title">🥩 宮城のおすすめグルメ</div>
-
-      <div class="card gourmet-card">
-        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" class="card-img" alt="牛たん">
-        <div class="card-body">
-          <div class="spot-title">仙台名物 本格牛たん</div>
-          <div class="spot-tag">名物ランチ・夕食</div>
-          <p class="time-desc">厚切りでジューシーな牛たんとテールスープのセットは外せません！子供も大好きな柔らかメニューもあります。</p>
-          <a href="https://www.gyutan-rikyu.co.jp/" target="_blank" class="web-btn">🌐 牛たん炭焼 利久 公式HP</a>
+      <div class="timeline">
+        <div class="time-card" data-start="2027-03-22T09:00" data-end="2027-03-22T09:30">
+          <div class="time-title">
+            <span>09:00 宿を出発</span>
+            <span class="now-badge">📍 いまココ！</span>
+          </div>
+          <div class="time-desc">チェックアウト後、車でラプラス公園へ向かいます！</div>
         </div>
-      </div>
 
-      <div class="card gourmet-card">
-        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80" class="card-img" alt="ずんだシェイク">
-        <div class="card-body">
-          <div class="spot-title">ずんだ餅・ずんだシェイク</div>
-          <div class="spot-tag">スイーツ・カフェ</div>
-          <p class="time-desc">枝豆のやさしい甘みと風味がたまらない！ドライブのお供や食後のデザートに大人気です。</p>
-          <a href="https://kikusuian.jp/" target="_blank" class="web-btn">🌐 喜久水庵 公式HP</a>
+        <div class="time-card" data-start="2027-03-22T09:30" data-end="2027-03-22T12:00">
+          <div class="time-title">
+            <span>09:30〜 ラプラス公園 in せんだい</span>
+            <span class="now-badge">📍 いまココ！</span>
+          </div>
+          <div class="time-desc">旅の一番の目玉！大きなラプラス遊具やポケモンたちとたっぷり遊びます！</div>
+          <a class="map-btn" href="https://maps.google.com/?q=ラプラス公園inせんだい" target="_blank">🗺️ Google Maps</a>
         </div>
-      </div>
 
-      <div class="card gourmet-card">
-        <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80" class="card-img" alt="海鮮丼">
-        <div class="card-body">
-          <div class="spot-title">三陸直送 豪華海鮮丼・生牡蠣</div>
-          <div class="spot-tag">松島・閖上ランチ</div>
-          <p class="time-desc">新鮮なマグロやイクラ、旬の海鮮が盛りだくさん！松島海岸や閖上で食べ歩きも楽しめます。</p>
-          <a href="http://www.matsushima-sakananagiba.com/" target="_blank" class="web-btn">🌐 松島さかな市場 公式HP</a>
+        <div class="time-card" data-start="2027-03-22T12:30" data-end="2027-03-22T15:30">
+          <div class="time-title">
+            <span>12:30〜 仙台うみの杜水族館</span>
+            <span class="now-badge">📍 いまココ！</span>
+          </div>
+          <div class="time-desc">館内レストランでランチ＆イルカ・アシカパフォーマンス観賞🐬</div>
+          <a class="map-btn" href="https://maps.google.com/?q=仙台うみの杜水族館" target="_blank">🗺️ Google Maps</a>
         </div>
-      </div>
 
-      <div class="card gourmet-card">
-        <img src="https://images.unsplash.com/photo-1607301406259-dfb186e15de8?auto=format&fit=crop&w=600&q=80" class="card-img" alt="笹かまぼこ">
-        <div class="card-body">
-          <div class="spot-title">手焼き笹かまぼこ体験</div>
-          <div class="spot-tag">体験・おやつ</div>
-          <p class="time-desc">自分でじっくり炙って食べる熱々の笹かまぼこは絶品！子供たちも楽しく体験できます。</p>
-          <a href="https://www.abekama.co.jp/" target="_blank" class="web-btn">🌐 阿部蒲鉾店 公式HP</a>
+        <div class="time-card" data-start="2027-03-22T16:00" data-end="2027-03-22T20:00">
+          <div class="time-title">
+            <span>16:00〜 お土産・解散・帰路へ</span>
+            <span class="now-badge">📍 いまココ！</span>
+          </div>
+          <div class="time-desc">お土産を買って、楽しかった思い出を胸に気をつけて帰りましょう！お疲れ様でした！</div>
         </div>
       </div>
     </div>
 
-    <!-- 3. スポット TAB -->
-    <div id="spots" class="tab-content">
-      <div class="section-title">📍 行く場所のご案内</div>
-
-      <div class="card spot-card">
-        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" class="card-img" alt="ラプラス公園">
-        <div class="card-body">
-          <div class="spot-title">ラプラス公園inせんだい</div>
-          <div class="spot-tag">みやぎ応援ポケモン</div>
-          <p class="time-desc">「アクアイグニス仙台」の隣接エリアに誕生！大きなラプラスのすべり台や可愛いポケモンの遊具がいっぱいです。</p>
-          <a href="https://maps.google.com/?q=アクアイグニス仙台" target="_blank" class="map-btn" style="margin-top:8px;">🗺️ Google Mapsで開く</a>
-        </div>
-      </div>
-
-      <div class="card spot-card">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" class="card-img" alt="松島海岸">
-        <div class="card-body">
-          <div class="spot-title">松島海岸・五大堂</div>
-          <div class="spot-tag">日本三景</div>
-          <p class="time-desc">美しい島々の景観を楽しめる日本三景のひとつ。赤い橋を渡る「透かし橋」は子供たちもワクワク！</p>
-          <a href="https://maps.google.com/?q=松島海岸" target="_blank" class="map-btn" style="margin-top:8px;">🗺️ Google Mapsで開く</a>
-        </div>
-      </div>
-
-      <div class="card spot-card">
-        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" class="card-img" alt="水族館">
-        <div class="card-body">
-          <div class="spot-title">仙台うみのの杜水族館</div>
-          <div class="spot-tag">水族館・ショー</div>
-          <p class="time-desc">迫力満点のイルカ・アシカパフォーマンスや、三陸の海を再現した巨大水槽など見どころ満載。</p>
-          <a href="https://maps.google.com/?q=仙台うみのの杜水族館" target="_blank" class="map-btn" style="margin-top:8px;">🗺️ Google Mapsで開く</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. メンバー TAB -->
+    <!-- 2. メンバータブ -->
     <div id="members" class="tab-content">
-      <div class="section-title">👨‍👩‍👧‍👧 参加メンバー（4家族）</div>
-
-      <div class="card family-card">
-        <div class="family-name">🌸 かすみファミリー</div>
-        <div class="member-list">パパ・ママ・女の子(5歳)・女の子(3歳)</div>
-      </div>
-
-      <div class="card family-card">
-        <div class="family-name">🌻 みはるファミリー</div>
-        <div class="member-list">パパ・ママ・女の子(5歳)</div>
-      </div>
-
-      <div class="card family-card">
-        <div class="family-name">☘️ なつきファミリー</div>
-        <div class="member-list">パパ・ママ・女の子(5歳)・男の子(2歳)</div>
-      </div>
-
-      <div class="card family-card" style="border-left-color: #f59e0b;">
-        <div class="family-name">🏠 我が家（我が家ファミリー）</div>
-        <div class="member-list">パパ・ママ・女の子(5歳)</div>
+      <div class="member-grid">
+        <div class="member-card">
+          <h3>かすみファミリー</h3>
+          <ul>
+            <li>パパ・ママ</li>
+            <li>👧 5歳女の子</li>
+            <li>👧 3歳女の子</li>
+          </ul>
+        </div>
+        <div class="member-card">
+          <h3>みはるファミリー</h3>
+          <ul>
+            <li>パパ・ママ</li>
+            <li>👧 5歳女の子</li>
+          </ul>
+        </div>
+        <div class="member-card">
+          <h3>なつきファミリー</h3>
+          <ul>
+            <li>パパ・ママ</li>
+            <li>👧 5歳女の子</li>
+          </ul>
+        </div>
+        <div class="member-card">
+          <h3>我が家</h3>
+          <ul>
+            <li>パパ・ママ</li>
+            <li>👧 5歳女の子</li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <!-- 5. 持ち物 TAB -->
-    <div id="checklist" class="tab-content">
-      <div class="section-title">🎒 持ち物チェックリスト</div>
+    <!-- 3. スポットタブ -->
+    <div id="spots" class="tab-content">
+      <div class="card-list">
+        <div class="info-card">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="ラプラス公園">
+          <div class="info-card-body">
+            <h3>ラプラス公園 in せんだい</h3>
+            <p>みやぎ応援ポケモンの「ラプラス」をモチーフにした大型遊具が大人気の公園！背中を滑るすべり台やみずタイプのポケモンたちが迎えてくれます。</p>
+            <div class="btn-group">
+              <a class="web-btn" href="https://laplace-miyagi.jp/park/" target="_blank">🌐 公式Webサイト</a>
+              <a class="map-btn" href="https://maps.google.com/?q=ラプラス公園inせんだい" target="_blank">🗺️ Google Maps</a>
+            </div>
+          </div>
+        </div>
 
-      <div class="notice-box">
-        💡 <strong>安心のローカル保存：</strong><br>
-        チェック状態および「自分で追加したアイテム」はお使いのスマホにのみ保存されます。他の家族には見えません。
+        <div class="info-card">
+          <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=600&q=80" alt="松島">
+          <div class="info-card-body">
+            <h3>日本三景 松島</h3>
+            <p>260余りの島々が浮かぶ美しい景勝地。遊覧船に乗っての島巡りや、美味しい海鮮・ずんだ餅の食べ歩きが楽しめます。</p>
+            <div class="btn-group">
+              <a class="web-btn" href="https://www.matsushima-kanko.gr.jp/" target="_blank">🌐 公式Webサイト</a>
+              <a class="map-btn" href="https://maps.google.com/?q=松島海岸駅" target="_blank">🗺️ Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="水族館">
+          <div class="info-card-body">
+            <h3>仙台うみの杜水族館</h3>
+            <p>豊かな三陸の海を再現した大水槽や、大人気のイルカ・アシカパフォーマンスなど見どころ満載の水族館です。</p>
+            <div class="btn-group">
+              <a class="web-btn" href="https://www.uminomori.jp/" target="_blank">🌐 公式Webサイト</a>
+              <a class="map-btn" href="https://maps.google.com/?q=仙台うみの杜水族館" target="_blank">🗺️ Google Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. グルメタブ -->
+    <div id="gourmet" class="tab-content">
+      <div class="card-list">
+        <div class="info-card">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="牛たん">
+          <div class="info-card-body">
+            <h3>仙台牛たん（利久 / 喜助など）</h3>
+            <p>厚切りでジューシーな仙台名物！麦飯やテールスープとの相性が抜群です。子供向けメニューや単品肉も大満足。</p>
+            <div class="btn-group">
+              <a class="web-btn" href="https://www.gnavi.co.jp/isiy/gyutan/" target="_blank">🌐 牛たん名店案内</a>
+              <a class="map-btn" href="https://maps.google.com/?q=仙台駅+牛たん" target="_blank">🗺️ Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80" alt="ずんだ餅">
+          <div class="info-card-body">
+            <h3>ずんだ餅・ずんだシェイク（ずんだ茶寮）</h3>
+            <p>枝豆の風味豊かな伝統スイーツ！手軽に飲める「ずんだシェイク」は散策中のお供にぴったり。</p>
+            <div class="btn-group">
+              <a class="web-btn" href="https://zundasaryo.com/" target="_blank">🌐 ずんだ茶寮 公式</a>
+              <a class="map-btn" href="https://maps.google.com/?q=ずんだ茶寮+仙台駅" target="_blank">🗺️ Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80" alt="海鮮丼">
+          <div class="info-card-body">
+            <h3>三陸海鮮丼・焼き牡蠣（松島エリア）</h3>
+            <p>松島海岸周辺で味わえる新鮮な三陸の海の幸。プリプリの牡蠣やマグロ丼は旅の大きな楽しみに！</p>
+            <div class="btn-group">
+              <a class="web-btn" href="https://www.matsushima-kanko.gr.jp/gourmet/" target="_blank">🌐 松島グルメ情報</a>
+              <a class="map-btn" href="https://maps.google.com/?q=松島+海鮮丼" target="_blank">🗺️ Google Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 持ち物タブ -->
+    <div id="belongings" class="tab-content">
+      <div class="belongings-notice">
+        ※ チェックした項目および追加したアイテムは自動でスマホに保存されます！（他の家族には見えません）
       </div>
 
-      <div class="add-item-box">
-        <input type="text" id="customInput" placeholder="自分だけの持ち物を追加...">
-        <button onclick="addCustomItem()">追加</button>
+      <!-- 自分用アイテム追加フォーム -->
+      <form class="add-item-form" onsubmit="addUserItem(event)">
+        <input type="text" id="newItemInput" placeholder="自分専用の持ち物を追加..." required>
+        <button type="submit">追加</button>
+      </form>
+
+      <!-- ユーザー追加アイテム表示エリア（最上部） -->
+      <div id="userCategoryBlock" style="display:none;">
+        <div class="category-title">⭐ 自分で追加したアイテム</div>
+        <ul class="checklist" id="userChecklist"></ul>
       </div>
 
-      <div id="userItemsArea"></div>
+      <!-- カテゴリ別デフォルト持ち物 -->
+      <div class="category-title">👛 貴重品・身の回り</div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="item_wallet"><label for="item_wallet">財布</label></li>
+        <li><input type="checkbox" id="item_glasses"><label for="item_glasses">メガネ</label></li>
+        <li><input type="checkbox" id="item_contact"><label for="item_contact">コンタクトレンズ</label></li>
+      </ul>
 
-      <div class="category-title">💳 貴重品・端末</div>
-      <div id="cat-valuables"></div>
+      <div class="category-title">👕 衣類・バス用品</div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="item_jacket"><label for="item_jacket">上着（夜、清津峡トンネル用）</label></li>
+        <li><input type="checkbox" id="item_sandal"><label for="item_sandal">サンダル（海岸、清津峡トンネル用）</label></li>
+        <li><input type="checkbox" id="item_bath_towel"><label for="item_bath_towel">バスタオル</label></li>
+        <li><input type="checkbox" id="item_hat"><label for="item_hat">帽子</label></li>
+        <li><input type="checkbox" id="item_clothes"><label for="item_clothes">着替え</label></li>
+        <li><input type="checkbox" id="item_bedding"><label for="item_bedding">布団、枕</label></li>
+      </ul>
 
-      <div class="category-title">👕 衣類・着用物</div>
-      <div id="cat-clothes"></div>
+      <div class="category-title">🧼 衛生・健康</div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="item_sweat_sheet"><label for="item_sweat_sheet">汗拭きシート</label></li>
+        <li><input type="checkbox" id="item_sunscreen"><label for="item_sunscreen">日焼け止め</label></li>
+        <li><input type="checkbox" id="item_bug_repellent"><label for="item_bug_repellent">虫除け</label></li>
+        <li><input type="checkbox" id="item_wash_kit"><label for="item_wash_kit">洗面用具</label></li>
+      </ul>
 
-      <div class="category-title">🧼 衛生・洗面・ケア</div>
-      <div id="cat-hygiene"></div>
+      <div class="category-title">📱 家電・スマホ</div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="item_phone"><label for="item_phone">スマホ</label></li>
+        <li><input type="checkbox" id="item_charger"><label for="item_charger">充電器</label></li>
+        <li><input type="checkbox" id="item_usb_fan"><label for="item_usb_fan">USB扇風機</label></li>
+        <li><input type="checkbox" id="item_mobile_battery"><label for="item_mobile_battery">モバイルバッテリー</label></li>
+      </ul>
 
-      <div class="category-title">🔋 電子機器・便利グッズ</div>
-      <div id="cat-gadgets"></div>
-
-      <div class="category-title">🎒 日用品・その他</div>
-      <div id="cat-daily"></div>
+      <div class="category-title">☂️ 日用品・その他</div>
+      <ul class="checklist">
+        <li><input type="checkbox" id="item_tea"><label for="item_tea">麦茶</label></li>
+        <li><input type="checkbox" id="item_umbrella"><label for="item_umbrella">傘</label></li>
+      </ul>
     </div>
 
   </div>
 
   <script>
-    // TAB Switch
+    // タブ切り替え
     function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
       
+      event.target.classList.add('active');
       document.getElementById(tabId).classList.add('active');
-      event.currentTarget.classList.add('active');
     }
 
-    // Default Items categorized
-    const defaultItems = {
-      valuables: ["財布", "スマホ"],
-      clothes: ["上着（夜、清津峡トンネル用）", "サンダル（海岸、清津峡トンネル用）", "帽子", "着替え"],
-      hygiene: ["バスタオル", "汗拭きシート", "日焼け止め", "虫除け", "メガネ", "コンタクトレンズ", "洗面用具"],
-      gadgets: ["充電器", "USB扇風機", "モバイルバッテリー"],
-      daily: ["麦茶", "布団、枕", "傘"]
-    };
-
-    let userAddedItems = JSON.parse(localStorage.getItem('my_trip_custom_items') || '[]');
-    let checkedState = JSON.parse(localStorage.getItem('my_trip_checked_state') || '{}');
-
-    function renderChecklist() {
-      // User items area (placed at TOP)
-      const userArea = document.getElementById('userItemsArea');
-      userArea.innerHTML = '';
-      if (userAddedItems.length > 0) {
-        let html = '<div class="category-title" style="color:#15803d;">⭐ 自分で追加したアイテム (一番上)</div>';
-        userAddedItems.forEach((item, index) => {
-          const isChecked = checkedState['user_' + index] ? 'checked' : '';
-          const checkedClass = isChecked ? 'checked' : '';
-          html += `
-            <div class="check-item ${checkedClass}">
-              <input type="checkbox" id="user_${index}" ${isChecked} onchange="toggleCheck('user_${index}')">
-              <label for="user_${index}">${item}<span class="user-added-tag">自分専用</span></label>
-            </div>
-          `;
-        });
-        userArea.innerHTML = html;
-      }
-
-      // Default categories
-      renderCategory('cat-valuables', defaultItems.valuables, 'val');
-      renderCategory('cat-clothes', defaultItems.clothes, 'clo');
-      renderCategory('cat-hygiene', defaultItems.hygiene, 'hyg');
-      renderCategory('cat-gadgets', defaultItems.gadgets, 'gad');
-      renderCategory('cat-daily', defaultItems.daily, 'dai');
-    }
-
-    function renderCategory(elementId, items, prefix) {
-      const container = document.getElementById(elementId);
-      let html = '';
-      items.forEach((item, idx) => {
-        const key = `${prefix}_${idx}`;
-        const isChecked = checkedState[key] ? 'checked' : '';
-        const checkedClass = isChecked ? 'checked' : '';
-        html += `
-          <div class="check-item ${checkedClass}">
-            <input type="checkbox" id="${key}" ${isChecked} onchange="toggleCheck('${key}')">
-            <label for="${key}">${item}</label>
-          </div>
-        `;
-      });
-      container.innerHTML = html;
-    }
-
-    function toggleCheck(key) {
-      checkedState[key] = !checkedState[key];
-      localStorage.setItem('my_trip_checked_state', JSON.stringify(checkedState));
-      renderChecklist();
-    }
-
-    function addCustomItem() {
-      const input = document.getElementById('customInput');
-      const val = input.value.trim();
-      if (val) {
-        userAddedItems.unshift(val); // Insert at TOP
-        localStorage.setItem('my_trip_custom_items', JSON.stringify(userAddedItems));
-        input.value = '';
-        renderChecklist();
-      }
-    }
-
-    // Real-time "📍 いまココ" Navigation Simulation
-    function updateRealTimeDisplay() {
+    // 「📍 いまココ！」自動判定機能
+    function updateCurrentLocation() {
       const simValue = document.getElementById('timeSim').value;
-      const d1Card = document.getElementById('card-d1');
-      const d2Card = document.getElementById('card-d2');
+      let now;
 
-      // Clear previous badges
-      document.querySelectorAll('.now-badge').forEach(b => b.remove());
-      d1Card.classList.remove('now-active');
-      d2Card.classList.remove('now-active');
+      if (simValue === 'real') {
+        now = new Date();
+      } else if (simValue === 'd1_1000') {
+        now = new Date('2027-03-21T10:00:00');
+      } else if (simValue === 'd1_1230') {
+        now = new Date('2027-03-21T12:30:00');
+      } else if (simValue === 'd1_1500') {
+        now = new Date('2027-03-21T15:00:00');
+      } else if (simValue === 'd2_1000') {
+        now = new Date('2027-03-22T10:00:00');
+      } else if (simValue === 'd2_1300') {
+        now = new Date('2027-03-22T13:00:00');
+      }
 
-      if (simValue === 'd1_1' || simValue === 'd1_2') {
-        d1Card.classList.add('now-active');
-        const badge = document.createElement('span');
-        badge.className = 'now-badge';
-        badge.innerText = '📍 いまココ！';
-        d1Card.parentElement.querySelector('.section-title').appendChild(badge);
-      } else if (simValue === 'd2_1' || simValue === 'd2_2') {
-        d2Card.classList.add('now-active');
-        const badge = document.createElement('span');
-        badge.className = 'now-badge';
-        badge.innerText = '📍 いまココ！';
-        d2Card.parentElement.querySelector('.section-title').appendChild(badge);
+      const cards = document.querySelectorAll('.time-card');
+      cards.forEach(card => {
+        const start = new Date(card.getAttribute('data-start'));
+        const end = new Date(card.getAttribute('data-end'));
+
+        if (now >= start && now <= end) {
+          card.classList.add('is-now');
+        } else {
+          card.classList.remove('is-now');
+        }
+      });
+    }
+
+    // 持ち物チェックリスト LocalStorage連動
+    const STORAGE_KEY_CHECKS = 'miyagi_trip_checks';
+    const STORAGE_KEY_USER_ITEMS = 'miyagi_trip_user_items';
+
+    function initBelongings() {
+      // デフォルトチェックの復元
+      const savedChecks = JSON.parse(localStorage.getItem(STORAGE_KEY_CHECKS) || '{}');
+      document.querySelectorAll('.checklist input[type="checkbox"]').forEach(chk => {
+        if (savedChecks[chk.id]) {
+          chk.checked = true;
+        }
+        chk.addEventListener('change', () => {
+          savedChecks[chk.id] = chk.checked;
+          localStorage.setItem(STORAGE_KEY_CHECKS, JSON.stringify(savedChecks));
+        });
+      });
+
+      // ユーザー追加アイテムの復元
+      renderUserItems();
+    }
+
+    function addUserItem(e) {
+      e.preventDefault();
+      const input = document.getElementById('newItemInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const userItems = JSON.parse(localStorage.getItem(STORAGE_KEY_USER_ITEMS) || '[]');
+      const newItem = { id: 'user_item_' + Date.now(), text: text, checked: false };
+      userItems.unshift(newItem); // 最上部に追加
+
+      localStorage.setItem(STORAGE_KEY_USER_ITEMS, JSON.stringify(userItems));
+      input.value = '';
+      renderUserItems();
+    }
+
+    function renderUserItems() {
+      const userItems = JSON.parse(localStorage.getItem(STORAGE_KEY_USER_ITEMS) || '[]');
+      const block = document.getElementById('userCategoryBlock');
+      const list = document.getElementById('userChecklist');
+      list.innerHTML = '';
+
+      if (userItems.length === 0) {
+        block.style.display = 'none';
+        return;
+      }
+
+      block.style.display = 'block';
+      userItems.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <input type="checkbox" id="${item.id}" ${item.checked ? 'checked' : ''} onchange="toggleUserItem('${item.id}', this.checked)">
+          <label for="${item.id}">${item.text}<span class="user-added-badge">追加アイテム</span></label>
+          <button class="del-btn" onclick="deleteUserItem('${item.id}')">✕</button>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    function toggleUserItem(id, isChecked) {
+      const userItems = JSON.parse(localStorage.getItem(STORAGE_KEY_USER_ITEMS) || '[]');
+      const target = userItems.find(i => i.id === id);
+      if (target) {
+        target.checked = isChecked;
+        localStorage.setItem(STORAGE_KEY_USER_ITEMS, JSON.stringify(userItems));
       }
     }
 
-    // Initial render
-    renderChecklist();
-    updateRealTimeDisplay();
+    function deleteUserItem(id) {
+      let userItems = JSON.parse(localStorage.getItem(STORAGE_KEY_USER_ITEMS) || '[]');
+      userItems = userItems.filter(i => i.id !== id);
+      localStorage.setItem(STORAGE_KEY_USER_ITEMS, JSON.stringify(userItems));
+      renderUserItems();
+    }
+
+    // 初期化実行
+    window.addEventListener('DOMContentLoaded', () => {
+      updateCurrentLocation();
+      initBelongings();
+      setInterval(updateCurrentLocation, 60000); // 1分ごとに更新
+    });
   </script>
 </body>
 </html>
