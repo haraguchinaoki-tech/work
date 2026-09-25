@@ -17,10 +17,6 @@
               500: '#22c55e',
               600: '#16a34a',
               700: '#15803d',
-            },
-            pokemon: {
-              blue: '#3b82f6',
-              light: '#eff6ff'
             }
           }
         }
@@ -222,16 +218,17 @@
       </div>
     </div>
 
-    <!-- 3. スポットタブ -->
+    <!-- 3. スポットタブ（写真付き） -->
     <div id="content-spots" class="hidden space-y-4">
       <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
-        <div class="bg-blue-500 p-3 text-white">
-          <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">メインスポット</span>
-          <h3 class="text-base font-bold mt-0.5">ラプラス公園inせんだい</h3>
-          <p class="text-xs text-blue-100">（仙台市海岸公園冒険広場）</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="ラプラス公園" class="w-full h-40 object-cover">
         <div class="p-4 space-y-2">
-          <p class="text-xs text-slate-600 leading-relaxed">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-bold text-slate-800">ラプラス公園inせんだい</h3>
+            <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-bold">メイン</span>
+          </div>
+          <p class="text-xs text-slate-400">（仙台市海岸公園冒険広場）</p>
+          <p class="text-xs text-slate-600 leading-relaxed pt-1">
             みやぎ応援ポケモンの「ラプラス」をモチーフにした遊具が揃う公園！巨大なラプラスの滑り台やふわふわドームなど、子供たちが大興奮できるポイントがいっぱいです。
           </p>
           <div class="pt-2">
@@ -243,12 +240,13 @@
       </div>
 
       <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
-        <div class="bg-teal-600 p-3 text-white">
-          <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">観光＆グルメ</span>
-          <h3 class="text-base font-bold mt-0.5">松島海岸エリア</h3>
-        </div>
+        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" alt="松島海岸エリア" class="w-full h-40 object-cover">
         <div class="p-4 space-y-2">
-          <p class="text-xs text-slate-600 leading-relaxed">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-bold text-slate-800">松島海岸エリア</h3>
+            <span class="text-[10px] bg-teal-100 text-teal-800 px-2 py-0.5 rounded font-bold">観光</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed pt-1">
             日本三景の一つで絶景を眺めながら散策！焼き牡蠣の食べ歩きや笹かまぼこの手焼き体験など、大人も子供も満足できる食べ歩きスポットです。
           </p>
           <div class="pt-2">
@@ -260,45 +258,56 @@
       </div>
     </div>
 
-    <!-- 4. グルメタブ -->
+    <!-- 4. グルメタブ（写真付き） -->
     <div id="content-gourmet" class="hidden space-y-4">
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-            <i class="fa-solid fa-drumstick-bite text-amber-600"></i> 仙台牛タン
-          </h3>
-          <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full">名物</span>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="仙台牛タン" class="w-full h-40 object-cover">
+        <div class="p-4 space-y-2">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 text-base flex items-center gap-1.5">
+              <i class="fa-solid fa-drumstick-bite text-amber-600"></i> 仙台牛タン
+            </h3>
+            <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full">名物</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed">厚切りでジューシーな炭火焼き牛タン。定番の塩焼きだけでなくテールスープや麦飯との相性も抜群です！</p>
         </div>
-        <p class="text-xs text-slate-500 leading-relaxed">厚切りでジューシーな炭火焼き牛タン。定番の塩焼きだけでなくテールスープや麦飯との相性も抜群です！</p>
       </div>
 
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-2">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-            <i class="fa-solid fa-ice-cream text-emerald-600"></i> ずんだスイーツ
-          </h3>
-          <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">スイーツ</span>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80" alt="ずんだスイーツ" class="w-full h-40 object-cover">
+        <div class="p-4 space-y-2">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 text-base flex items-center gap-1.5">
+              <i class="fa-solid fa-ice-cream text-emerald-600"></i> ずんだスイーツ
+            </h3>
+            <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">スイーツ</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed">風味豊かな枝豆ペーストのずんだ餅や、手軽に持ち運べる大人気の「ずんだシェイク」は子供たちのおやつにもぴったり！</p>
         </div>
-        <p class="text-xs text-slate-500 leading-relaxed">風味豊かな枝豆ペーストのずんだ餅や、手軽に持ち運べる大人気の「ずんだシェイク」は子供たちのおやつにもぴったり！</p>
       </div>
     </div>
 
     <!-- 5. その他タブ (持ち物 / お土産 / 割り勘) -->
     <div id="content-other" class="hidden space-y-6">
       
+      <!-- プライバシー明記のアラートボックス -->
+      <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 text-xs text-emerald-800 flex items-start gap-2.5 shadow-sm">
+        <i class="fa-solid fa-lock text-emerald-600 text-base mt-0.5"></i>
+        <p class="leading-relaxed font-bold">
+          このページで追加・記録した内容（持ち物・お土産・割り勘メモ）は、他の家族には共有されず、あなたのお使いのスマホ（端末）のみに保存されます！
+        </p>
+      </div>
+
       <!-- 持ち物チェックリスト -->
       <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
         <h2 class="font-bold text-slate-800 text-sm flex items-center justify-between">
           <span><i class="fa-solid fa-list-check text-emerald-600 mr-1.5"></i> 持ち物チェックリスト</span>
         </h2>
-        <form onsubmit="addCustomItem(event)" class="flex gap-2">
-          <input type="text" id="customItemInput" placeholder="自分用の持ち物を追加..." class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-emerald-500">
+        <form onsubmit="addBelongingItem(event)" class="flex gap-2">
+          <input type="text" id="belongingInput" placeholder="持ち物を追加..." class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-emerald-500">
           <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3 py-2 rounded-xl transition-colors">追加</button>
         </form>
         <div id="todoList" class="space-y-2 pt-1"></div>
-        <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-2.5 text-[11px] text-slate-500 leading-relaxed">
-          ※ チェックした項目は自動でスマホに保存されます！他の家族には見えません。
-        </div>
       </div>
 
       <!-- お土産チェックリスト -->
@@ -372,8 +381,8 @@
   </div>
 
   <script>
-    // デフォルト持ち物
-    const defaultBelongings = [
+    // デフォルト持ち物（配列オブジェクト化して削除可能に）
+    const initialBelongings = [
       "着替え（大人・子供）",
       "パジャマ・下着",
       "子供のおやつ・飲み物",
@@ -384,8 +393,7 @@
       "ラプラスグッズ（持ち込み用）"
     ];
 
-    let customItems = [];
-    let checkedItems = {};
+    let belongings = [];
     let souvenirItems = [];
     let souvenirChecked = {};
     let payments = [];
@@ -421,13 +429,12 @@
     function renderTodoList() {
       const container = document.getElementById('todoList');
       container.innerHTML = '';
-      customItems.forEach((item, index) => {
-        const id = `custom-${index}`;
-        container.appendChild(createTodoElement(id, item, !!checkedItems[id], true, index, 'todo'));
-      });
-      defaultBelongings.forEach((item, index) => {
-        const id = `default-${index}`;
-        container.appendChild(createTodoElement(id, item, !!checkedItems[id], false, null, 'todo'));
+      if(belongings.length === 0) {
+        container.innerHTML = '<p class="text-xs text-slate-400 text-center py-2">持ち物を追加してください♪</p>';
+        return;
+      }
+      belongings.forEach((item, index) => {
+        container.appendChild(createTodoElement(index, item.text, item.checked, 'todo'));
       });
     }
 
@@ -441,42 +448,40 @@
       }
       souvenirItems.forEach((item, index) => {
         const id = `souvenir-${index}`;
-        container.appendChild(createTodoElement(id, item, !!souvenirChecked[id], true, index, 'souvenir'));
+        container.appendChild(createTodoElement(index, item, !!souvenirChecked[id], 'souvenir'));
       });
     }
 
-    function createTodoElement(id, text, isChecked, isCustom, customIndex, type) {
+    function createTodoElement(index, text, isChecked, type) {
       const div = document.createElement('div');
       div.className = `flex items-center justify-between p-2.5 rounded-xl border ${isChecked ? 'bg-slate-50 border-slate-200 opacity-60' : 'bg-white border-slate-200'} transition-all`;
       const fn = type === 'todo' ? 'toggleTodo' : 'toggleSouvenir';
-      const rmFn = type === 'todo' ? 'removeCustomItem' : 'removeSouvenirItem';
+      const rmFn = type === 'todo' ? 'removeBelongingItem' : 'removeSouvenirItem';
       
       div.innerHTML = `
         <label class="flex items-center gap-2.5 flex-1 cursor-pointer">
-          <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="${fn}('${id}', this.checked)" class="w-4 h-4 accent-emerald-600 rounded">
+          <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="${fn}(${index}, this.checked)" class="w-4 h-4 accent-emerald-600 rounded">
           <span class="text-xs font-medium ${isChecked ? 'line-through text-slate-400' : 'text-slate-700'}">${text}</span>
         </label>
-        ${isCustom ? `
-          <button onclick="${rmFn}(${customIndex})" class="text-slate-400 hover:text-red-500 text-xs px-1.5 py-0.5">
-            <i class="fa-solid fa-trash-can"></i>
-          </button>
-        ` : ''}
+        <button onclick="${rmFn}(${index})" class="text-slate-400 hover:text-red-500 text-xs px-1.5 py-0.5">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
       `;
       return div;
     }
 
-    function toggleTodo(id, isChecked) { checkedItems[id] = isChecked; saveLocalStorage(); renderTodoList(); }
-    function toggleSouvenir(id, isChecked) { souvenirChecked[id] = isChecked; saveLocalStorage(); renderSouvenirList(); }
+    function toggleTodo(index, isChecked) { belongings[index].checked = isChecked; saveLocalStorage(); renderTodoList(); }
+    function toggleSouvenir(index, isChecked) { souvenirChecked[`souvenir-${index}`] = isChecked; saveLocalStorage(); renderSouvenirList(); }
 
-    function addCustomItem(e) {
+    function addBelongingItem(e) {
       e.preventDefault();
-      const input = document.getElementById('customItemInput');
+      const input = document.getElementById('belongingInput');
       if (!input.value.trim()) return;
-      customItems.unshift(input.value.trim());
+      belongings.unshift({ text: input.value.trim(), checked: false });
       input.value = '';
       saveLocalStorage(); renderTodoList();
     }
-    function removeCustomItem(index) { customItems.splice(index, 1); saveLocalStorage(); renderTodoList(); }
+    function removeBelongingItem(index) { belongings.splice(index, 1); saveLocalStorage(); renderTodoList(); }
 
     function addSouvenirItem(e) {
       e.preventDefault();
@@ -574,21 +579,24 @@
     }
 
     function saveLocalStorage() {
-      localStorage.setItem('miyagi_trip_custom_items', JSON.stringify(customItems));
-      localStorage.setItem('miyagi_trip_checked_items', JSON.stringify(checkedItems));
+      localStorage.setItem('miyagi_trip_belongings_v2', JSON.stringify(belongings));
       localStorage.setItem('miyagi_trip_souvenir_items', JSON.stringify(souvenirItems));
       localStorage.setItem('miyagi_trip_souvenir_checked', JSON.stringify(souvenirChecked));
       localStorage.setItem('miyagi_trip_payments', JSON.stringify(payments));
     }
 
     function loadLocalStorage() {
-      const c = localStorage.getItem('miyagi_trip_custom_items');
-      const k = localStorage.getItem('miyagi_trip_checked_items');
+      const b = localStorage.getItem('miyagi_trip_belongings_v2');
       const s = localStorage.getItem('miyagi_trip_souvenir_items');
       const sc = localStorage.getItem('miyagi_trip_souvenir_checked');
       const p = localStorage.getItem('miyagi_trip_payments');
-      if (c) customItems = JSON.parse(c);
-      if (k) checkedItems = JSON.parse(k);
+      
+      if (b) {
+        belongings = JSON.parse(b);
+      } else {
+        belongings = initialBelongings.map(item => ({ text: item, checked: false }));
+      }
+      
       if (s) souvenirItems = JSON.parse(s);
       if (sc) souvenirChecked = JSON.parse(sc);
       if (p) payments = JSON.parse(p);
