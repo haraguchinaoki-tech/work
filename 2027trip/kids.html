@@ -2,363 +2,280 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>こども たびの しおり</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>キッズページ - たのしい旅のしおり</title>
   <style>
-    @media print {
-      .no-print { display: none !important; }
-      body { background: white !important; -webkit-print-color-adjust: exact; padding: 0 !important; }
-      .page { box-shadow: none !important; border: none !important; margin: 0 !important; width: 100% !important; page-break-after: always; height: 100vh; }
-      .page:last-child { page-break-after: auto; }
+    :root {
+      --primary-color: #4CAF50;
+      --bg-color: #F4F9F4;
+      --card-bg: #FFFFFF;
+      --text-color: #333333;
+      --accent-color: #FF9800;
+      --border-color: #E0E0E0;
     }
-    @page {
-      size: A4 portrait;
-      margin: 6mm;
+
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 16px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      border-bottom: 2px dashed var(--primary-color);
+      padding-bottom: 6px;
+      margin-top: 0;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 1. めあて・じこしょうかい */
+    .profile-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .input-group label {
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .input-group input {
+      padding: 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    /* 2. クイズ・ミッション（スタンプラリー） */
+    .mission-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mission-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .mission-item:last-child {
+      border-bottom: none;
+    }
+
+    .mission-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .mission-checkbox {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--primary-color);
+    }
+
+    .stamp-badge {
+      background-color: var(--accent-color);
+      color: white;
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+
+    /* 3. おえかき・ぬりえスペース */
+    .canvas-container {
+      text-align: center;
+    }
+
+    canvas {
+      border: 2px dashed var(--primary-color);
+      border-radius: 8px;
+      background-color: #FFFFFF;
+      touch-action: none; /* スマホでのスクロール防止 */
+      max-width: 100%;
+    }
+
+    .canvas-tools {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .btn-clear {
+      background-color: #f44336;
     }
   </style>
 </head>
-<body class="bg-slate-200 text-slate-800 font-sans p-4 space-y-6">
+<body>
 
-  <!-- いんさつ ボタン -->
-  <div class="max-w-4xl mx-auto no-print bg-white p-4 rounded-xl shadow-md flex justify-between items-center">
-    <div>
-      <h1 class="font-bold text-lg text-slate-700">📄 こどもよう しおり（ぜん2ぺーじ）</h1>
-      <p class="text-xs text-slate-500">かんじは つかっていません！A4サイズで いんさつ できます。</p>
-    </div>
-    <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2">
-      <i class="fa-solid fa-print"></i> いんさつ する（PDF）
-    </button>
-  </div>
+<div class="container">
+  <h1>🎈 きっず ぺーじ 🎈</h1>
 
-  <!-- ==================== 1ぺーじめ ==================== -->
-  <div class="page max-w-[210mm] mx-auto bg-white p-5 shadow-xl border border-slate-300 rounded-sm space-y-3 flex flex-col justify-between">
-    
-    <div>
-      <!-- タイトル ＆ なまえ -->
-      <div class="border-4 border-dashed border-emerald-500 rounded-3xl p-2.5 text-center relative bg-emerald-50/30 mb-2.5">
-        <div class="text-[11px] font-bold text-emerald-700 tracking-widest mb-0.5">🌸 2027ねん 3がつ 21にち 〜 22にち 🌸</div>
-        <h1 class="text-xl font-black text-slate-800 tracking-wide mb-1.5">わくわく！みやぎ りょこう の しおり</h1>
-        
-        <div class="flex justify-center items-center gap-2 bg-white border-2 border-emerald-400 rounded-full py-0.5 px-5 max-w-xs mx-auto shadow-sm">
-          <span class="font-bold text-xs text-emerald-800">なまえ：</span>
-          <div class="flex-1 border-b-2 border-dotted border-emerald-600 h-4"></div>
-        </div>
+  <!-- 1. めあて・じこしょうかい -->
+  <section class="section-card">
+    <h2 class="section-title">✏️ たびのめあて & じこしょうかい</h2>
+    <div class="profile-grid">
+      <div class="input-group">
+        <label for="child-name">なまえ：</label>
+        <input type="text" id="child-name" placeholder="なまえをいれてね">
       </div>
-
-      <!-- 2からむ らいあうと -->
-      <div class="grid grid-cols-12 gap-3">
-        
-        <!-- ひだり：じかん -->
-        <div class="col-span-7 space-y-2">
-          <h2 class="font-bold text-[11px] bg-emerald-600 text-white px-2.5 py-0.5 rounded-lg flex items-center gap-1">
-            <i class="fa-solid fa-flag"></i> たびの すけじゅーる
-          </h2>
-
-          <!-- 1にちめ -->
-          <div class="border-2 border-emerald-200 rounded-xl p-2 space-y-1 bg-emerald-50/20">
-            <div class="font-extrabold text-[10px] text-emerald-800 border-b border-emerald-200 pb-0.5 flex justify-between">
-              <span>【1にちめ】3がつ21にち（ど）</span>
-              <span>まつしま へ！</span>
-            </div>
-            <ul class="text-[9px] space-y-0.5 font-medium text-slate-700">
-              <li class="flex items-center gap-1">
-                <span class="bg-emerald-100 text-emerald-800 font-bold px-1 rounded text-[8px]">09:30</span>
-                <span>みんなで ぶーぶー しゅっぱつ 🚗</span>
-              </li>
-              <li class="flex items-center gap-1">
-                <span class="bg-emerald-100 text-emerald-800 font-bold px-1 rounded text-[8px]">12:00</span>
-                <span>まつしま海岸で ごはん ＆ さんさく 🦪</span>
-              </li>
-              <li class="flex items-center gap-1">
-                <span class="bg-emerald-100 text-emerald-800 font-bold px-1 rounded text-[8px]">15:30</span>
-                <span>ほてるに とうちゃく！へやであそぼう 🏨</span>
-              </li>
-              <li class="flex items-center gap-1">
-                <span class="bg-emerald-100 text-emerald-800 font-bold px-1 rounded text-[8px]">18:00</span>
-                <span>よるごはん ＆ おんせんで ぽかぽか ♨️</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- 2にちめ -->
-          <div class="border-2 border-blue-200 rounded-xl p-2 space-y-1 bg-blue-50/20">
-            <div class="font-extrabold text-[10px] text-blue-800 border-b border-blue-200 pb-0.5 flex justify-between">
-              <span>【2にちめ】3がつ22にち（にち）</span>
-              <span>こうえん！</span>
-            </div>
-            <ul class="text-[9px] space-y-0.5 font-medium text-slate-700">
-              <li class="flex items-center gap-1">
-                <span class="bg-blue-100 text-blue-800 font-bold px-1 rounded text-[8px]">10:00</span>
-                <span class="font-bold text-blue-900">★ らぷらす こうえんで あそぶ！ 🦕</span>
-              </li>
-              <li class="flex items-center gap-1">
-                <span class="bg-blue-100 text-blue-800 font-bold px-1 rounded text-[8px]">13:00</span>
-                <span>せんだいで ひるごはん ＆ すいーつ 🍦</span>
-              </li>
-              <li class="flex items-center gap-1">
-                <span class="bg-blue-100 text-blue-800 font-bold px-1 rounded text-[8px]">16:00</span>
-                <span>ばいばい！おうちに かえろう 🏠</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- おやくそく -->
-          <div class="border-2 border-amber-300 bg-amber-50 rounded-xl p-1.5 space-y-0.5">
-            <h3 class="font-bold text-[10px] text-amber-900 flex items-center gap-1">
-              <i class="fa-solid fa-star text-amber-500"></i> たびの おやくそく
-            </h3>
-            <ul class="text-[8px] font-bold text-amber-800 space-y-0.5 list-disc list-inside">
-              <li>おとなの てを つなぐ！</li>
-              <li>くるまに きをつける！</li>
-              <li>「ありがとう」を いう！</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- みぎ：てがき もちもの -->
-        <div class="col-span-5 space-y-2">
-          
-          <!-- てがき りすと -->
-          <div class="border-2 border-slate-300 rounded-xl p-2 space-y-1 bg-slate-50/30">
-            <h2 class="font-bold text-[11px] text-slate-800 border-b pb-0.5 flex items-center gap-1">
-              <i class="fa-solid fa-pen-to-square text-emerald-600"></i> じぶんの もちもの
-            </h2>
-            <p class="text-[8px] text-slate-400">ぺんや えんぴつで かいてね！</p>
-            <div class="space-y-1.5 pt-0.5">
-              <div class="flex items-center gap-1.5 border-b border-slate-300 pb-0.5">
-                <span class="w-3 h-3 border-2 border-slate-400 rounded-sm inline-block bg-white"></span>
-                <span class="text-[10px] text-slate-300 flex-1">＿＿＿＿＿＿＿＿＿＿</span>
-              </div>
-              <div class="flex items-center gap-1.5 border-b border-slate-300 pb-0.5">
-                <span class="w-3 h-3 border-2 border-slate-400 rounded-sm inline-block bg-white"></span>
-                <span class="text-[10px] text-slate-300 flex-1">＿＿＿＿＿＿＿＿＿＿</span>
-              </div>
-              <div class="flex items-center gap-1.5 border-b border-slate-300 pb-0.5">
-                <span class="w-3 h-3 border-2 border-slate-400 rounded-sm inline-block bg-white"></span>
-                <span class="text-[10px] text-slate-300 flex-1">＿＿＿＿＿＿＿＿＿＿</span>
-              </div>
-              <div class="flex items-center gap-1.5 border-b border-slate-300 pb-0.5">
-                <span class="w-3 h-3 border-2 border-slate-400 rounded-sm inline-block bg-white"></span>
-                <span class="text-[10px] text-slate-300 flex-1">＿＿＿＿＿＿＿＿＿＿</span>
-              </div>
-              <div class="flex items-center gap-1.5 border-b border-slate-300 pb-0.5">
-                <span class="w-3 h-3 border-2 border-slate-400 rounded-sm inline-block bg-white"></span>
-                <span class="text-[10px] text-slate-300 flex-1">＿＿＿＿＿＿＿＿＿＿</span>
-              </div>
-              <div class="flex items-center gap-1.5 border-b border-slate-300 pb-0.5">
-                <span class="w-3 h-3 border-2 border-slate-400 rounded-sm inline-block bg-white"></span>
-                <span class="text-[10px] text-slate-300 flex-1">＿＿＿＿＿＿＿＿＿＿</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- えがく ところ -->
-          <div class="border-2 border-dashed border-slate-300 rounded-xl p-1.5 space-y-0.5 h-[130px] flex flex-col bg-white">
-            <h2 class="font-bold text-[10px] text-slate-700 flex justify-between items-center">
-              <span><i class="fa-solid fa-paint-brush text-amber-500"></i> おもいで メモ</span>
-            </h2>
-            <div class="flex-1 border border-slate-100 rounded-lg bg-slate-50/50 flex items-center justify-center text-slate-300 text-[9px]">
-              ✨ えを かいてね ✨
-            </div>
-          </div>
-
-        </div>
+      <div class="input-group">
+        <label for="child-goal">たびの めあて：</label>
+        <input type="text" id="child-goal" placeholder="例：いっぱいあそぶ！、ごはんをのこさない">
+      </div>
+      <div class="input-group">
+        <label for="child-favorite">いちばん たのしみなこと：</label>
+        <input type="text" id="child-favorite" placeholder="例：おんせん、いちごがり">
       </div>
     </div>
+  </section>
 
-    <!-- ふったー -->
-    <div class="border-t-2 border-slate-200 pt-1 text-center">
-      <div class="text-[8px] font-bold text-slate-500">
-        いっしょに行く おともだち：さくらちゃん / りんちゃん / ひなちゃん / みおちゃん / えまちゃん
+  <!-- 2. クイズ・スタンプラリー -->
+  <section class="section-card">
+    <h2 class="section-title">🔍 みっしょん（ミッション）</h2>
+    <p style="font-size: 0.85rem; color: #666; margin-top: -8px; margin-bottom: 12px;">みつけたり、できたりしたら チェックしてね！</p>
+    <ul class="mission-list">
+      <li class="mission-item">
+        <label class="mission-label">
+          <input type="checkbox" class="mission-checkbox">
+          <span>🚗 あかい くるまを 3だい みつける</span>
+        </label>
+        <span class="stamp-badge">クリア！</span>
+      </li>
+      <li class="mission-item">
+        <label class="mission-label">
+          <input type="checkbox" class="mission-checkbox">
+          <span>🌸 きれいな はなを みつける</span>
+        </label>
+        <span class="stamp-badge">クリア！</span>
+      </li>
+      <li class="mission-item">
+        <label class="mission-label">
+          <input type="checkbox" class="mission-checkbox">
+          <span>🤝 みんなに 「ありがとう」を いう</span>
+        </label>
+        <span class="stamp-badge">クリア！</span>
+      </li>
+      <li class="mission-item">
+        <label class="mission-label">
+          <input type="checkbox" class="mission-checkbox">
+          <span>♨️ おんせんに はいる・おふろを たのしむ</span>
+        </label>
+        <span class="stamp-badge">クリア！</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 3. おえかき・ぬりえスペース -->
+  <section class="section-card">
+    <h2 class="section-title">🎨 自由におえかき</h2>
+    <div class="canvas-container">
+      <canvas id="paintCanvas" width="300" height="200"></canvas>
+      <div class="canvas-tools">
+        <button class="btn btn-clear" id="clearBtn">けす</button>
       </div>
     </div>
+  </section>
+</div>
 
-  </div>
+<script>
+  // お絵描きキャンバスの動作スクリプト
+  const canvas = document.getElementById('paintCanvas');
+  const ctx = canvas.getContext('2d');
+  const clearBtn = document.getElementById('clearBtn');
+  let isDrawing = false;
 
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = '#333333';
 
-  <!-- ==================== 2ぺーじめ ==================== -->
-  <div class="page max-w-[210mm] mx-auto bg-white p-5 shadow-xl border border-slate-300 rounded-sm space-y-3 flex flex-col justify-between">
-    
-    <div class="space-y-3">
-      <!-- 2ぺーじめ へっだー -->
-      <div class="bg-teal-600 text-white p-2 rounded-2xl text-center shadow-sm">
-        <h1 class="text-base font-black tracking-wide">💡 みやぎの まめちしき ＆ たび びんご 🎯</h1>
-      </div>
+  function startDrawing(e) {
+    isDrawing = true;
+    draw(e);
+  }
 
-      <!-- まめちしき -->
-      <div class="border-2 border-teal-200 rounded-2xl p-2.5 bg-teal-50/30 space-y-1.5">
-        <h2 class="font-bold text-[11px] text-teal-800 flex items-center gap-1 border-b border-teal-200 pb-0.5">
-          <i class="fa-solid fa-lightbulb text-amber-500"></i> しってる？ みやぎの ひみつ
-        </h2>
-        <div class="grid grid-cols-2 gap-1.5 text-[9px]">
-          <div class="bg-white p-1.5 rounded-xl border border-teal-100 space-y-0.5">
-            <div class="font-bold text-teal-900">🦕 らぷらす と みやぎ</div>
-            <p class="text-slate-600 leading-tight">みずタイプの ぽけもん「らぷらす」は みやぎの すぺしゃるな ぽけもんだよ！</p>
-          </div>
+  function stopDrawing() {
+    isDrawing = false;
+    ctx.beginPath();
+  }
 
-          <div class="bg-white p-1.5 rounded-xl border border-teal-100 space-y-0.5">
-            <div class="font-bold text-teal-900">🏝️ まつしまの しま</div>
-            <p class="text-slate-600 leading-tight">うみに 200こ以上の ちいさな しまが ういているよ！さがしてみてね！</p>
-          </div>
+  function draw(e) {
+    if (!isDrawing) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX || e.touches[0].clientX) - rect.left;
+    const y = (e.clientY || e.touches[0].clientY) - rect.top;
 
-          <div class="bg-white p-1.5 rounded-xl border border-teal-100 space-y-0.5">
-            <div class="font-bold text-teal-900">🍡 みどり色の「ずんだ」</div>
-            <p class="text-slate-600 leading-tight">えだまめを つぶして つくった みどり色の おいしい おもちだよ！</p>
-          </div>
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }
 
-          <div class="bg-white p-1.5 rounded-xl border border-teal-100 space-y-0.5">
-            <div class="font-bold text-teal-900">🌙 みかづきの ぶしょう</div>
-            <p class="text-slate-600 leading-tight">「だてまさむね」さまは かぶとに おおきな みかづきが ついていたよ！</p>
-          </div>
-        </div>
-      </div>
+  // マウスイベント
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('mouseup', stopDrawing);
+  canvas.addEventListener('mousemove', draw);
 
-      <!-- 5x5 たびびんご -->
-      <div class="border-2 border-emerald-400 rounded-2xl p-2.5 bg-emerald-50/20 space-y-1.5">
-        <div class="flex justify-between items-center border-b border-emerald-200 pb-0.5">
-          <h2 class="font-bold text-[11px] text-emerald-900 flex items-center gap-1">
-            <i class="fa-solid fa-bullseye text-red-500"></i> みやぎ たび びんご（5×5）
-          </h2>
-          <span class="text-[8px] font-bold text-emerald-700">みつけたら まる を つけたり しーる を はろう！</span>
-        </div>
+  // タッチイベント（スマホ対応）
+  canvas.addEventListener('touchstart', startDrawing);
+  canvas.addEventListener('touchend', stopDrawing);
+  canvas.addEventListener('touchmove', draw);
 
-        <!-- 5x5 ぐりっど -->
-        <div class="grid grid-cols-5 gap-1 text-center">
-          
-          <!-- たて 1ぎょうめ -->
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🦕</span>
-            <span class="font-bold text-[8px] text-slate-700">らぷらす</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🍡</span>
-            <span class="font-bold text-[8px] text-slate-700">ずんだもち</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🌊</span>
-            <span class="font-bold text-[8px] text-slate-700">うみ</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🦪</span>
-            <span class="font-bold text-[8px] text-slate-700">かきかい</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">♨️</span>
-            <span class="font-bold text-[8px] text-slate-700">おんせん</span>
-          </div>
-
-          <!-- たて 2ぎょうめ -->
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🏯</span>
-            <span class="font-bold text-[8px] text-slate-700">だてまさむね</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🐮</span>
-            <span class="font-bold text-[8px] text-slate-700">ぎゅうたん</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🐟</span>
-            <span class="font-bold text-[8px] text-slate-700">ささかま</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🚅</span>
-            <span class="font-bold text-[8px] text-slate-700">しんかんせん</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🛝</span>
-            <span class="font-bold text-[8px] text-slate-700">すべりだい</span>
-          </div>
-
-          <!-- たて 3ぎょうめ (ちゅうおう FREE) -->
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🍦</span>
-            <span class="font-bold text-[8px] text-slate-700">そふとくりーむ</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🚢</span>
-            <span class="font-bold text-[8px] text-slate-700">ふね</span>
-          </div>
-          <!-- FREE -->
-          <div class="bg-amber-100 border-2 border-amber-400 rounded-lg p-1 flex flex-col items-center justify-center h-14 shadow-inner">
-            <span class="text-[9px] font-black text-amber-700">★ ふりー ★</span>
-            <span class="font-bold text-[7px] text-amber-800">えがお</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🌸</span>
-            <span class="font-bold text-[8px] text-slate-700">はな</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🛍️</span>
-            <span class="font-bold text-[8px] text-slate-700">おみやげ</span>
-          </div>
-
-          <!-- たて 4ぎょうめ -->
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🚗</span>
-            <span class="font-bold text-[8px] text-slate-700">あかい くるま</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🐦</span>
-            <span class="font-bold text-[8px] text-slate-700">うみねこ</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🌉</span>
-            <span class="font-bold text-[8px] text-slate-700">あかい はし</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">📮</span>
-            <span class="font-bold text-[8px] text-slate-700">ぽすと</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🍙</span>
-            <span class="font-bold text-[8px] text-slate-700">おにぎり</span>
-          </div>
-
-          <!-- たて 5ぎょうめ -->
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🧃</span>
-            <span class="font-bold text-[8px] text-slate-700">じゅーす</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🏨</span>
-            <span class="font-bold text-[8px] text-slate-700">ほてる</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🌲</span>
-            <span class="font-bold text-[8px] text-slate-700">おおきな き</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">🐱</span>
-            <span class="font-bold text-[8px] text-slate-700">ねこ</span>
-          </div>
-          <div class="bg-white border border-dashed border-emerald-300 rounded-lg p-1 flex flex-col items-center justify-center h-14">
-            <span class="text-base">✨</span>
-            <span class="font-bold text-[8px] text-slate-700">きらきら</span>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- すたんぷ 枠 -->
-    <div class="border-2 border-dashed border-slate-300 rounded-xl p-1.5 space-y-0.5 h-[90px] bg-slate-50/50 flex flex-col">
-      <div class="text-[9px] font-bold text-slate-500">
-        💮 すたんぷ を おす ところ
-      </div>
-      <div class="flex-1 flex items-center justify-center text-slate-300 text-[9px]">
-        すたんぷ を おしたり えを かこう！
-      </div>
-    </div>
-
-    <!-- ふったー -->
-    <div class="border-t border-slate-200 pt-0.5 text-center">
-      <div class="text-[8px] text-slate-400">
-        みやぎ たび 2027
-      </div>
-    </div>
-
-  </div>
+  // クリアボタン
+  clearBtn.addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });
+</script>
 
 </body>
 </html>
