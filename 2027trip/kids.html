@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>きっずぺーじ - たびのしおり</title>
   <style>
-    /* 印刷基本設定 */
+    /* いんさつきほんせってい */
     @page {
       size: A4;
-      margin: 10mm;
+      margin: 8mm;
     }
 
     :root {
       --main-color: #4CAF50;
       --text-color: #222222;
-      --border-color: #888888;
+      --border-color: #777777;
     }
 
     body {
@@ -35,94 +35,95 @@
 
     .header-title {
       text-align: center;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       color: var(--main-color);
       border-bottom: 3px dashed var(--main-color);
-      padding-bottom: 8px;
-      margin-bottom: 20px;
+      padding-bottom: 4px;
+      margin-top: 0;
+      margin-bottom: 10px;
     }
 
     .section-box {
       border: 2px solid var(--border-color);
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 20px;
+      border-radius: 10px;
+      padding: 8px 10px;
+      margin-bottom: 10px;
       background-color: #FFFFFF;
     }
 
     .section-title {
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: bold;
       color: var(--main-color);
       margin-top: 0;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      margin-bottom: 6px;
     }
 
-    /* 1. めあて・じこしょうかい */
+    /* 1. じこしょうかい */
     .profile-fields {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 6px;
     }
 
     .field-line {
       display: flex;
       align-items: flex-end;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       font-weight: bold;
     }
 
     .field-line .line {
       flex-grow: 1;
       border-bottom: 2px dotted #999;
-      margin-left: 8px;
-      height: 1.5rem;
+      margin-left: 6px;
+      height: 1.1rem;
     }
 
-    /* 2. クイズ・スタンプラリー（ミッション） */
-    .mission-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .mission-card {
-      border: 2px dashed #AAA;
-      border-radius: 10px;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .mission-text {
-      font-size: 0.95rem;
-      font-weight: bold;
+    /* 2. みやぎの まめちしき */
+    .info-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.82rem;
       line-height: 1.4;
+      font-weight: bold;
     }
 
-    .stamp-circle {
-      width: 45px;
-      height: 45px;
-      border: 2px dotted var(--main-color);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      color: #888;
-      flex-shrink: 0;
-      margin-left: 8px;
+    .info-list li {
+      margin-bottom: 3px;
     }
 
-    /* 3. おえかき・ぬりえスペース */
+    /* 3. たびの 5x5 びんご */
+    .bingo-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
+    }
+
+    .bingo-table td {
+      width: 20%;
+      height: 48px;
+      border: 2px solid var(--border-color);
+      text-align: center;
+      vertical-align: middle;
+      font-size: 0.72rem;
+      font-weight: bold;
+      padding: 2px;
+      box-sizing: border-box;
+      line-height: 1.2;
+    }
+
+    .bingo-center {
+      background-color: #FFFDE7;
+      font-size: 0.8rem !important;
+      color: #D84315;
+    }
+
+    /* 4. おえかき・ぬりえ */
     .drawing-space {
       border: 2px dashed #999;
-      border-radius: 10px;
-      height: 280px;
+      border-radius: 8px;
+      height: 110px;
       position: relative;
       background-color: #FAFAFA;
       display: flex;
@@ -131,28 +132,26 @@
     }
 
     .drawing-hint {
-      color: #BBB;
-      font-size: 1.2rem;
+      color: #CCC;
+      font-size: 0.95rem;
       font-weight: bold;
-      pointer-events: none;
     }
 
-    /* 画面表示用（印刷時には非表示にするボタン等） */
+    /* がめんひょうじよう */
     .no-print {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     .print-btn {
       background-color: var(--main-color);
       color: white;
       border: none;
-      padding: 10px 24px;
-      font-size: 1rem;
+      padding: 8px 20px;
+      font-size: 0.95rem;
       font-weight: bold;
       border-radius: 20px;
       cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
     @media print {
@@ -168,13 +167,13 @@
 <body>
 
 <div class="no-print">
-  <button class="print-btn" onclick="window.print()">🛈 このページをいんさつする</button>
+  <button class="print-btn" onclick="window.print()">🛈 このぺーじを いんさつする</button>
 </div>
 
 <div class="page-container">
-  <h1 class="header-title">🎈 たびの きっずのーと 🎈</h1>
+  <h1 class="header-title">🌸 はるやすみ！たびの きっずのーと 🌸</h1>
 
-  <!-- 1. めあて・じこしょうかい -->
+  <!-- 1. じこしょうかい & めあて -->
   <section class="section-box">
     <div class="section-title">✏️ じこしょうかい & めあて</div>
     <div class="profile-fields">
@@ -186,41 +185,65 @@
         <span>たびの めあて：</span>
         <div class="line"></div>
       </div>
-      <div class="field-line">
-        <span>いちばん たのしみなこと：</span>
-        <div class="line"></div>
-      </div>
     </div>
   </section>
 
-  <!-- 2. クイズ・スタンプラリー -->
+  <!-- 2. みやぎの まめちしき -->
   <section class="section-box">
-    <div class="section-title">🔍 みっしょん（見つけたらスタンプを押してね！）</div>
-    <div class="mission-grid">
-      <div class="mission-card">
-        <div class="mission-text">🚗 あかい くるまを<br>3だい みつける</div>
-        <div class="stamp-circle">スタンプ</div>
-      </div>
-      <div class="mission-card">
-        <div class="mission-text">🌸 きれいな はなを<br>みつける</div>
-        <div class="stamp-circle">スタンプ</div>
-      </div>
-      <div class="mission-card">
-        <div class="mission-text">🤝 みんなに<br>「ありがとう」を いう</div>
-        <div class="stamp-circle">スタンプ</div>
-      </div>
-      <div class="mission-card">
-        <div class="mission-text">♨️ おふろ・おんせんに<br>はいる</div>
-        <div class="stamp-circle">スタンプ</div>
-      </div>
-    </div>
+    <div class="section-title">💡 はるのみやぎ まめちしき</div>
+    <ul class="info-list">
+      <li>🍡 <b>「ずんだ」</b>は、えだまめをつぶして つくった あまい おかしだよ！</li>
+      <li>🌙 昔のえらいひと<b>「だてまさむね」</b>は、かぶとに まんまるなお月さまをつけていたよ！</li>
+      <li>🌸 3がつ・4がつは<b>「さくらの はな」</b>や おいしいものが いっぱいの きせつだよ！</li>
+    </ul>
   </section>
 
-  <!-- 3. おえかき・ぬりえスペース -->
+  <!-- 3. たびの 5x5 びんご -->
   <section class="section-box">
-    <div class="section-title">🎨 じゆうに おえかきしよう！</div>
+    <div class="section-title">🎲 たびの 5×5 びんご（みつけたら 〇をつけよう！）</div>
+    <table class="bingo-table">
+      <tr>
+        <td>あかい<br>くるま</td>
+        <td>お友達と<br>てをつなぐ</td>
+        <td>しんかんせん<br>（でんしゃ）</td>
+        <td>ピンクの<br>おはな</td>
+        <td>あおい<br>かんばん</td>
+      </tr>
+      <tr>
+        <td>みはるちゃんと<br>おはなし</td>
+        <td>「ありがとう」<br>をいう</td>
+        <td>あかりちゃんと<br>あそぶ</td>
+        <td>バス</td>
+        <td>コンビニ</td>
+      </tr>
+      <tr>
+        <td>みのりちゃんと<br>たっち</td>
+        <td>へんがおを<br>する</td>
+        <td class="bingo-center">★<br>FREE</td>
+        <td>おにぎりを<br>たべる</td>
+        <td>みおりちゃんと<br>にっこり</td>
+      </tr>
+      <tr>
+        <td>たかい<br>やま</td>
+        <td>かすみちゃんと<br>あるく</td>
+        <td>ふじくんと<br>バイバイ</td>
+        <td>トンネル</td>
+        <td>なつきちゃんと<br>しゃしん</td>
+      </tr>
+      <tr>
+        <td>自動販売機<br>（じはんき）</td>
+        <td>みんなで<br>えがお</td>
+        <td>川（かわ）や<br>うみ</td>
+        <td>おてつだい<br>をする</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 4. おえかき・ぬりえ -->
+  <section class="section-box">
+    <div class="section-title">🎨 じゆうに おえかきスペース</div>
     <div class="drawing-space">
-      <span class="drawing-hint">ここに えを かいてね！</span>
+      <span class="drawing-hint">ここに すきな えを かいてね！</span>
     </div>
   </section>
 </div>
